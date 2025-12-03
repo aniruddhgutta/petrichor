@@ -1,0 +1,16 @@
+[Dynamic]
+text               = dedede
+subtext            = dedede
+main               = 242729
+sidebar            = 242729
+player             = 242729
+card               = 242729
+shadow             = 242729
+selected-row       = 77767b
+button             = 8a9887
+button-active      = c7c9cc
+button-disabled    = 77767b
+tab-active         = 8a9887
+notification       = 242729
+notification-error = 8a9887
+misc               = 242729

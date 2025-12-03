@@ -1,0 +1,16 @@
+[Dynamic]
+text               = {foreground.strip}
+subtext            = {foreground.strip}
+main               = {background.strip}
+sidebar            = {background.strip}
+player             = {background.strip}
+card               = {background.strip}
+shadow             = {background.strip}
+selected-row       = 77767b
+button             = {color2.strip}
+button-active      = {color7.strip}
+button-disabled    = 77767b
+tab-active         = {color2.strip}
+notification       = {background.strip}
+notification-error = {color2.strip}
+misc               = {background.strip}
