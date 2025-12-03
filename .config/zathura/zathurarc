@@ -1,0 +1,10 @@
+include colors
+set font                    "monospace 10"
+set selection-notification  "true"
+set selection-clipboard     "clipboard"
+set scroll-page-aware       "true"
+set statusbar-home-tilde    "true"
+set adjust-open             "width"
+set statusbar-h-padding     10
+set statusbar-v-padding     10
+set recolor                 "false"
