@@ -1,0 +1,11 @@
+[colors]
+background=242729ff
+prompt=dededeff
+text=dededeff
+placeholder=dededeff
+input=dededeff
+match=dededeff
+selection=8a9887ff
+selection-text=242729ff
+selection-match=dededeff
+border=8a9887ff
