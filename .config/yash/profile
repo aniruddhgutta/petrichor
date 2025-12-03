@@ -1,0 +1,46 @@
+. /etc/profile
+
+# Paths
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.local/scripts"
+
+# Shell/script exports
+export LANG="en_US.UTF-8"
+export LC_ALL="$LANG"
+export GPG_TTY=$(tty)
+# export POSIXLY_CORRECT=1
+
+# Default programs
+export EDITOR=$(command -v hx || command -v nvim || command -v vis || command -v vi)
+export VISUAL="$EDITOR"
+export TERMINAL="$TERM"
+export TERMINAL_PROG="$TERMINAL"
+
+# Program settings
+export MPD_HOST="$XDG_CONFIG_HOME/mpd/socket"
+export CHROME_FLAGS="
+--enable-features=UseOzonePlatform
+--ozone-platform=wayland
+--enable-features=WebRTCPipeWireCapturer
+--enable-features=WaylandWindowDecorations
+--disable-features=WaylandFractionalScaleV1
+"
+
+# Cleanup
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export GOPATH="$XDG_DATA_HOME/go"
+export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
+export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+export SQLITE_HISTORY="$XDG_DATA_HOME/sqlite_history"
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export ANDROID_SDK_HOME="$XDG_DATA_HOME/android"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export SSL_CERT_DIR="$XDG_DATA_HOME/pki"
+export PKI_CONFIG_DIR="$XDG_DATA_HOME/pki"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+
+# Imports
+USE_OX=s USE_LTO=1 USE_CLANG=1 . "$XDG_CONFIG_HOME/yash/mkenv"

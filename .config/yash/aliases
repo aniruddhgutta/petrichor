@@ -1,0 +1,21 @@
+alias ..="cd .."
+alias ...="cd ../.."
+
+alias la="ls -lAh --color"
+alias ls="ls -Ah --color"
+
+alias rm="rm -v"
+alias rf="rm -rf"
+alias cp="cp -i"
+
+alias df="df -Th"
+alias x=xdg-open
+alias vi="$EDITOR"
+
+alias s="$(command -v doas || command -v ssu  || command -v sudo) --"
+alias se="s $EDITOR"
+
+alias mi="s make clean install"
+alias mc="make clean"
+
+alias dots='/usr/bin/git --git-dir=$HOME/.local/dots --work-tree=$HOME'
