@@ -1,0 +1,82 @@
+{
+    "layer": "top",
+    "reload_style_on_change": true,
+    "height": 24,
+    "modules-left": [
+        // "niri/workspaces",
+        "clock",
+        "mpris"
+    ],
+    "modules-center": [
+        "niri/window"
+    ],
+    "modules-right": [
+        "network",
+        "bluetooth",
+        "wireplumber",
+        "battery"
+    ],
+
+    "niri/window": {
+        "format": "{title}",
+        "tooltip": false,
+        "seperate-outputs": true
+    },
+
+    "clock": {
+        "format": "{:%R}",
+        "tooltip-format": "{:%A, %B %d, %Y}"
+    },
+
+    "mpris": {
+        "format": "󰎇 {dynamic}",
+        "dynamic-order": ["artist", "title"],
+        "tooltip-format": "{status}"
+    },
+
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": "{icon} {essid}",
+        "format-ethernet": " {essid}",
+        "format-disconnected": "󰤮 disconnected",
+        "format-disabled": "󰤭 disabled",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format": "{ifname} - {ipaddr}"
+    },
+
+    "wireplumber": {
+        "format": "{icon} {volume}",
+        "format-muted": "󰝟",
+        "format-icons": ["󰕿", "󰖀", "󰕾"],
+        "on-click": "volume -t 2> /dev/null"
+    },
+
+    "battery": {
+        "format": "{icon} {capacity}",
+        "format-charging": "󰂄 {capacity}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format": "{timeTo}",
+        "states": {
+            "warning": 30,
+            "critical": 10
+        },
+        "interval": 30
+    },
+
+    "bluetooth": {
+        "format": "󰂯 {status}",
+        "format-disabled": "󰂲 {status}",
+        "format-off": "󰂲 {status}",
+        "format-connected": "󰂱 {device_alias}",
+        "tooltip-format": "{controller_address}",
+        "tooltip-format-connected": "{controller_address} - {num_connections}",
+        "tooltip-format-connected-battery": "{device_alias} - {device_battery_percentage}%"
+    }
+
+    // "custom/media": {
+    //     "format": "{}",
+    //     "exec": "media -s 2> /dev/null",
+    //     "on-click": "media -q -t 2> /dev/null",
+    //     "interval": 1,
+    // }
+}
