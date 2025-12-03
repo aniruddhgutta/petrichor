@@ -1,0 +1,85 @@
+# Source this file in ~/.profile to apply compiler optimizations
+# NOTE: Review aggressive flags below - may break some packages
+
+# Compiler flags
+: "${USE_OX:=2}"
+case $USE_OX in
+    z) COMMON_FLAGS=-Oz ;;
+    s) COMMON_FLAGS=-Os ;;
+    1) COMMON_FLAGS=-O1 ;;
+    2) COMMON_FLAGS=-O2 ;;
+    3) COMMON_FLAGS=-O3 ;;
+esac
+
+COMMON_FLAGS="$COMMON_FLAGS -march=native -pipe"
+# basics:
+#  -O2 - performance optimizations (safe)
+#  -Os - space saving optimizations (safe)
+#  -march=native - targets the host architecture and adds extra CPU-specific flags not enabled by explicit architectures
+#  -pipe - speeds up builds, uses pipes instead of temporary files
+
+COMMON_FLAGS="$COMMON_FLAGS -ffunction-sections -fdata-sections -fno-plt -fstack-protector-strong  -Wno-incompatible-pointer-types"
+# misc:
+#  -ffunction/-fdata-sections - drop unused code/data at link time
+#  -fno-plt - faster function calls
+#  -fstack-protector-strong - stack canaries
+#  -Wno-incompatible-pointer-types - compatibility flag
+
+COMMON_FLAGS="$COMMON_FLAGS -fno-unwind-tables -fno-asynchronous-unwind-tables"
+#  -fno-unwind-tables - removes synchronous unwind tables used for C++ exceptions and some stack tracing
+#  -fno-asynchronous-unwind-tables - removes async unwind tables used by debuggers and signal-based stack unwinding
+
+# COMMON_FLAGS="$COMMON_FLAGS -fno-semantic-interposition -fomit-frame-pointer -fmerge-all-constants -fstack-clash-protection"
+# aggressive:
+#  -fno-semantic-interposition - disables symbol interposition (faster calls, can break libraries expecting it)
+#  -fomit-frame-pointer - free reg, minor perf
+#  -fmerge-all-constants - dedup constants (can break code relying on addresses)
+#  -fstack-clash-protection - guard against stack clash
+
+# Linker flags
+LDFLAGS="-Wl,-O2 -Wl,--as-needed"
+# basics: optimize linker, drop unused deps, GC dead code
+
+LDFLAGS="$LDFLAGS -Wl,--gc-sections"
+# misc: GC dead code, enable only if -ffunction-sections and -fdata-sections are enabled in COMMON_FLAGS
+
+LDFLAGS="$LDFLAGS -Wl,--sort-common -Wl,--hash-style=gnu"
+# speed: better symbol lookup & smaller hash tables
+
+# LDFLAGS="$LDFLAGS -Wl,--build-id=none -Wl,--strip-all"
+# strip: no build-id, strip all symbols (tiny bins, no debugging)
+
+# LDFLAGS="$LDFLAGS -Wl,-z,relro -Wl,-z,now"
+# security: full RELRO + immediate symbol binding
+
+# Compiler and LTO selection
+: "${USE_CLANG:=0}"     # 0=gcc/g++, 1=clang/clang++ (ensure clang is installed)
+: "${USE_LTO:=0}"       # 0=disabled, 1=enabled (link-time optimization)
+# lto: optimizes across object files at link time - smaller/faster bins, slower builds, may break some packages
+
+if [ "$USE_CLANG" = 1 ]; then
+    export CC=clang
+    export CXX=clang++
+    LDFLAGS="$LDFLAGS -fuse-ld=lld"
+    [ "$USE_LTO" = 1 ] && LTO_FLAGS="-flto=thin"
+else
+    export CC=gcc
+    export CXX=g++
+    [ "$USE_LTO" = 1 ] && {
+        LTO_FLAGS="-flto -fuse-linker-plugin"
+        export AR=gcc-ar
+        export NM=gcc-nm
+    }
+fi
+
+COMMON_FLAGS="$COMMON_FLAGS $LTO_FLAGS"
+LDFLAGS="$LDFLAGS $LTO_FLAGS"
+
+# Final exports
+export CFLAGS="$COMMON_FLAGS"
+export CXXFLAGS="$COMMON_FLAGS"
+export FCFLAGS="$COMMON_FLAGS"
+export FFLAGS="$COMMON_FLAGS"
+export LDFLAGS="$LDFLAGS"
+export MAKEFLAGS="-j$(nproc)"
+export MAKEOPTS="$MAKEFLAGS"

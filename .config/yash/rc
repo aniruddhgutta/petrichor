@@ -1,0 +1,82 @@
+# History
+HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/yash-history"
+HISTSIZE=100000
+HISTRMDUP=5000
+
+# Shell options
+set -o brace-expand
+set -o extended-glob
+set -o no-clobber
+set -o hist-space
+set -o vi
+set -o le-predict
+
+# Keybindings
+for mode in --emacs --vi-insert --vi-command; do
+  bindkey "$mode" '\^L' clear-and-redraw-all
+  bindkey "$mode" '\^[b' backward-emacsword
+  bindkey "$mode" '\^[f' forward-emacsword
+done
+
+bindkey --vi-insert '\B' backward-delete-semiword
+bindkey --vi-insert '\^H' backward-delete-semiword
+bindkey --vi-insert '\^[l' end-of-line
+bindkey --vi-insert '\^[h' undo
+
+# Prompt
+YASH_PS1='${_prefix}\fb.${PWD/#$HOME/\~}\fd. \fm.$\fd. '
+YASH_PS1R='\fc.${_vcs_info}'
+YASH_PS1P='\fi.'
+
+_update_prompt() {
+  [ -n "${SSH_CONNECTION-}" ] && _prefix='\fy.ssh\fd. ' || _prefix=''
+  [ "$(id -u)" -eq 0 ] && _prefix='\fr.root\fd. '
+  
+  _vcs_info=$(git branch --show-current 2>/dev/null) || return
+  [ -n "$(git status --porcelain 2>/dev/null)" ] && _vcs_info="$_vcs_info*"
+}
+PROMPT_COMMAND=("$PROMPT_COMMAND" '_update_prompt')
+
+# Directory jumper
+_J_DATA="${XDG_STATE_HOME:-$HOME/.local/state}/j"
+mkdir -p "${_J_DATA%/*}" 2>/dev/null
+[ -f "$_J_DATA" ] || touch "$_J_DATA"
+
+j() {
+    [ $# -eq 0 ] && cat "$_J_DATA" && return
+    
+    best=""
+    best_score=0
+    while IFS='|' read -r path count; do
+        case "$path" in *"$1"*)
+            [ "$count" -gt "$best_score" ] &&
+                best="$path" && best_score="$count"
+        esac
+    done < "$_J_DATA"
+    
+    [ -d "$best" ] && cd "$best" && return
+    [ -d "$1" ] && cd "$1" && return
+    printf "j: no match\n" >&2
+    return 1
+}
+
+_j_add() {
+    pwd_abs="$(pwd -P)"
+    [ "$pwd_abs" = "$HOME" ] && return
+    
+    tmp="${_J_DATA}_"
+    count=0
+    
+    while IFS='|' read -r path num; do
+        [ "$path" = "$pwd_abs" ] && count=$num ||
+            printf "%s|%s\n" "$path" "$num" >> "$tmp"
+    done < "$_J_DATA"
+    
+    printf "%s|%d\n" "$pwd_abs" "$((count + 1))" >> "$tmp"
+    mv "$tmp" "$_J_DATA"
+}
+
+YASH_AFTER_CD=_j_add
+
+# Source
+. "${XDG_CONFIG_HOME:-$HOME/.config}/yash/aliases"
