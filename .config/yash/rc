@@ -1,3 +1,6 @@
+# Source colors
+(cat "${XDG_CACHE_HOME:-$HOME/.cache}/reclr/sequences")
+
 # History
 HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/yash-history"
 HISTSIZE=100000
