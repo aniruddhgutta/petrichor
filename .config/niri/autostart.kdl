@@ -1,0 +1,5 @@
+spawn-at-startup "swww-daemon"
+spawn-at-startup "waybar"
+spawn-at-startup "foot" "--server"
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"

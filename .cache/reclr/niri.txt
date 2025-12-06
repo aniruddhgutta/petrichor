@@ -1,0 +1,18 @@
+layout {
+	background-color "#242729"
+	focus-ring {
+        active-color "#8a9887"
+        inactive-color "#44444c"
+    }
+}
+
+overview {
+	backdrop-color "#242729"
+}
+
+recent-windows {
+	highlight {
+		active-color "#8a9887"
+		urgent-color "#9c6b7a"
+	}
+}
