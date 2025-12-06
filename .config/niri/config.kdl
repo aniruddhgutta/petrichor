@@ -133,10 +133,12 @@ layer-rule {
     geometry-corner-radius 0
 }
 
-// Autostart.
+// Autostart
 spawn-at-startup "swww-daemon"
 spawn-at-startup "waybar"
 spawn-at-startup "foot" "--server"
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 
 binds {
     Mod+Space  { spawn "fuzzel"; }
@@ -151,13 +153,13 @@ binds {
     Mod+t      { spawn "theme-menu"; }
     Mod+x      { spawn "footclient" "-T" "helix" "hx"; }
 
+    Mod+g           { spawn "trap-monitor"; }
     Mod+Shift+Space { spawn "layout-menu"; }
     Mod+Shift+M     { spawn "footclient" "rmpc"; }
     Mod+Shift+B     { spawn "footclient" "-T" "btop" "btop"; }
     Mod+Shift+N     { spawn "media-menu"; }
     Mod+Shift+E     { spawn "emoji-menu"; }
-    Mod+Shift+C     { spawn "colorpick"; }
-    Mod+g           { spawn "trap-monitor"; }
+    Mod+Shift+C     { spawn-sh "cliphist list | fuzzel -dp 'Clipboard: ' -w '100' -l '25' | cliphist decode | wl-copy"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "volume" "-i" "2"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "volume" "-d" "2"; }
