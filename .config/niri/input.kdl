@@ -1,0 +1,18 @@
+input {
+    keyboard {
+        repeat-delay 200
+        repeat-rate 30
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+    }
+
+    mouse {
+        accel-profile "flat"
+    }
+
+    focus-follows-mouse max-scroll-amount="90%"
+    workspace-auto-back-and-forth
+}

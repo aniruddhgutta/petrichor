@@ -1,0 +1,13 @@
+prefer-no-csd
+
+animations {
+    slowdown 0.8
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Ice"
+    xcursor-size 18
+
+    hide-when-typing
+    hide-after-inactive-ms 5000
+}

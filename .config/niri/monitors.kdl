@@ -1,0 +1,7 @@
+// Other monitors are auto-configured.
+output "HDMI-A-1" {
+    mode "1920x1080@179.999"
+    variable-refresh-rate
+    position x=0 y=0
+    focus-at-startup
+}

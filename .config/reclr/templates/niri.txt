@@ -1,0 +1,18 @@
+layout {
+	background-color "{background}"
+	focus-ring {
+        active-color "{color2}"
+        inactive-color "{color8}"
+    }
+}
+
+overview {
+	backdrop-color "{background}"
+}
+
+recent-windows {
+	highlight {
+		active-color "{color2}"
+		urgent-color "{color1}"
+	}
+}
