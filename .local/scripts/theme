@@ -1,0 +1,53 @@
+#!/bin/sh
+# Set wallpaper and colorscheme
+
+dir="${XDG_PICTURES_DIR:-$HOME/pics}/walls/"
+hist="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/wallpaper-history"
+info="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/theme"
+[ -f "$info" ] && . "$info" || : >"$info"
+
+usage() { 
+    printf 'usage: %s [-rpsmc]\n' "${0##*/}" >&2
+    exit 1
+}
+
+save() { 
+    printf 'prev_wall=%s\ncur_wall=%s\ncolorscheme=%s\n' \
+        "$prev_wall" "$cur_wall" "$colorscheme" >"$info"
+    printf '%s\n%s' "$cur_wall" "$(head -n 49 "$hist")" >"$hist"
+}
+
+colors() { 
+    [ "$1" = pywal ] && wal -i "$2" -nqe || wal --theme "$1" -nqe || exit 1
+    colorscheme=$1; save
+    notify-send -a theme "Colorscheme set!" \
+        "Colorscheme set to <b>$colorscheme</b>"
+}
+
+wall() {
+    [ "$1" ] || exit 1
+    killall -q wbg 2>/dev/null; wbg -s "$1" &
+    # swww img \
+    #     --transition-type outer \
+    #     --transition-step 125 \
+    #     --transition-duration 1 \
+    #     --transition-fps 60 \
+    #     "$1"
+    [ "$colorscheme" = pywal ] && colors pywal "$1"
+    [ "$arg" != "r" ] && { 
+        prev_wall=$cur_wall cur_wall=$1; save
+        notify-send -a theme "Wallpaper set!" \
+            "Wallpaper set to <b>${cur_wall##*/}</b>"
+    }
+    command -v makoctl >/dev/null && makoctl reload
+}
+
+[ $# -eq 0 ] && usage
+while getopts rpsmc arg; do case $arg in
+    r) wall "$cur_wall" ;;
+    p) wall "$prev_wall" ;;
+    s) wall "$(find "$dir" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | shuf -n1)" ;;
+    m) sel=$(find "$dir" -type f | fuzzel -dp 'Select wallpaper: '); [ "$sel" ] && wall "$sel" ;;
+    c) sel=$(wal --theme | awk -F' - ' '/ - / && $2 !~ /^random/ {print $2}' | fuzzel -dp 'Select colorscheme: '); [ "$sel" ] && colors "$sel" "$cur_wall" ;;
+    *) usage ;;
+esac; done

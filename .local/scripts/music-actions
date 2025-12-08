@@ -1,0 +1,70 @@
+#!/bin/sh
+# Sync/download music using spotdl or yt-dlp
+# shellcheck disable=SC2154
+
+usage() {
+    printf "usage: %s [-sn|-se] [-ds|-dy] [-l]\n" "${0##*/}"
+    exit 1
+}
+
+get_info() {
+    printf "%s %s: " "$2" "$1"; read -r val
+    [ "$val" ] && eval "$1=\$val" || exit 1
+}
+
+[ "$1" ] || usage
+
+while getopts "s:d:lh" arg; do
+    case "$arg" in
+        s)
+            case "$OPTARG" in
+                n)
+                    get_info url "Playlist"
+                    get_info name "Playlist"
+                    spotdl sync "$url" \
+                        --save-file "$name.sync.spotdl" \
+                        --m3u "$name.m3u8"
+                    ;;
+                e)
+                    name=$(printf '%s\n' *.spotdl | \
+                        sed 's/\.sync\.spotdl$//' | \
+                        fzf --prompt "Select a playlist: ")
+                    printf "You selected: %s\n" "$name"
+                    spotdl sync "$name.sync.spotdl" --m3u "$name.m3u8"
+                    ;;
+                *)
+                    printf "usage: %s -s[n|e]\n" "${0##*/}"
+                    exit 1
+                    ;;
+            esac
+            ;;
+        d)
+            get_info url "Song/playlist"
+            case "$OPTARG" in
+                s)
+                    spotdl download "$url"
+                    ;;
+                y)
+                    yt-dlp -x -f 'bestaudio[acodec=opus]' \
+                        --audio-format 'opus' \
+                        --audio-quality '0' \
+                        "$url"
+                    ;;
+                *)
+                    printf "usage: %s -d[s|y]\n" "${0##*/}"
+                    exit 1
+                    ;;
+            esac
+            ;;
+        l)
+            command -v syncedlyrics >/dev/null || exit 1
+            for f in *.opus *.mp3 *.flac *.m4a *.wav *.aac; do
+                [ -f "$f" ] || continue
+                name="${f%.*}"
+                syncedlyrics "$name" > "$name.lrc" &&
+                    printf "Lyrics for %s written to %s.lrc\n" "$f" "$name"
+            done
+            ;;
+        *) usage ;;
+    esac
+done

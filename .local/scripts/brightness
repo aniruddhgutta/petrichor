@@ -1,0 +1,30 @@
+#!/bin/sh -x
+# Backlight control
+# Change brightness by a percentage of the current level for smoother,
+# perception-based (logarithmic-like) adjustments instead of fixed linear steps.
+
+usage() {
+    printf "usage: %s [-i|-d|-s number]\n" "${0##*/}" >&2
+    exit 1
+}
+
+{ [ $# -lt 2 ] || ! printf "%d" "$2" >/dev/null 2>&1; } && usage
+
+dev=$(printf "%s\n" /sys/class/backlight/* | head -n 1)
+read -r max < "$dev/max_brightness"
+read -r cur < "$dev/brightness"
+
+case $1 in
+    -i) new=$(( cur + cur * $2 / 100 )) ;;
+    -d) new=$(( cur - cur * $2 / 100 )) ;;
+    -s) new=$(( max * $2 / 100 )) ;;
+    *) usage ;;
+esac
+
+[ $new -lt 1 ] && new=1; [ $new -gt $max ] && new=$max
+printf "%s" "$new" > "$dev/brightness"
+perc=$(( new * 100 / max ))
+
+[ "$DBUS_SESSION_BUS_ADDRESS" ] && 
+    notify-send -a "brightness" -h int:value:$perc "Brightness: $perc%" 
+printf "Brightness: %s%%" "$perc"
