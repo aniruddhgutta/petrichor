@@ -1,0 +1,23 @@
+#!/bin/sh
+# Emoji selection menu
+
+list="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/emoji_list.txt"
+url="https://unicode.org/Public/emoji/latest/emoji-test.txt"
+
+[ ! -s "$list" ] && {
+    notify-send "Fetching emoji list..."
+    mkdir -p "$(dirname "$list")"
+    curl -s "$url" | awk '
+    /; fully-qualified/ && !/skin tone/ {
+        sub(/.*# /, "")
+        sub(/ E[0-9.]+/, "")
+        print
+    }' > "$list" && notify-send "Done!"
+}
+
+chosen=$(fuzzel -dp "Select emoji: " < "$list" | awk '{ print $1 }')
+
+[ "$chosen" ] && {
+    printf "%s" "$chosen" | wl-copy &&
+    notify-send "Emoji copied: $chosen"
+}

@@ -1,0 +1,13 @@
+#!/bin/sh -e
+# Pdf preview for man pages
+
+[ "$1" ] || {
+    printf "usage: %s manpage\n" " ${0##*/}" >&2
+    exit 1
+}
+
+pdf="$(mktemp)"
+trap 'rm "$pdf"' INT EXIT
+
+man -Tpdf "$1" > "$pdf"
+xdg-open "$pdf"

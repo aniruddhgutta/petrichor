@@ -1,0 +1,39 @@
+#!/bin/sh -e
+# Traps cursor on primary monitor (niri)
+
+STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/trap-monitor"
+GAP=10000  # Distance to move secondary monitor
+
+get_outputs() {
+    niri msg -j outputs | jq -r 'keys[]'
+}
+
+get_position() {
+    niri msg -j outputs | jq -r ".\"$1\".logical.x"
+}
+
+toggle_mode() {
+    primary=$(get_outputs | head -1)
+    secondary=$(get_outputs | tail -1)
+    
+    [ "$primary" = "$secondary" ] && {
+        echo "Only one monitor detected"
+        exit 1
+    }
+    
+    if [ -f "$STATE_FILE" ]; then
+        # Restore: move secondary back
+        pos=$(cat "$STATE_FILE")
+        niri msg output "$secondary" position set -- "$pos" 0
+        rm "$STATE_FILE"
+        notify-send "Trap monitor OFF" "Monitors restored" 2>/dev/null || true
+    else
+        # Trap: save position and move secondary far away
+        pos=$(get_position "$secondary")
+        echo "$pos" > "$STATE_FILE"
+        niri msg output "$secondary" position set -- $((pos > 0 ? pos + GAP : pos - GAP)) 0
+        notify-send "Trap monitor ON" "Cursor trapped on $primary" 2>/dev/null || true
+    fi
+}
+
+toggle_mode
