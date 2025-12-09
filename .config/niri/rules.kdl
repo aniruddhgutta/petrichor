@@ -42,11 +42,10 @@ window-rule {
     open-maximized true
 }
 
-// Add a shadow for fuzzel.
+// Add a shadow to the launcher and waybar.
 layer-rule {
-    match namespace="^launcher$"
-    shadow {
-        on
-    }
+    match namespace="^(launcher|waybar)$"
+    match at-startup=true
+    shadow { on; }
     geometry-corner-radius 0
 }
