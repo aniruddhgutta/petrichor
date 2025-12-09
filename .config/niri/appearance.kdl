@@ -5,8 +5,8 @@ animations {
 }
 
 cursor {
-    xcursor-theme "Bibata-Modern-Ice"
-    xcursor-size 18
+    xcursor-theme "plan9"
+    xcursor-size 16
 
     hide-when-typing
     hide-after-inactive-ms 5000
