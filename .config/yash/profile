@@ -41,4 +41,4 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
 
 # Imports
-USE_OX=s USE_LTO=1 USE_CLANG=1 . "$XDG_CONFIG_HOME/yash/mkenv"
+USE_OX=2 USE_LTO=1 USE_CLANG=1 . "$XDG_CONFIG_HOME/yash/mkenv"
