@@ -83,3 +83,12 @@ YASH_AFTER_CD=_j_add
 
 # Source
 . "${XDG_CONFIG_HOME:-$HOME/.config}/yash/aliases"
+
+# Autostart niri
+if [ -n "$(command -v niri)" ] && [ -z "$DISPLAY" ] && [ "$(tty)" = /dev/tty1 ]; then
+  file="/tmp/tty1_session"
+  if [ ! -f "$file" ]; then
+    touch "$file"
+    exec niri --session
+  fi
+fi
