@@ -30,12 +30,11 @@ window#waybar.empty #window,
     transition: none;
 }
 
-#workspaces button { padding: 0 2px; }
-#workspaces button.focused,
-#workspaces button.focused:hover {
-    background-color: @color2;
-    color: @background;
+#workspaces button {
+    color: shade(@foreground, 0.5);
+    padding: 0 2px;
 }
+#workspaces button.focused { color: @foreground; }
 
 #battery.warning { color: @color3; }
 #battery.critical { color: @color1; }
