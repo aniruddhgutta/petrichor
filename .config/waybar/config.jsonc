@@ -32,7 +32,9 @@
     "mpris": {
         "format": "󰎇 {dynamic}",
         "dynamic-order": ["artist", "title"],
-        "tooltip-format": "{status}"
+        "tooltip-format": "{status}",
+        "on-scroll-up": "playerctl volume 0.10+",
+        "on-scroll-down": "playerctl volume 0.10-"
     },
 
     "network": {
@@ -49,7 +51,7 @@
         "format": "{icon} {volume}",
         "format-muted": "󰝟",
         "format-icons": ["󰕿", "󰖀", "󰕾"],
-        "on-click": "volume -t 2> /dev/null"
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     },
 
     "battery": {
@@ -72,12 +74,5 @@
         "tooltip-format": "{controller_address}",
         "tooltip-format-connected": "{controller_address} - {num_connections}",
         "tooltip-format-connected-battery": "{device_alias} - {device_battery_percentage}%"
-    }
-
-    // "custom/media": {
-    //     "format": "{}",
-    //     "exec": "media -s 2> /dev/null",
-    //     "on-click": "media -q -t 2> /dev/null",
-    //     "interval": 1,
-    // }
+    },
 }

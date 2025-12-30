@@ -17,6 +17,7 @@ tooltip label { margin: -5px -3px; }
 
 #clock,
 #mpris,
+#custom-media,
 #window,
 window#waybar.empty #window,
 #network,
@@ -41,6 +42,7 @@ window#waybar.empty #window,
 
 #clock:hover,
 #mpris:hover,
+#custom-media:hover,
 #window:hover,
 #network:hover,
 #bluetooth:hover,
