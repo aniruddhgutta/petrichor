@@ -10,9 +10,10 @@ input {
     }
 
     mouse {
+        accel-speed 0.2
         accel-profile "flat"
     }
 
     focus-follows-mouse max-scroll-amount="90%"
-    workspace-auto-back-and-forth
+    // workspace-auto-back-and-forth
 }
