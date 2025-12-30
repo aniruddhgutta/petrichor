@@ -13,6 +13,7 @@ tooltip label {
     background-color: @background;
     color: @foreground;
 }
+
 tooltip label { margin: -5px -3px; }
 
 #clock,
@@ -25,17 +26,25 @@ window#waybar.empty #window,
 #wireplumber,
 #workspaces button,
 #battery {
-    padding: 0 12px;
     background-color: @background;
     color: @foreground;
+    padding: 0 12px;
     transition: none;
 }
 
 #workspaces button {
-    color: shade(@foreground, 0.5);
-    padding: 0 2px;
+    color: @color8;
+    margin: 5 3px;
+    min-height: 0px;
+    padding: 0 0px;
+    transition: all 0.15s ease;
 }
-#workspaces button.focused { color: @foreground; }
+
+#workspaces button.focused {
+    background: @foreground;
+    border-radius: 10px;
+    min-width: 30px;
+}
 
 #battery.warning { color: @color3; }
 #battery.critical { color: @color1; }
@@ -47,7 +56,6 @@ window#waybar.empty #window,
 #network:hover,
 #bluetooth:hover,
 #wireplumber:hover,
-#workspaces button:hover,
 #battery:hover {
     background-color: shade(@background, 1.5);
 }
