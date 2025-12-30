@@ -1,5 +1,8 @@
-spawn-at-startup "swww-daemon"
-spawn-at-startup "waybar"
-spawn-at-startup "foot" "--server"
+// Commented since they are better managed by systemd/dinit.
+// spawn-at-startup "swww-daemon"
+// spawn-at-startup "waybar"
+// spawn-at-startup "foot" "--server"
+
+spawn-at-startup "mon-vol"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
