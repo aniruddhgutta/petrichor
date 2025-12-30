@@ -1,0 +1,12 @@
+#!/bin/sh
+# Logout menu
+
+opt=$(printf "Poweroff\nReboot\nSleep\nConservation mode - On\nConservation mode - Off" | fuzzel -dp "Power opts: ")
+case "$opt" in
+  "Poweroff") loginctl poweroff ;;
+  "Reboot") loginctl reboot ;;
+  "Sleep") loginctl suspend;;
+  "Conservation mode - On")  printf 1 | doas tee /sys/bus/platform/devices/VPC2004:*/conservation_mode ;;
+  "Conservation mode - Off") printf 0 | doas tee /sys/bus/platform/devices/VPC2004:*/conservation_mode ;;
+esac
+[ "$opt" ] && notify-send "$opt"

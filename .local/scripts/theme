@@ -18,28 +18,27 @@ save() {
 }
 
 colors() { 
-    [ "$1" = pywal ] && wal -i "$2" -nqe || wal --theme "$1" -nqe || exit 1
+    reclr -i "$1"
     colorscheme=$1; save
+    command -v makoctl >/dev/null && makoctl reload
     notify-send -a theme "Colorscheme set!" \
         "Colorscheme set to <b>$colorscheme</b>"
+    command -v waybar >/dev/null && killall -SIGUSR2 waybar
 }
 
 wall() {
     [ "$1" ] || exit 1
-    killall -q wbg 2>/dev/null; wbg -s "$1" &
-    # swww img \
-    #     --transition-type outer \
-    #     --transition-step 125 \
-    #     --transition-duration 1 \
-    #     --transition-fps 60 \
-    #     "$1"
-    [ "$colorscheme" = pywal ] && colors pywal "$1"
+    swww img \
+        --transition-type outer \
+        --transition-step 125 \
+        --transition-duration 1 \
+        --transition-fps 60 \
+        "$1"
     [ "$arg" != "r" ] && { 
         prev_wall=$cur_wall cur_wall=$1; save
         notify-send -a theme "Wallpaper set!" \
             "Wallpaper set to <b>${cur_wall##*/}</b>"
     }
-    command -v makoctl >/dev/null && makoctl reload
 }
 
 [ $# -eq 0 ] && usage
@@ -48,6 +47,6 @@ while getopts rpsmc arg; do case $arg in
     p) wall "$prev_wall" ;;
     s) wall "$(find "$dir" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | shuf -n1)" ;;
     m) sel=$(find "$dir" -type f | fuzzel -dp 'Select wallpaper: '); [ "$sel" ] && wall "$sel" ;;
-    c) sel=$(wal --theme | awk -F' - ' '/ - / && $2 !~ /^random/ {print $2}' | fuzzel -dp 'Select colorscheme: '); [ "$sel" ] && colors "$sel" "$cur_wall" ;;
+    c) sel=$(reclr -l | fuzzel -dp 'Select colorscheme: '); [ "$sel" ] && colors "$sel" ;;
     *) usage ;;
 esac; done
