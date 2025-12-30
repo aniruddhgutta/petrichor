@@ -20,7 +20,6 @@ export TERMINAL="$TERM"
 export TERMINAL_PROG="$TERMINAL"
 
 # Program settings
-export MPD_HOST="$XDG_CONFIG_HOME/mpd/socket"
 export CHROME_FLAGS="
 --enable-features=UseOzonePlatform
 --ozone-platform=wayland
