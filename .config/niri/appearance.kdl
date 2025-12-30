@@ -5,7 +5,7 @@ animations {
 }
 
 cursor {
-    xcursor-theme "plan9"
+    xcursor-theme "default"
     xcursor-size 16
 
     hide-when-typing

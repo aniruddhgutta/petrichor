@@ -42,7 +42,7 @@ window-rule {
     open-maximized true
 }
 
-// Add a shadow to the launcher and waybar.
+// Add a shadow to dmenu and waybar.
 layer-rule {
     match namespace="^(launcher|waybar)$"
     match at-startup=true

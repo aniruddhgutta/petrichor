@@ -1,14 +1,21 @@
 include "autostart.kdl"    // spawn-at-startup
 include "appearance.kdl"   // animations, cursor
 include "colors.kdl"       // colors
+include "debug.kdl"        // debug
 include "input.kdl"        // input
 include "keybinds.kdl"     // binds
 include "layout.kdl"       // layout, overview, recent-windows
 include "monitors.kdl"     // output
 include "rules.kdl"        // window-rule, layer-rule
+include "custom.kdl"       // custom overrides
 
 screenshot-path "~/pics/screenshots/%F-%T.png"
+
 hotkey-overlay {
     skip-at-startup
     hide-not-bound
+}
+
+config-notification {
+    disable-failed
 }

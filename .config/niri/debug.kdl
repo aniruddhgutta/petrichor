@@ -1,0 +1,5 @@
+// Emulate zero (unknown) presentation time returned from DRM
+// (fix for laggy cursor/session with NVIDIA).
+debug {
+    emulate-zero-presentation-time
+}
