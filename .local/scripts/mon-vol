@@ -1,0 +1,30 @@
+#!/bin/sh
+# Monitor volume changes
+
+trap 'kill 0 2>/dev/null' INT TERM EXIT    # kill whole process group
+
+prev="$(wpctl get-volume @DEFAULT_SINK@)"
+skip=0
+
+pw-mon | while read -r line; do
+    case $line in
+        *volume*|*mute*)
+            [ "$skip" -gt 0 ] && { skip=$((skip - 1)); continue; }  # debounce
+            
+            curr="$(wpctl get-volume @DEFAULT_SINK@)"
+            [ "$curr" = "$prev" ] && continue
+            
+            prev="$curr"
+            skip=2  # skip next 2 events
+            vol="${curr##*: }"
+            
+            [ "$vol" = "${vol##*\ }" ] && {  # not muted
+                vol="${vol%%.*}${vol##*.}"   # 0.07 -> 007
+                disp="${vol#${vol%%[!0]*}}"  # strip leading zeros
+                disp="${disp:-0}%"
+            } || unset vol disp
+
+        notify-send -a "volume" ${vol+-h int:value:$vol} "Volume: ${disp-muted}"
+        ;;
+    esac
+done
