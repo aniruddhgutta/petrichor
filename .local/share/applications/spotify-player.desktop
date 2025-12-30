@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=Spotify Player
+Exec=spotify_player
+Terminal=true
