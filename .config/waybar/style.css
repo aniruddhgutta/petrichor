@@ -26,9 +26,9 @@ window#waybar.empty #window,
 #wireplumber,
 #workspaces button,
 #battery {
+    padding: 0 12px;
     background-color: @background;
     color: @foreground;
-    padding: 0 12px;
     transition: none;
 }
 
@@ -41,7 +41,8 @@ window#waybar.empty #window,
 }
 
 #workspaces button.focused {
-    background: @foreground;
+    background-color: @color2;
+    color: @foreground;
     border-radius: 10px;
     min-width: 30px;
 }
