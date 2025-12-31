@@ -1,14 +1,12 @@
 #!/bin/sh
-# Color picker using imagemagick
+# Color picker using niri
 
-[ "$WAYLAND_DISPLAY" ] || exit 1
-
-color=$(grim -g "$(slurp -b 00000000 -p)" -t png - | \
-  magick - -format '%[hex:p{0,0}]' info:-)
+output=$(niri msg pick-color)
+color=${output##*Hex: }
 
 [ "$color" ] && {
-    printf "#%s" "$color" | wl-copy
+    printf "%s" "$color" | wl-copy
+    printf "%s\n" "$color"
     notify-send "Picked color" \
-        "<span color='#$color'></span> #$color copied to clipboard"
-    echo "#$color"
+        "<span color='$color'></span> $color copied to clipboard"
 }
