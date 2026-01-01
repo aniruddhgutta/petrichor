@@ -1,3 +1,8 @@
+// This config is in the KDL format: https://kdl.dev
+// "/-" comments out the following node.
+// Check the wiki for a full description of the configuration:
+// https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
+
 include "autostart.kdl"    // spawn-at-startup
 include "appearance.kdl"   // animations, cursor
 include "colors.kdl"       // colors

@@ -1,9 +1,10 @@
 #!/bin/sh
 # Set wallpaper and colorscheme
-
 dir="${XDG_PICTURES_DIR:-$HOME/pics}/walls/"
 hist="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/wallpaper-history"
 info="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/theme"
+backdrop_cache="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/backdrop.png"
+
 [ -f "$info" ] && . "$info" || : >"$info"
 
 usage() { 
@@ -26,6 +27,19 @@ colors() {
     command -v waybar >/dev/null && killall -SIGUSR2 waybar
 }
 
+backdrop() {
+    magick "$1" \
+        -scale 25% \
+        -blur 0x5 \
+        -quality 75 \
+        "$backdrop_cache"
+    swww img \
+        --transition-type fade \
+        --transition-duration 0.75 \
+        -n backdrop \
+        "$backdrop_cache"
+}
+
 wall() {
     [ "$1" ] || exit 1
     swww img \
@@ -34,6 +48,7 @@ wall() {
         --transition-duration 1 \
         --transition-fps 60 \
         "$1"
+    backdrop "$1" &
     [ "$arg" != "r" ] && { 
         prev_wall=$cur_wall cur_wall=$1; save
         notify-send -a theme "Wallpaper set!" \

@@ -1,5 +1,6 @@
 // Commented since they are better managed by systemd/dinit.
 // spawn-at-startup "swww-daemon"
+// spawn-at-startup "swww-daemon" "--namespace" "backdrop"
 // spawn-at-startup "waybar"
 // spawn-at-startup "foot" "--server"
 

@@ -49,3 +49,9 @@ layer-rule {
     shadow { on; }
     geometry-corner-radius 0
 }
+
+// Use current wallpaper as backdrop.
+layer-rule {
+    match namespace="^swww-daemonbackdrop$"
+    place-within-backdrop true
+}
