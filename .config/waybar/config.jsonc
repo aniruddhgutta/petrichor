@@ -5,28 +5,28 @@
     "modules-left": [
         "niri/workspaces",
         "clock",
-        "mpris"
+        "mpris",
     ],
     "modules-center": [
-        "niri/window"
+        "niri/window",
     ],
     "modules-right": [
         "network",
         "bluetooth",
         "wireplumber",
-        "battery"
+        "battery",
     ],
 
     "niri/window": {
         "format": "{title}",
         "tooltip": false,
-        "seperate-outputs": true
+        "seperate-outputs": true,
     },
 
     "clock": {
         "format": "{:%B %d, %H:%M}",
         "tooltip-format": "{:%A, %Y (%S)}",
-        "interval": 1
+        "interval": 1,
     },
 
     "mpris": {
@@ -34,7 +34,7 @@
         "dynamic-order": ["artist", "title"],
         "tooltip-format": "{status}",
         "on-scroll-up": "playerctl volume 0.10+",
-        "on-scroll-down": "playerctl volume 0.10-"
+        "on-scroll-down": "playerctl volume 0.10-",
     },
 
     "network": {
@@ -44,14 +44,16 @@
         "format-disconnected": "󰤮 disconnected",
         "format-disabled": "󰤭 disabled",
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-        "tooltip-format": "{ifname} - {ipaddr}"
+        "tooltip-format": "{ifname} - {ipaddr}",
+        "on-click-right": "foot -T impala impala",
     },
 
     "wireplumber": {
         "format": "{icon} {volume}",
         "format-muted": "󰝟",
         "format-icons": ["󰕿", "󰖀", "󰕾"],
-        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "foot -T wiremix wiremix",
     },
 
     "battery": {
@@ -63,7 +65,8 @@
             "warning": 30,
             "critical": 10
         },
-        "interval": 30
+        "interval": 30,
+        "on-click-right": "foot -T btop btop",
     },
 
     "bluetooth": {
@@ -73,6 +76,7 @@
         "format-connected": "󰂱 {device_alias}",
         "tooltip-format": "{controller_address}",
         "tooltip-format-connected": "{controller_address} - {num_connections}",
-        "tooltip-format-connected-battery": "{device_alias} - {device_battery_percentage}%"
+        "tooltip-format-connected-battery": "{device_alias} - {device_battery_percentage}%",
+        "on-click-right": "foot -T bluetuith bluetuith",
     },
 }
