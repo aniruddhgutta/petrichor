@@ -40,7 +40,10 @@ _update_prompt() {
 }
 PROMPT_COMMAND=("$PROMPT_COMMAND" '_update_prompt')
 
-# Directory jumper
+# j - directory jumper
+# usage:
+#     j - print state file
+#     j <pattern> - jump to best-matching directory
 _J_DATA="${XDG_STATE_HOME:-$HOME/.local/state}/j"
 mkdir -p "${_J_DATA%/*}" 2>/dev/null
 [ -f "$_J_DATA" ] || touch "$_J_DATA"
@@ -81,14 +84,30 @@ _j_add() {
 
 YASH_AFTER_CD=_j_add
 
+# y - yazi shell wrapper
+# usage:
+#     q - exit yazi and change cwd
+#     Q - only exit yazi
+y() {
+	set -- "$@" --cwd-file "$(mktemp -t yazi-cwd.XXXXXX)"
+	command yazi "$@"
+	shift $(($# - 1))
+	set -- "$(command cat < "$1"; printf .; rm -f -- "$1")"
+	set -- "${1%.}"
+	[ -n "$1" ] && [ "$1" != "$PWD" ] && command cd -- "$1"
+}
+
 # Source
 . "${XDG_CONFIG_HOME:-$HOME/.config}/yash/aliases"
 
 # Autostart niri
+# NIRI_AUTOSTART=0    # Uncomment to disable autostart
 if [ -n "$(command -v niri)" ] && [ -z "$DISPLAY" ] && [ "$(tty)" = /dev/tty1 ]; then
-  file="/tmp/tty1_session"
-  if [ ! -f "$file" ]; then
-    touch "$file"
-    exec niri --session
-  fi
+  [ "${NIRI_AUTOSTART:-1}" = 1 ] && {
+    file="/tmp/tty1_session"
+    if [ ! -f "$file" ]; then
+      touch "$file"
+      exec niri --session
+    fi
+  }
 fi
