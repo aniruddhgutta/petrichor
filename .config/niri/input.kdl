@@ -10,7 +10,7 @@ input {
     }
 
     mouse {
-        accel-speed 0.2
+        accel-speed 0
         accel-profile "flat"
     }
 

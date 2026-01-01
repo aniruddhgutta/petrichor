@@ -12,7 +12,7 @@ binds {
     Mod+x           { spawn "foot" "-T" "helix" "hx"; }
 
     Mod+g           { spawn "trap-monitor"; }
-    Mod+c           { spawn-sh "cliphist list | fuzzel -dp 'Clipboard: ' -w '100' -l '25' | cliphist decode | wl-copy"; }
+    Mod+c           { spawn-sh "cliphist  -preview-width 125 list | fuzzel -dp 'Clipboard: ' -w '135' -l '25' | cliphist decode | wl-copy"; }
     Mod+Shift+Space { spawn "logout-menu"; }
     Mod+Shift+M     { spawn "foot" "rmpc"; }
     Mod+Shift+B     { spawn "foot" "-T" "btop" "btop"; }
@@ -41,6 +41,11 @@ binds {
     Mod+Shift+Down         allow-when-locked=true { spawn "playerctl" "play-pause"; }
     Mod+Shift+Up           allow-when-locked=true { spawn "playerctl" "play-pause"; }
     Mod+Shift+Right        allow-when-locked=true { spawn "playerctl" "next"; }
+
+    Mod+Ctrl+Left          allow-when-locked=true { spawn "playerctl" "volume" "0.0"; }
+    Mod+Ctrl+Down          allow-when-locked=true { spawn "playerctl" "volume" "0.1-"; }
+    Mod+Ctrl+Up            allow-when-locked=true { spawn "playerctl" "volume" "0.1+"; }
+    Mod+Ctrl+Right         allow-when-locked=true { spawn "playerctl" "volume" "1.0"; }
 
     XF86MonBrightnessUp    allow-when-locked=true { spawn "brightness" "-i" "10"; }
     XF86MonBrightnessDown  allow-when-locked=true { spawn "brightness" "-d" "10"; }

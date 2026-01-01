@@ -29,6 +29,8 @@ overview {
 }
 
 recent-windows {
+    open-delay-ms 100
+
     highlight {
         padding 30
         corner-radius 0
