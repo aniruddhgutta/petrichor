@@ -30,7 +30,7 @@ colors() {
 backdrop() {
     magick "$1" \
         -scale 25% \
-        -blur 0x5 \
+        -blur 0x3 \
         -quality 75 \
         "$backdrop_cache"
     swww img \
