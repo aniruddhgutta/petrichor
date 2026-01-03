@@ -18,12 +18,12 @@ palette = {
     'foreground-attention': "#ffffff",
     'comment': colorjson["comment"],
     'cyan': colorjson["parens"],
-    'green': colorjson["function"],
+    'green': colorjson["variable"],
     'orange': colorjson["operator"],
-    'pink': colorjson["variable"],
+    'pink': colorjson["function"],
     'purple': colorjson["matched"],
-    'red': colorjson["cursor"],
-    'yellow': colorjson["variable"],
+    'red': colorjson["function"],
+    'yellow': colorjson["operator"],
 }
 
 
@@ -285,7 +285,7 @@ def color(c, options={}):
 
     # ## Background color of selected even tabs.
     # ## Type: QtColor
-    c.colors.tabs.selected.even.bg = colorjson["function"]
+    c.colors.tabs.selected.even.bg = palette["green"]
 
     # ## Foreground color of selected even tabs.
     # ## Type: QtColor
@@ -293,7 +293,7 @@ def color(c, options={}):
 
     # ## Background color of selected odd tabs.
     # ## Type: QtColor
-    c.colors.tabs.selected.odd.bg = colorjson["function"]
+    c.colors.tabs.selected.odd.bg = palette["green"]
 
     # ## Foreground color of selected odd tabs.
     # ## Type: QtColor

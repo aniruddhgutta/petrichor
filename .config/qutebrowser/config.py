@@ -1,4 +1,3 @@
-import os
 import pywalQute.draw
 from pathlib import Path
 
@@ -11,13 +10,13 @@ c.url.searchengines = {
     'DEFAULT': 'https://www.startpage.com/sp/search?query={}'
 }
 
-c.tabs.show = 'multiple'
+# c.tabs.show = 'multiple'
 c.tabs.last_close = 'startpage'
 c.scrolling.bar = 'when-searching'
 # c.statusbar.show = 'in-mode'
 
 c.colors.webpage.preferred_color_scheme = 'dark'
-c.completion.height = '30%'
+c.completion.height = '40%'
 c.completion.open_categories = ['searchengines', 'bookmarks', 'history', 'quickmarks', 'filesystem']
 
 c.content.blocking.method = 'adblock'
@@ -34,6 +33,10 @@ c.input.mode_override = 'normal'
 c.keyhint.delay = 0
 c.content.javascript.clipboard = 'access-paste'
 c.downloads.location.prompt = False
+
+# TODO:
+# rewrite pywalQute and speedcrunch template to only account for qutebrowser
+# and to remove cursed variable names
 
 pywalQute.draw.color(c, {
     'spacing': {
