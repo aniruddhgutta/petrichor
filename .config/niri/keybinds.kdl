@@ -18,6 +18,7 @@ binds {
     Mod+Shift+B     { spawn "foot" "-T" "btop" "btop"; }
     Mod+Shift+N     { spawn "media-menu"; }
     Mod+Shift+E     { spawn "emoji-menu"; }
+    Mod+Alt+L       { spawn "swaylock"; }
 
     XF86AudioRaiseVolume   allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+" "-l" "1.0"; }
     XF86AudioLowerVolume   allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
