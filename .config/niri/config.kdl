@@ -24,3 +24,10 @@ hotkey-overlay {
 config-notification {
     disable-failed
 }
+
+switch-events {
+    lid-close       { spawn "swaylock"; }
+    lid-open        { spawn "theme" "-r"; }
+    tablet-mode-on  { spawn "sh" "-c" "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"; }
+    tablet-mode-off { spawn "sh" "-c" "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"; }
+}
