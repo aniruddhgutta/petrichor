@@ -1,5 +1,5 @@
 #!/bin/sh
-# Color picker using niri
+# Color picker using niri ipc
 
 output=$(niri msg pick-color)
 color=${output##*Hex: }

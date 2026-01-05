@@ -1,5 +1,5 @@
 #!/bin/sh
-# Menu to interact with wallpaper
+# Menu to interact with 'theme'
 
 opt=$(printf "Reapply wallpaper\nPrevious wallpaper\nColorscheme\nRandom wallpaper\nWallpaper menu\nColor picker" |
     fuzzel -dp "Select action: ")
