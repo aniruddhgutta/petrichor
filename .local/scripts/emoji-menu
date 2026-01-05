@@ -19,5 +19,5 @@ chosen=$(fuzzel -dp "Select emoji: " < "$list" | awk '{ print $1 }')
 
 [ "$chosen" ] && {
     printf "%s" "$chosen" | wl-copy &&
-    notify-send "Emoji copied: $chosen"
+        notify-send "Emoji copied: $chosen"
 }

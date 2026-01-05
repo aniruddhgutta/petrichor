@@ -1,31 +1,32 @@
-#!/bin/sh -x
-# Set wallpaper and colorscheme
+#!/bin/sh
+# Set wallpaper, colorscheme and generate backdrop
 
 dir="${XDG_PICTURES_DIR:-$HOME/pics}/walls/"
 hist="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/wallpaper-history"
 info="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/theme"
 backdrop_cache="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/backdrop.png"
 
-[ -f "$info" ] && . "$info" || : >"$info"
+[ -f "$info" ] && . "$info" || : > "$info"
 
-usage() { 
+usage() {
     printf 'usage: %s [-rpsmc]\n' "${0##*/}" >&2
     exit 1
 }
 
-save() { 
+save() {
     printf 'prev_wall=%s\ncur_wall=%s\ncolorscheme=%s\n' \
-        "$prev_wall" "$cur_wall" "$colorscheme" >"$info"
-    printf '%s\n%s' "$cur_wall" "$(head -n 49 "$hist")" >"$hist"
+        "$prev_wall" "$cur_wall" "$colorscheme" > "$info"
+    printf '%s\n%s' "$cur_wall" "$(head -n 49 "$hist")" > "$hist"
 }
 
-colors() { 
+colors() {
     reclr -i "$1"
-    colorscheme=$1; save
-    command -v makoctl >/dev/null && makoctl reload
+    colorscheme=$1
+    save
+    command -v makoctl > /dev/null && makoctl reload
     notify-send -a theme "Colorscheme set!" \
         "Colorscheme set to <b>$colorscheme</b>"
-    command -v waybar >/dev/null && killall -SIGUSR2 waybar
+    command -v waybar > /dev/null && killall -SIGUSR2 waybar
 }
 
 backdrop() {
@@ -50,8 +51,9 @@ wall() {
         --transition-fps 60 \
         "$1"
     backdrop "$1" &
-    [ "$arg" != "r" ] && { 
-        prev_wall=$cur_wall cur_wall=$1; save
+    [ "$arg" != "r" ] && {
+        prev_wall=$cur_wall cur_wall=$1
+        save
         notify-send -a theme "Wallpaper set!" \
             "Wallpaper set to <b>${cur_wall##*/}</b>"
     }
@@ -62,7 +64,13 @@ while getopts rpsmc arg; do case $arg in
     r) wall "$cur_wall" ;;
     p) wall "$prev_wall" ;;
     s) wall "$(find "$dir" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | sort -R | head -n1)" ;;
-    m) sel=$(find "$dir" -type f | fuzzel -dp 'Select wallpaper: '); [ "$sel" ] && wall "$sel" ;;
-    c) sel=$(reclr -l | fuzzel -dp 'Select colorscheme: '); [ "$sel" ] && colors "$sel" ;;
+    m)
+        sel=$(find "$dir" -type f | fuzzel -dp 'Select wallpaper: ')
+        [ "$sel" ] && wall "$sel"
+        ;;
+    c)
+        sel=$(reclr -l | fuzzel -dp 'Select colorscheme: ')
+        [ "$sel" ] && colors "$sel"
+        ;;
     *) usage ;;
-esac; done
+esac done
