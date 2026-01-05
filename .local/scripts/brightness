@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 # Backlight control
 # Change brightness by a percentage of the current level for smoother,
 # perception-based (logarithmic-like) adjustments instead of fixed linear steps.

@@ -1,8 +1,9 @@
 #!/bin/sh -e
 # Traps cursor on primary monitor (niri)
+# Requires 'jq'
 
-STATE_FILE="${XDG_RUNTIME_DIR:-/tmp}/trap-monitor"
-GAP=10000  # Distance to move secondary monitor
+state_file="${XDG_RUNTIME_DIR:-/tmp}/trap-monitor"
+gap=10000    # distance to move secondary monitor
 
 get_outputs() {
     niri msg -j outputs | jq -r 'keys[]'
@@ -21,17 +22,17 @@ toggle_mode() {
         exit 1
     }
     
-    if [ -f "$STATE_FILE" ]; then
-        # Restore: move secondary back
-        pos=$(cat "$STATE_FILE")
+    if [ -f "$state_file" ]; then
+        # restore: move secondary back
+        pos=$(cat "$state_file")
         niri msg output "$secondary" position set -- "$pos" 0
-        rm "$STATE_FILE"
+        rm "$state_file"
         notify-send "Trap monitor OFF" "Monitors restored" 2>/dev/null || true
     else
-        # Trap: save position and move secondary far away
+        # trap: save position and move secondary far away
         pos=$(get_position "$secondary")
-        echo "$pos" > "$STATE_FILE"
-        niri msg output "$secondary" position set -- $((pos > 0 ? pos + GAP : pos - GAP)) 0
+        echo "$pos" > "$state_file"
+        niri msg output "$secondary" position set -- $((pos > 0 ? pos + gap : pos - gap)) 0
         notify-send "Trap monitor ON" "Cursor trapped on $primary" 2>/dev/null || true
     fi
 }

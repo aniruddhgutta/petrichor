@@ -1,7 +1,9 @@
 #!/bin/sh
 # Menu to interact with wallpaper
 
-opt=$(printf "Reapply wallpaper\nPrevious wallpaper\nColorscheme\nRandom wallpaper\nWallpaper menu\nColor picker" | fuzzel -dp "Select action: ")
+opt=$(printf "Reapply wallpaper\nPrevious wallpaper\nColorscheme\nRandom wallpaper\nWallpaper menu\nColor picker" |
+    fuzzel -dp "Select action: ")
+
 case "$opt" in
     "Reapply wallpaper") theme -r ;;
     "Previous wallpaper") theme -p ;;
@@ -9,4 +11,5 @@ case "$opt" in
     "Random wallpaper") theme -s ;;
     "Wallpaper menu") theme -m ;;
     "Color picker") colorpick ;;
+    *) exit 1 ;;
 esac

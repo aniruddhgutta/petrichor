@@ -1,5 +1,5 @@
 #!/bin/sh
-# Menu to interact with media script
+# Menu to interact with media
 
 opt=$(printf "Play/Pause playback\nStop playback\nPrevious song\nNext song" | 
     fuzzel -dp "Select media action: ")

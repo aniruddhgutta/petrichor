@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/bin/sh -x
 # Set wallpaper and colorscheme
+
 dir="${XDG_PICTURES_DIR:-$HOME/pics}/walls/"
 hist="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/wallpaper-history"
 info="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/theme"
@@ -60,7 +61,7 @@ wall() {
 while getopts rpsmc arg; do case $arg in
     r) wall "$cur_wall" ;;
     p) wall "$prev_wall" ;;
-    s) wall "$(find "$dir" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | shuf -n1)" ;;
+    s) wall "$(find "$dir" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | sort -R | head -n1)" ;;
     m) sel=$(find "$dir" -type f | fuzzel -dp 'Select wallpaper: '); [ "$sel" ] && wall "$sel" ;;
     c) sel=$(reclr -l | fuzzel -dp 'Select colorscheme: '); [ "$sel" ] && colors "$sel" ;;
     *) usage ;;
