@@ -13,7 +13,7 @@ text-wrong-color={foreground.strip}
 inside-clear-color=000000C0
 ring-clear-color={color3.strip}
 text-clear-color={foreground.strip}
-key-hl-color={color2.strip}
+key-hl-color={accent.strip}
 bs-hl-color={color1.strip}
 line-uses-ring
 

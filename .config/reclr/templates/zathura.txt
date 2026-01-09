@@ -4,8 +4,8 @@ set recolor-keephue "true"
 set completion-bg "{background}"
 set completion-fg "{foreground}"
 set completion-group-bg "{background}"
-set completion-group-fg "{color2}"
-set completion-highlight-bg "{color2}"
+set completion-group-fg "{accent}"
+set completion-highlight-bg "{accent}"
 set completion-highlight-fg "{background}"
 
 set recolor-lightcolor "{background}"
@@ -28,8 +28,8 @@ set statusbar-fg "{foreground}"
 set render-loading-bg "{background}"
 set render-loading-fg "{foreground}"
 
-set highlight-color "{color2}"
-set highlight-active-color "{color2}"
+set highlight-color "{accent}"
+set highlight-active-color "{accent}"
 
 set window-title-home-tilde true
 set statusbar-basename true

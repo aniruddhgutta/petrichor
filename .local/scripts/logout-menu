@@ -1,9 +1,9 @@
 #!/bin/sh
 # Logout menu
-# Requires 'permit nopass :wheel' in /etc/doas.conf (or) modify to use 'pkexec'.
+# Requires 'permit nopass :wheel' in /etc/doas.conf (or) modify to use 'pkexec'
 
 opt=$(printf "Poweroff\nReboot\nSleep\nConservation mode - On\nConservation mode - Off" |
-    fuzzel -dp "Power opts: ")
+    fuzzel -dp "Power options: ")
 
 case "$opt" in
     "Poweroff") loginctl poweroff ;;

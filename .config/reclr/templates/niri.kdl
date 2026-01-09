@@ -1,7 +1,7 @@
 layout {
 	background-color "{background}"
 	focus-ring {
-        active-color "{color2}"
+        active-color "{accent}"
         inactive-color "{color8}"
     }
 }
@@ -12,7 +12,7 @@ overview {
 
 recent-windows {
 	highlight {
-		active-color "{color2}"
+		active-color "{accent}"
 		urgent-color "{color1}"
 	}
 }

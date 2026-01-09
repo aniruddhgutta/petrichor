@@ -1,5 +1,6 @@
 #!/bin/sh
 # Set wallpaper, colorscheme and generate backdrop
+# Requires `graphicsmagick`
 
 dir="${XDG_PICTURES_DIR:-$HOME/pics}/walls/"
 hist="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/wallpaper-history"
@@ -30,10 +31,10 @@ colors() {
 }
 
 backdrop() {
-    magick "$1" \
+    gm convert "$1" \
         -scale 25% \
         -blur 0x3 \
-        -quality 75 \
+        -quality 50 \
         "$backdrop_cache"
     swww img \
         --transition-type fade \

@@ -1,3 +1,4 @@
+accent=#8a9887
 background=#242729
 foreground=#dedede
 cursor=#dedede

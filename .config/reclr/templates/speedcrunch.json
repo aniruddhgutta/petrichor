@@ -7,7 +7,7 @@
     "matched": "{color4}",
     "function": "{color1}",
     "operator": "{color3}",
-    "variable": "{color2}",
+    "variable": "{accent}",
     "scrollbar": "{color3}",
     "separator": "{color3}",
     "background": "{background}",

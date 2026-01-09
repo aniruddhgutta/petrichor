@@ -5,7 +5,7 @@ theme = "catppuccin"
 line-number = "relative"     # use relative line numbers
 bufferline = "multiple"      # only show when multiple buffers are open
 color-modes = true           # colorise mode indicator
-default-yank-register="+"    # use system clipboard
+# default-yank-register="+"  # use system clipboard
 rulers = [80]                # conventional unix guideline
 
 [editor.cursor-shape]

@@ -1,8 +1,8 @@
 #!/bin/sh
 # Backlight control
 # Change brightness by a percentage of the current level for smoother,
-# perception-based (logarithmic-like) adjustments instead of fixed linear steps.
-# Requires custom udev rules (or) being run as superuser.
+# perception-based (logarithmic-like) adjustments instead of fixed linear steps
+# Requires custom udev rules (or) being run as superuser
 
 usage() {
     printf "usage: %s [-i|-d|-s number]\n" "${0##*/}" >&2

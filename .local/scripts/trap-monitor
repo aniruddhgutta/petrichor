@@ -1,6 +1,6 @@
 #!/bin/sh -e
 # Traps cursor on primary monitor (niri)
-# Requires 'jq'.
+# Requires 'jq'
 
 state_file="${XDG_RUNTIME_DIR:-/tmp}/trap-monitor"
 gap=10000 # distance to move secondary monitor
