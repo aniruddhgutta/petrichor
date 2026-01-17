@@ -1,11 +1,14 @@
 #!/bin/sh
 # Wrapper for swayidle + swaylock
-# Locks (and) powers off monitors after certain idle intervals
+# Locks, powers off monitors and suspends after certain idle intervals
+# Intervals are counted from the same reference point
 
 int1=300 # lock screen
 int2=600 # power off monitors
+int3=900 # sleep
 
 swayidle -w \
     timeout $int1 'swaylock -f' \
     timeout $int2 'niri msg action power-off-monitors' \
+    timeout $int3 'loginctl suspend' \
     resume 'niri msg action power-on-monitors'
