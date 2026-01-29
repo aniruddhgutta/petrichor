@@ -1,8 +1,10 @@
 #!/bin/sh
 # Set wallpaper, colorscheme and generate backdrop
-# Requires `graphicsmagick`
+# Backdrop generation requires `graphicsmagick`
+# Colorscheme setting requires `reclr`
+# Wallpaper setting requires `swww`
 
-dir="${XDG_PICTURES_DIR:-$HOME/pics}/walls/"
+dir="${XDG_PICTURES_DIR:-$HOME/pics}/walls"
 hist="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/wallpaper-history"
 info="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/theme"
 backdrop_cache="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/backdrop.png"
@@ -15,7 +17,7 @@ usage() {
 }
 
 save() {
-    printf 'prev_wall=%s\ncur_wall=%s\ncolorscheme=%s\n' \
+    printf 'prev_wall="%s"\ncur_wall="%s"\ncolorscheme="%s"\n' \
         "$prev_wall" "$cur_wall" "$colorscheme" > "$info"
     printf '%s\n%s' "$cur_wall" "$(head -n 49 "$hist")" > "$hist"
 }
@@ -28,6 +30,7 @@ colors() {
     notify-send -a theme "Colorscheme set!" \
         "Colorscheme set to <b>$colorscheme</b>"
     command -v waybar > /dev/null && killall -SIGUSR2 waybar
+    command -v spicetify > /dev/null && spicetify apply
 }
 
 backdrop() {
@@ -64,7 +67,7 @@ wall() {
 while getopts rpsmc arg; do case $arg in
     r) wall "$cur_wall" ;;
     p) wall "$prev_wall" ;;
-    s) wall "$(find "$dir" -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' \) | sort -R | head -n1)" ;;
+    s) wall "$(find "$dir" -type f -iregex '.*\.\(png\|jpe\?g\|gif\)' | sort -R | sed 1q)" ;;
     m)
         sel=$(find "$dir" -type f | fuzzel -dp 'Select wallpaper: ')
         [ "$sel" ] && wall "$sel"

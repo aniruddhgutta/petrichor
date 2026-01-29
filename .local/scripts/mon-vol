@@ -1,5 +1,5 @@
 #!/bin/sh
-# Monitor volume changes (pipewire)
+# Monitors and notifies volume changes (pipewire)
 
 trap 'kill 0 2>/dev/null' INT TERM EXIT # kill whole process group
 
