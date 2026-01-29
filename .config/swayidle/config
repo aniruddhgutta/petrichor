@@ -1,0 +1,6 @@
+# Intervals are counted from the same reference point
+timeout 300 'swaylock -f'
+timeout 300 'niri msg action power-off-monitors'
+timeout 900 'loginctl suspend'
+lock 'swaylock -f'
+after-resume 'niri msg action power-on-monitors'

@@ -3,8 +3,8 @@
 // spawn-at-startup "swww-daemon" "--namespace" "backdrop"
 // spawn-at-startup "waybar"
 // spawn-at-startup "foot" "--server"
+// spawn-at-startup "swayidle"
 
 spawn-at-startup "mon-vol"
-spawn-at-startup "idle-lock"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
