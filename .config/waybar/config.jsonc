@@ -11,6 +11,7 @@
         "niri/window",
     ],
     "modules-right": [
+        "tray",
         "network",
         "bluetooth",
         "wireplumber",
@@ -32,9 +33,16 @@
     "mpris": {
         "format": "󰎇 {dynamic}",
         "dynamic-order": ["artist", "title"],
+        "artist-len": 40,
+        "title-len": 30,
         "tooltip-format": "{status}",
         "on-scroll-up": "playerctl volume 0.10+",
         "on-scroll-down": "playerctl volume 0.10-",
+    },
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 5,
     },
 
     "network": {
@@ -53,7 +61,7 @@
         "format-muted": "󰝟",
         "format-icons": ["󰕿", "󰖀", "󰕾"],
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-click-right": "foot -T wiremix wiremix",
+        "on-click-right": "foot -T wiremix wiremix -v output -m 100",
     },
 
     "battery": {
