@@ -13,8 +13,10 @@ binds {
 
     Mod+g           { spawn "trap-monitor"; }
     Mod+c           { spawn-sh "cliphist  -preview-width 125 list | fuzzel -dp 'Clipboard: ' -w '135' -l '25' | cliphist decode | wl-copy"; }
+    Mod+Alt+Space   { spawn "theme" "-p"; }
+    Mod+Ctrl+Space  { spawn "theme" "-s"; }
     Mod+Shift+Space { spawn "logout-menu"; }
-    Mod+Shift+M     { spawn "foot" "rmpc"; }
+    Mod+Shift+M     { spawn "foot" "-T" "rmpc" "rmpc"; }
     Mod+Shift+B     { spawn "foot" "-T" "btop" "btop"; }
     Mod+Shift+N     { spawn "media-menu"; }
     Mod+Shift+E     { spawn "emoji-menu"; }
