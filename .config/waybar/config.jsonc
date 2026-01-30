@@ -28,6 +28,8 @@
         "format": "{:%B %d, %H:%M}",
         "tooltip-format": "{:%A, %Y (%S)}",
         "interval": 1,
+        "on-click": "fuzzel",
+        "on-click-right": "~/.local/scripts/logout-menu",
     },
 
     "mpris": {
