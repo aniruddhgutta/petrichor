@@ -2,7 +2,7 @@
 default-timeout=3000
 width=350
 height=200
-padding=12
+padding=10
 border-size=2
 layer=overlay
 font=monospace 10
@@ -14,6 +14,10 @@ include=~/.cache/reclr/mako.txt
 [app-name=volume]
 group-by=app-name
 format=<b>%s</b>\n%b
+history=0
+anchor=bottom-center
+padding=15
+outer-margin=0,0,100,0
 
 [app-name=volume group-index=0]
 invisible=0
@@ -22,6 +26,10 @@ invisible=0
 [app-name=brightness]
 group-by=app-name
 format=<b>%s</b>\n%b
+history=0
+anchor=bottom-center
+padding=15
+outer-margin=0,0,100,0
 
 [app-name=brightness group-index=0]
 invisible=0
