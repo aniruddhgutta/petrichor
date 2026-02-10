@@ -1,8 +1,7 @@
 #!/bin/sh
 # Logout menu
-# Requires 'permit nopass :wheel' in /etc/doas.conf (or) modify to use 'pkexec'
 
-opt=$(printf "Shutdown\nReboot\nSleep\nLock\nPower off monitors\nConservation mode - On\nConservation mode - Off" |
+opt=$(printf "Shutdown\nReboot\nSleep\nLock\nPower off monitors\nStop auto-sleep\nStart auto-sleep\nConservation mode - On\nConservation mode - Off" |
     fuzzel -dp "Power options: ")
 
 case "$opt" in
@@ -11,6 +10,9 @@ case "$opt" in
     "Sleep") loginctl suspend ;;
     "Lock") swaylock -f ;;
     "Power off monitors") niri msg action power-off-monitors ;;
+    "Stop auto-sleep") dinitctl stop swayidle ;;
+    "Start auto-sleep") dinitctl start swayidle ;;
+    # Requires 'permit nopass :wheel' in /etc/doas.conf (or) modify to use 'pkexec'
     "Conservation mode - On") printf 1 |
         doas tee /sys/bus/platform/devices/VPC2004:*/conservation_mode ;;
     "Conservation mode - Off") printf 0 |

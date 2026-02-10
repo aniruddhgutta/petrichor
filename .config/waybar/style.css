@@ -20,7 +20,6 @@ tooltip label { margin: -5px -3px; }
 #custom-media,
 #window,
 window#waybar.empty #window,
-#tray,
 #network,
 #bluetooth,
 #wireplumber,
@@ -32,9 +31,14 @@ window#waybar.empty #window,
     transition: none;
 }
 
+#tray {
+    padding: 0 9px;
+    background-color: shade(@background, 1.5);
+}
+
 #workspaces button {
-    color: shade(@foreground, 0.5);
     padding: 0 2px;
+    color: shade(@foreground, 0.5);
 }
 #workspaces button.focused { color: @foreground; }
 
