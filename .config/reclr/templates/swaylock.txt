@@ -1,6 +1,6 @@
 color={background.strip}
 inside-color=000000C0
-ring-color={color8.strip}
+ring-color=000000C0
 line-color={background.strip}
 separator-color={background.strip}
 text-color={foreground.strip}

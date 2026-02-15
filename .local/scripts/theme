@@ -12,7 +12,15 @@ backdrop_cache="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/backdrop.png"
 [ -f "$info" ] && . "$info" || : > "$info"
 
 usage() {
-    printf 'usage: %s [-rpsmc]\n' "${0##*/}" >&2
+    cat >&2 <<- EOF
+	usage: ${0##*/} [-rpsmhc]
+	  -r    reapply current wallpaper
+	  -p    apply previous wallpaper
+	  -s    apply random wallpaper
+	  -m    select wallpaper from menu
+	  -h    select wallpaper from history
+	  -c    select colorscheme
+	EOF
     exit 1
 }
 
@@ -63,14 +71,37 @@ wall() {
     }
 }
 
+strip_prefix() {
+    while read -r f; do
+        printf '%s\n' "${f#"$1/"}"
+    done
+}
+
 [ $# -eq 0 ] && usage
-while getopts rpsmc arg; do case $arg in
+while getopts rpsmhc arg; do case $arg in
     r) wall "$cur_wall" ;;
     p) wall "$prev_wall" ;;
-    s) wall "$(find "$dir" -type f -iregex '.*\.\(png\|jpe\?g\|gif\)' | sort -R | sed 1q)" ;;
+    s)
+        wall "$(
+            find "$dir" -type f -iregex '.*\.\(png\|jpe\?g\|gif\)' |
+                sort -R |
+                sed 1q
+        )"
+        ;;
     m)
-        sel=$(find "$dir" -type f | fuzzel -dp 'Select wallpaper: ')
-        [ "$sel" ] && wall "$sel"
+        sel=$(
+            find "$dir" -type f -not -path '*/.git/*' |
+                strip_prefix "$dir" |
+                fuzzel -dp 'Select wallpaper: '
+        )
+        [ "$sel" ] && wall "$dir/$sel"
+        ;;
+    h)
+        sel=$(
+            strip_prefix "$dir" < "$hist" |
+                fuzzel -dp 'Select wallpaper: '
+        )
+        [ "$sel" ] && wall "$dir/$sel"
         ;;
     c)
         sel=$(reclr -l | fuzzel -dp 'Select colorscheme: ')
