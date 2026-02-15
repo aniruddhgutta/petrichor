@@ -82,25 +82,17 @@ while getopts rpsmhc arg; do case $arg in
     r) wall "$cur_wall" ;;
     p) wall "$prev_wall" ;;
     s)
-        wall "$(
-            find "$dir" -type f -iregex '.*\.\(png\|jpe\?g\|gif\)' |
-                sort -R |
-                sed 1q
-        )"
+        wall "$(find "$dir" -type f -iregex '.*\.\(png\|jpe\?g\|gif\)' |
+            sort -R | sed 1q)"
         ;;
     m)
-        sel=$(
-            find "$dir" -type f -not -path '*/.git/*' |
-                strip_prefix "$dir" |
-                fuzzel -dp 'Select wallpaper: '
-        )
+        sel=$(find "$dir" -type f -not -path '*/.git/*' |
+            strip_prefix "$dir" | fuzzel -dp 'Select wallpaper: ')
         [ "$sel" ] && wall "$dir/$sel"
         ;;
     h)
-        sel=$(
-            strip_prefix "$dir" < "$hist" |
-                fuzzel -dp 'Select wallpaper: '
-        )
+        sel=$(strip_prefix "$dir" < "$hist" |
+            awk '!seen[$0]++' | fuzzel -dp 'Select wallpaper: ')
         [ "$sel" ] && wall "$dir/$sel"
         ;;
     c)
