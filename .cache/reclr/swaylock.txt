@@ -1,6 +1,6 @@
 color=242729
 inside-color=000000C0
-ring-color=44444c
+ring-color=000000C0
 line-color=242729
 separator-color=242729
 text-color=dedede
