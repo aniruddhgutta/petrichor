@@ -1,0 +1,24 @@
+#!/bin/sh
+# Script to manage my dotfiles
+# This script must be run from the root of the dotfiles git repository
+# NOTE: VERY EARLY STAGE, lots of changes will have to be made
+
+dotfiles=$(pwd)
+
+# create required directories
+mkdir -p ~/.cache/reclr
+mkdir -p ~/.cache/script-cache
+mkdir -p ~/.config
+mkdir -p ~/.local/share/mpd
+
+# symlink everything
+for file in ${dotfiles}/.cache/reclr/*; do
+	ln -s ${file} ~/.cache/reclr/
+done
+for file in ${dotfiles}/.config/*; do
+	ln -s ${file} ~/.config/
+done
+for file in ${dotfiles}/.local/share/*; do
+	ln -s ${file} ~/.local/share/
+done
+ln -s ${dotfiles}/.local/scripts ~/.local/scripts
