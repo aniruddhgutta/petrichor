@@ -25,6 +25,7 @@ More info will be added later.
 - files: yazi/nautilus
 - font: personal fork of [gohu](https://github.com/aniruddhgutta/gohufont)
 - colors are managed by [reclr](https://codeberg.org/oceanicc/reclr)
+- script dependencies: brightnessctl, playerctl, graphicsmagick, swww, jq
 
 ---
 
