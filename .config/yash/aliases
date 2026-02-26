@@ -1,4 +1,4 @@
-alias ..="cd .."
+alias  ..="cd .."
 alias ...="cd ../.."
 
 alias la="ls -lAh --color"
@@ -9,13 +9,13 @@ alias rf="rm -rf"
 alias cp="cp -i"
 
 alias df="df -Th"
-alias x=xdg-open
+alias  x="xdg-open"
 alias vi="$EDITOR"
 
-alias s="$(command -v doas || command -v ssu  || command -v sudo) --"
-alias se="s $EDITOR"
+alias  s="$(command -v doas || command -v ssu  || command -v sudo) --"
+alias se="$(command -v doasedit || printf "s %s" $EDITOR) --"
 
 alias mi="s make clean install"
 alias mc="make clean"
 
-alias dots='/usr/bin/git --git-dir=$HOME/.local/dots --work-tree=$HOME'
+alias dots='/usr/bin/git --git-dir=$HOME/.local/dots --work-tree=$HOME'  # bare repository helper

@@ -1,0 +1,3 @@
+# language-specific environment variables
+# example: zig-bin
+# export PATH="$PATH:$HOME/.local/bin/zig-0.15.2"

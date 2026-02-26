@@ -16,9 +16,9 @@ set -o le-predict
 
 # Keybindings
 for mode in --emacs --vi-insert --vi-command; do
-  bindkey "$mode" '\^L' clear-and-redraw-all
-  bindkey "$mode" '\^[b' backward-emacsword
-  bindkey "$mode" '\^[f' forward-emacsword
+    bindkey "$mode" '\^L' clear-and-redraw-all
+    bindkey "$mode" '\^[b' backward-emacsword
+    bindkey "$mode" '\^[f' forward-emacsword
 done
 
 bindkey --vi-insert '\B' backward-delete-semiword
@@ -32,17 +32,18 @@ YASH_PS1R='\fc.${_vcs_info}'
 YASH_PS1P='\fi.'
 
 _update_prompt() {
-  [ -n "${SSH_CONNECTION-}" ] && _prefix='\fy.ssh\fd. ' || _prefix=''
-  [ "$(id -u)" -eq 0 ] && _prefix='\fr.root\fd. '
-  
-  _vcs_info=$(git branch --show-current 2>/dev/null) || return
-  [ -n "$(git status --porcelain 2>/dev/null)" ] && _vcs_info="$_vcs_info*"
-}
+    [ -n "${SSH_CONNECTION-}" ] && _prefix='\fy.ssh\fd. ' || _prefix=''
+    [ "$(id -u)" -eq 0 ] && _prefix='\fr.root\fd. '
+
+    _vcs_info=$(git branch --show-current 2>/dev/null) || return
+    [ -n "$(git status --porcelain 2>/dev/null)" ] && _vcs_info="$_vcs_info*"
+    }
 PROMPT_COMMAND=("$PROMPT_COMMAND" '_update_prompt')
 
 # j - directory jumper
 # usage:
 #     j - print state file
+#     j_clean - clean database
 #     j <pattern> - jump to best-matching directory
 _J_DATA="${XDG_STATE_HOME:-$HOME/.local/state}/j"
 mkdir -p "${_J_DATA%/*}" 2>/dev/null
@@ -50,7 +51,7 @@ mkdir -p "${_J_DATA%/*}" 2>/dev/null
 
 j() {
     [ $# -eq 0 ] && cat "$_J_DATA" && return
-    
+
     best=""
     best_score=0
     while IFS='|' read -r path count; do
@@ -59,7 +60,7 @@ j() {
                 best="$path" && best_score="$count"
         esac
     done < "$_J_DATA"
-    
+
     [ -d "$best" ] && cd "$best" && return
     [ -d "$1" ] && cd "$1" && return
     printf "j: no match\n" >&2
@@ -69,17 +70,39 @@ j() {
 _j_add() {
     pwd_abs="$(pwd -P)"
     [ "$pwd_abs" = "$HOME" ] && return
-    
+
     tmp="${_J_DATA}_"
     count=0
-    
+
     while IFS='|' read -r path num; do
-        [ "$path" = "$pwd_abs" ] && count=$num ||
+        if [ "$path" = "$pwd_abs" ]; then
+            count=$num
+        elif [ -d "$path" ]; then
             printf "%s|%s\n" "$path" "$num" >> "$tmp"
+        fi
     done < "$_J_DATA"
-    
+
     printf "%s|%d\n" "$pwd_abs" "$((count + 1))" >> "$tmp"
     mv "$tmp" "$_J_DATA"
+
+    # autoclean if database size exceeds 200kb
+    # [ "$(wc -c < "$_J_DATA")" -gt 204800 ] && j_clean
+}
+
+j_clean() {
+    [ -f "$_J_DATA" ] || return
+
+    printf "Cleaning database...\n"
+    tmp="${_J_DATA}_"
+    while IFS='|' read -r path num; do
+        [ -d "$path" ] && printf "%s|%s\n" "$path" "$num" >> "$tmp"
+    done < "$_J_DATA"
+
+    sort -t'|' -k2 -rn "$tmp" | awk -F'|' '!seen[$1]++' | head -5000 > "${tmp}2"
+    mv "${tmp}2" "$_J_DATA"
+    rm -f "$tmp"
+
+    printf "Cleaned: %d entries remain\n" "$(wc -l < "$_J_DATA")"
 }
 
 YASH_AFTER_CD=_j_add
@@ -89,12 +112,12 @@ YASH_AFTER_CD=_j_add
 #     q - exit yazi and change cwd
 #     Q - only exit yazi
 y() {
-	set -- "$@" --cwd-file "$(mktemp -t yazi-cwd.XXXXXX)"
-	command yazi "$@"
-	shift $(($# - 1))
-	set -- "$(command cat < "$1"; printf .; rm -f -- "$1")"
-	set -- "${1%.}"
-	[ -n "$1" ] && [ "$1" != "$PWD" ] && command cd -- "$1"
+    set -- "$@" --cwd-file "$(mktemp -t yazi-cwd.XXXXXX)"
+    command yazi "$@"
+    shift $(($# - 1))
+    set -- "$(command cat < "$1"; printf .; rm -f -- "$1")"
+    set -- "${1%.}"
+    [ -n "$1" ] && [ "$1" != "$PWD" ] && command cd -- "$1"
 }
 
 # Source
@@ -103,11 +126,11 @@ y() {
 # Autostart niri
 # NIRI_AUTOSTART=0    # Uncomment to disable autostart
 if [ -n "$(command -v niri)" ] && [ -z "$DISPLAY" ] && [ "$(tty)" = /dev/tty1 ]; then
-  [ "${NIRI_AUTOSTART:-1}" = 1 ] && {
-    file="/tmp/tty1_session"
-    if [ ! -f "$file" ]; then
-      touch "$file"
-      exec niri --session
-    fi
-  }
+    [ "${NIRI_AUTOSTART:-1}" = 1 ] && {
+        file="/tmp/tty1_session"
+        if [ ! -f "$file" ]; then
+            touch "$file"
+            exec niri --session
+        fi
+    }
 fi
