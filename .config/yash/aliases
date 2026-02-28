@@ -18,4 +18,4 @@ alias se="$(command -v doasedit || printf "s %s" $EDITOR) --"
 alias mi="s make clean install"
 alias mc="make clean"
 
-alias dots='/usr/bin/git --git-dir=$HOME/.local/dots --work-tree=$HOME'  # bare repository helper
+alias dots='/usr/bin/git -C $DOTS_DIR'  # alias to dots repo

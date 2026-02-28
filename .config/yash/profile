@@ -38,3 +38,5 @@ export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 USE_OX=2 USE_LTO=0 USE_CLANG=1 . "$XDG_CONFIG_HOME/yash/mkenv"	# compile flags
 . "$XDG_CONFIG_HOME/yash/langs"	 # lang specific env vars can be placed here
 . "$XDG_CACHE_HOME/script-cache/theme"	# theme details
+
+export DOTS_DIR="$HOME/.local/src/personal/petrichor"
