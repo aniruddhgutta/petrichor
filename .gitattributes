@@ -1,0 +1,22 @@
+[attr]lfs filter=lfs diff=lfs merge=lfs -text
+
+* text=auto eol=lf
+
+*.png lfs
+*.jpg lfs
+/.local/share/icons/plan9/cursors/* lfs
+
+*config            linguist-language=INI
+*.conf             linguist-language=INI
+*.desktop          linguist-language=INI
+*.dirs             linguist-language=SHELL
+*.jsonc            linguist-language=JSON
+*.theme            linguist-language=INI
+*.txt              linguist-language=INI
+*.kdl              linguist-language=JSON
+dotman             linguist-language=SHELL
+fonts.conf         linguist-language=XML
+/.config/dinit.d/* linguist-language=INI
+/.config/yash/*    linguist-language=SHELL
+/.config/zathura/* linguist-language=SHELL
+/.local/scripts/*  linguist-language=SHELL
