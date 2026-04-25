@@ -1,5 +1,5 @@
 # Colorscheme
-theme = "catppuccin"
+theme = "booberry-v2"
 
 [editor]
 line-number = "relative"     # use relative line numbers
