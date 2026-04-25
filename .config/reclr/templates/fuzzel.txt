@@ -1,5 +1,5 @@
 [colors]
-background={background.strip}ff
+background={background.strip}da
 prompt={foreground.strip}ff
 text={foreground.strip}ff
 placeholder={foreground.strip}ff

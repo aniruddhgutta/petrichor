@@ -5,12 +5,13 @@
     font-size: 11px;
     border: none;
     border-radius: 0;
+    transition: none;
 }
 
 window#waybar,
 tooltip,
 tooltip label {
-    background-color: @background;
+    background-color: alpha(@background, 0.9);
     color: @foreground;
 }
 tooltip label { margin: -5px -3px; }
@@ -26,14 +27,13 @@ window#waybar.empty #window,
 #workspaces button,
 #battery {
     padding: 0 12px;
-    background-color: @background;
+    background-color: transparent;
     color: @foreground;
-    transition: none;
 }
 
 #tray {
     padding: 0 9px;
-    background-color: shade(@background, 1.5);
+    background-color: shade(@background, 1.7);
 }
 
 #workspaces button {
@@ -48,11 +48,10 @@ window#waybar.empty #window,
 #clock:hover,
 #mpris:hover,
 #custom-media:hover,
-#window:hover,
 #network:hover,
 #bluetooth:hover,
 #wireplumber:hover,
 #workspaces button:hover,
 #battery:hover {
-    background-color: shade(@background, 1.5);
+    background-color: shade(@background, 1.7);
 }

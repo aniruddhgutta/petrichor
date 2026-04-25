@@ -35,6 +35,7 @@ colors() {
     colorscheme=$1
     save
     command -v makoctl > /dev/null && makoctl reload
+    command -v fnott > /dev/null && dinitctl restart fnott
     notify-send -a theme "Colorscheme set!" \
         "Colorscheme set to <b>$colorscheme</b>"
     command -v waybar > /dev/null && killall -SIGUSR2 waybar

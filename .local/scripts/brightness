@@ -27,5 +27,5 @@ esac
 printf "%s" "$new" > "$dev/brightness"
 perc=$((new * 100 / max))
 
-notify-send -a "brightness" -h int:value:$perc "Brightness: $perc%"
+notify-send -r 10000 -a "brightness" -h int:value:$perc "Brightness: $perc%"
 printf "Brightness: %s%%" "$perc"

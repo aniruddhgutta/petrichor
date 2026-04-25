@@ -11,3 +11,10 @@ cursor {
     hide-when-typing
     hide-after-inactive-ms 5000
 }
+
+blur {
+    passes 2
+    offset 5
+    noise 0.02
+    saturation 1.5
+}

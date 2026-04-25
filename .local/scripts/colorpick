@@ -1,5 +1,6 @@
 #!/bin/sh
 # Color picker using niri ipc
+# Color preview requires `graphicsmagick`
 
 output=$(niri msg pick-color)
 color=${output##*Hex: }
@@ -7,6 +8,8 @@ color=${output##*Hex: }
 [ "$color" ] && {
     printf "%s" "$color" | wl-copy
     printf "%s\n" "$color"
-    notify-send "Picked color" \
-        "<span color='$color'></span> $color copied to clipboard"
+    prev="$(mktemp -u).png"
+    trap 'rm -f "$prev"' EXIT
+    gm convert -size 24x24 "xc:$color" "$prev" && icon="$prev" || icon=""
+    notify-send ${icon:+-i "$icon"} "Picked color" "$color copied to clipboard"
 }

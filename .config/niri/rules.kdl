@@ -42,12 +42,32 @@ window-rule {
     open-maximized true
 }
 
-// Add a shadow to dmenu and waybar.
+// Add a shadow and blur to launcher, notifications and waybar.
 layer-rule {
-    match namespace="^(launcher|waybar)$"
+    match namespace="^(launcher|notifications|waybar)$"  // remove 'notifications' if using mako
     match at-startup=true
-    shadow { on; }
+
+    shadow {
+        on
+    }
+
+    background-effect {
+        blur true
+        xray false
+    }
+
     geometry-corner-radius 0
+}
+
+// Enable blur behind spotify.
+window-rule {
+    match app-id="^(spotify|org.gnome.Nautilus)$"
+
+    opacity 0.9
+
+    background-effect {
+        blur true
+    }
 }
 
 // Use current wallpaper as backdrop.

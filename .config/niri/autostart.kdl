@@ -4,6 +4,9 @@
 // spawn-at-startup "waybar"
 // spawn-at-startup "foot" "--server"
 // spawn-at-startup "swayidle"
+// spawn-at-startup "fnott"
+// spawn-at-startup "mpd"
+// spawn-at-startup "mpdris2-rs"
 
 spawn-at-startup "mon-vol"
 spawn-at-startup "brightnessctl" "set" "50%" // temporary, until I rewrite my brightness script

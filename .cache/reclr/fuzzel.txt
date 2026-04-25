@@ -1,5 +1,5 @@
 [colors]
-background=242729ff
+background=242729da
 prompt=dededeff
 text=dededeff
 placeholder=dededeff
