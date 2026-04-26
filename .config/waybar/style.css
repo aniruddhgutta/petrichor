@@ -2,7 +2,7 @@
 
 * {
     font-family: monospace;
-    font-size: 11px;
+    font-size: 13px;
     border: none;
     border-radius: 0;
     transition: none;
@@ -55,3 +55,5 @@ window#waybar.empty #window,
 #battery:hover {
     background-color: shade(@background, 1.7);
 }
+
+@import "custom.css";
