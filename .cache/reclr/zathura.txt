@@ -1,35 +1,35 @@
 set recolor "true"
 set recolor-keephue "true"
 
-set completion-bg "#242729"
-set completion-fg "#dedede"
-set completion-group-bg "#242729"
-set completion-group-fg "#8a9887"
-set completion-highlight-bg "#8a9887"
-set completion-highlight-fg "#242729"
+set completion-bg "#141416"
+set completion-fg "#eeeeee"
+set completion-group-bg "#141416"
+set completion-group-fg "#cda2d4"
+set completion-highlight-bg "#cda2d4"
+set completion-highlight-fg "#141416"
 
-set recolor-lightcolor "#242729"
-set recolor-darkcolor "#dedede"
+set recolor-lightcolor "#141416"
+set recolor-darkcolor "#eeeeee"
 
-set default-bg "#242729"
-set inputbar-bg "#242729"
-set inputbar-fg "#dedede"
+set default-bg "#141416"
+set inputbar-bg "#141416"
+set inputbar-fg "#eeeeee"
 
-set notification-bg "#242729"
-set notification-fg "#dedede"
-set notification-error-bg "#9c6b7a"
-set notification-error-fg "#dedede"
-set notification-warning-bg "#9c6b7a"
-set notification-warning-fg "#dedede"
+set notification-bg "#141416"
+set notification-fg "#eeeeee"
+set notification-error-bg "#a3697d"
+set notification-error-fg "#eeeeee"
+set notification-warning-bg "#a3697d"
+set notification-warning-fg "#eeeeee"
 
-set statusbar-bg "#242729"
-set statusbar-fg "#dedede"
+set statusbar-bg "#141416"
+set statusbar-fg "#eeeeee"
 
-set render-loading-bg "#242729"
-set render-loading-fg "#dedede"
+set render-loading-bg "#141416"
+set render-loading-fg "#eeeeee"
 
-set highlight-color "#8a9887"
-set highlight-active-color "#8a9887"
+set highlight-color "#cda2d4"
+set highlight-active-color "#cda2d4"
 
 set window-title-home-tilde true
 set statusbar-basename true

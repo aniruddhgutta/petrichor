@@ -1,0 +1,39 @@
+.theme-dark {
+	--color-accent:     #9f8ac6;
+	--color-accent-hsl: 243, 32%, 68%;
+
+	--p0:  #141416;
+  --p15: #eeeeee;
+
+  --color-base-00:  var(--p0);
+  --color-base-05:  color-mix(in srgb, var(--p0) 95%, var(--p15));
+  --color-base-10:  color-mix(in srgb, var(--p0) 90%, var(--p15));
+  --color-base-20:  color-mix(in srgb, var(--p0) 80%, var(--p15));
+  --color-base-25:  color-mix(in srgb, var(--p0) 75%, var(--p15));
+  --color-base-30:  color-mix(in srgb, var(--p0) 70%, var(--p15));
+  --color-base-35:  color-mix(in srgb, var(--p0) 62%, var(--p15));
+  --color-base-40:  color-mix(in srgb, var(--p0) 50%, var(--p15));
+  --color-base-50:  color-mix(in srgb, var(--p0) 38%, var(--p15));
+  --color-base-60:  color-mix(in srgb, var(--p0) 22%, var(--p15));
+  --color-base-70:  color-mix(in srgb, var(--p0) 12%, var(--p15));
+  --color-base-100: var(--p15);
+
+	--text-normal: #eeeeee;
+	--text-muted:  #c7c9cc;
+
+	--color-red:    #a3697d;
+	--color-orange: #d1bea5;
+	--color-yellow: #d8c5a0;
+	--color-green:  #9aaa9e;
+	--color-cyan:   #8a9ca0;
+	--color-blue:   #9f8ac6;
+	--color-purple: #cda2d4;
+	--color-pink:   #b8869b;
+
+	--h1-color: #b8a4de;
+	--h2-color: #cda2d4;
+	--h3-color: #9f8ac6;
+	--h4-color: #8a9ca0;
+	--h5-color: #9aaa9e;
+	--h6-color: #c7c9cc;
+}

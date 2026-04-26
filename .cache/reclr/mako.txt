@@ -1,0 +1,4 @@
+background-color=#141416
+text-color=#eeeeee
+border-color=#3d3744
+progress-color=source #cda2d4

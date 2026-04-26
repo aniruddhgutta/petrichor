@@ -1,0 +1,39 @@
+.theme-dark {
+	--color-accent:     {color4};
+	--color-accent-hsl: 243, 32%, 68%;
+
+	--p0:  {color0};
+  --p15: {color15};
+
+  --color-base-00:  var(--p0);
+  --color-base-05:  color-mix(in srgb, var(--p0) 95%, var(--p15));
+  --color-base-10:  color-mix(in srgb, var(--p0) 90%, var(--p15));
+  --color-base-20:  color-mix(in srgb, var(--p0) 80%, var(--p15));
+  --color-base-25:  color-mix(in srgb, var(--p0) 75%, var(--p15));
+  --color-base-30:  color-mix(in srgb, var(--p0) 70%, var(--p15));
+  --color-base-35:  color-mix(in srgb, var(--p0) 62%, var(--p15));
+  --color-base-40:  color-mix(in srgb, var(--p0) 50%, var(--p15));
+  --color-base-50:  color-mix(in srgb, var(--p0) 38%, var(--p15));
+  --color-base-60:  color-mix(in srgb, var(--p0) 22%, var(--p15));
+  --color-base-70:  color-mix(in srgb, var(--p0) 12%, var(--p15));
+  --color-base-100: var(--p15);
+
+	--text-normal: {color15};
+	--text-muted:  {color7};
+
+	--color-red:    {color1};
+	--color-orange: {color3};
+	--color-yellow: {color11};
+	--color-green:  {color2};
+	--color-cyan:   {color6};
+	--color-blue:   {color4};
+	--color-purple: {color5};
+	--color-pink:   {color9};
+
+	--h1-color: {color12};
+	--h2-color: {color5};
+	--h3-color: {color4};
+	--h4-color: {color6};
+	--h5-color: {color2};
+	--h6-color: {color7};
+}
