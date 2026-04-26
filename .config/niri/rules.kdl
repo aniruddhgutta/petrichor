@@ -42,9 +42,15 @@ window-rule {
     open-maximized true
 }
 
+// Open Cartridges as fullscreen by default.
+window-rule {
+    match app-id=r#"Cartridges$"#
+    open-fullscreen true
+}
+
 // Add a shadow and blur to launcher, notifications and waybar.
 layer-rule {
-    match namespace="^(launcher|notifications|waybar)$"  // remove 'notifications' if using mako
+    match namespace="^(launcher|waybar)$"  // add 'notifications' once mako adds support
     match at-startup=true
 
     shadow {
@@ -61,7 +67,7 @@ layer-rule {
 
 // Enable blur behind spotify.
 window-rule {
-    match app-id="^(spotify|org.gnome.Nautilus)$"
+    match app-id="^(spotify)$"
 
     opacity 0.9
 
