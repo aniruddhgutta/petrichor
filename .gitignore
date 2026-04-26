@@ -2,5 +2,3 @@
 .config/dinit.d/boot.d
 .config/qutebrowser/quickmarks
 .config/qutebrowser/image.jpg
-.config/spotify-player/app.toml
-.config/yash/langs
