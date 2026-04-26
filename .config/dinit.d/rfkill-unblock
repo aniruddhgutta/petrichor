@@ -1,3 +1,0 @@
-type = process
-command = /usr/bin/rfkill unblock all
-before = login.target
