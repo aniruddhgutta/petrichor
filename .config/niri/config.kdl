@@ -5,14 +5,14 @@
 
 include "autostart.kdl"    // spawn-at-startup
 include "appearance.kdl"   // animations, cursor
-include "colors.kdl"       // colors
 include "debug.kdl"        // debug
 include "input.kdl"        // input
 include "keybinds.kdl"     // binds
 include "layout.kdl"       // layout, overview, recent-windows
-include "monitors.kdl"     // output
 include "rules.kdl"        // window-rule, layer-rule
-include "custom.kdl"       // custom overrides
+
+include optional=true "outputs.kdl" // outputs
+include optional=true "custom.kdl"  // custom overrides
 
 screenshot-path "~/pics/screenshots/%F-%T.png"
 

@@ -1,9 +1,7 @@
 binds {
     Mod+Space       { spawn "fuzzel"; }
-    Mod+p           { spawn "fuzzel"; }
-    Mod+Return      { spawn "footclient"; }
     Mod+w           { spawn "footclient"; }
-    Mod+d           { spawn "flatpak" "run" "com.imputnet.Helium"; }
+    Mod+d           { spawn "flatpak" "run" "net.imput.helium"; }
     Mod+s           { spawn "foot" "-T" "spotify" "spotify_player"; }
     Mod+e           { spawn "foot" "yazi"; }
     Mod+a           { spawn "nautilus" "--new-window"; }
@@ -16,6 +14,7 @@ binds {
     Mod+Alt+Space   { spawn "theme" "-p"; }
     Mod+Ctrl+Space  { spawn "theme" "-s"; }
     Mod+Shift+Space { spawn "logout-menu"; }
+    Mod+Shift+Slash { spawn "keybinds"; }
     Mod+Shift+M     { spawn "foot" "-T" "rmpc" "rmpc"; }
     Mod+Shift+B     { spawn "foot" "-T" "btop" "btop"; }
     Mod+Shift+N     { spawn "media-menu"; }
@@ -58,12 +57,13 @@ binds {
     Mod+Alt+Up             allow-when-locked=true { spawn "brightness" "-i" "10"; }
     Mod+Alt+Right          allow-when-locked=true { spawn "brightness" "-s" "100"; }
 
+    Mod+Shift+Escape       allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     Mod+Escape             repeat=false           { toggle-overview; }
     Mod+O                  repeat=false           { toggle-overview; }
     Mod+Q                  repeat=false           { close-window; }
     Mod+Shift+Q            repeat=false           { quit; }
-    Mod+Shift+Escape       allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
+    Print         { screenshot; }
     Mod+Shift+S   { screenshot; }
     Shift+Alt+s   { screenshot-screen; }
     Shift+Alt+d   { screenshot-window; }

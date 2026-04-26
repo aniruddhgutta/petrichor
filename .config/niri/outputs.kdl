@@ -1,0 +1,9 @@
+// Configure outputs here.
+
+// Example:
+// output "HDMI-A-1" {
+//     mode "1920x1080@179.999"
+//     position x=0 y=0
+//     focus-at-startup
+// }
+

@@ -1,0 +1,34 @@
+#!/bin/sh
+# Preview niri keybinds in fuzzel
+
+entries=$(awk '
+	/binds[[:space:]]*\{/         { in_binds=1; next }
+	in_binds && /^[[:space:]]*\}/ { in_binds=0; next }
+	!in_binds { next }
+	{
+		sub(/\/\/.*$/, "")
+		sub(/^[[:space:]]+/, "")
+		if (!length || /^\}/) next
+		brace = index($0, "{")
+		if (!brace) next
+		key  = substr($0, 1, brace-1)
+		rest = substr($0, brace+1)
+		sub(/\}.*$/, "", rest)
+		gsub(/[[:space:]]+[a-z-]+=[^[:space:]]+/, "", key)
+		gsub(/[[:space:]]+/, " ", key);  sub(/^ | $/, "", key)
+		gsub(/[[:space:]]+/, " ", rest); sub(/^ | $/, "", rest)
+		if (key && rest) print key "\t" rest
+	}
+' "${XDG_CONFIG_HOME:-$HOME/.config}/niri"/*.kdl)
+
+[ -z "$entries" ] && { printf 'no keybinds found\n' >&2; exit 1; }
+
+selected=$(printf '%s\n' "$entries" \
+	| awk -F'\t' '{ printf "%-25s %s\n", $1, $2 }' \
+	| fuzzel -d -l 20 -w 120 "$@")
+[ -z "$selected" ] && exit 0
+
+key=$(printf '%s' "$selected" | awk '{print $1}')
+action=$(printf '%s\n' "$entries" | awk -F'\t' -v k="$key" '$1==k { print $2; exit }')
+
+[ -n "$action" ] && niri msg action "$action"

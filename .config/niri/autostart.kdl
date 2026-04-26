@@ -9,6 +9,5 @@
 // spawn-at-startup "mpdris2-rs"
 
 spawn-at-startup "mon-vol"
-spawn-at-startup "brightnessctl" "set" "50%" // temporary, until I rewrite my brightness script
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"

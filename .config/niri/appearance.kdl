@@ -5,7 +5,7 @@ animations {
 }
 
 cursor {
-    xcursor-theme "default"
+    xcursor-theme "Bibata-Modern-Ice"
     xcursor-size 16
 
     hide-when-typing
@@ -18,3 +18,5 @@ blur {
     noise 0.02
     saturation 1.5
 }
+
+include "~/.cache/reclr/niri.kdl"
