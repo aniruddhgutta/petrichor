@@ -1,6 +1,6 @@
 prefer-no-csd
 
-animations {
+/-animations {
     slowdown 0.8
 }
 
