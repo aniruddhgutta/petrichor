@@ -2,7 +2,7 @@
 # Set wallpaper, colorscheme and generate backdrop
 # Backdrop generation requires `graphicsmagick`
 # Colorscheme setting requires `reclr`
-# Wallpaper setting requires `swww`
+# Wallpaper setting requires `awww`
 
 dir="${XDG_PICTURES_DIR:-$HOME/pics}/walls"
 hist="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/wallpaper-history"
@@ -48,7 +48,7 @@ backdrop() {
         -blur 0x3 \
         -quality 50 \
         "$backdrop_cache"
-    swww img \
+    awww img \
         --transition-type fade \
         --transition-duration 0.75 \
         -n backdrop \
@@ -57,7 +57,7 @@ backdrop() {
 
 wall() {
     [ "$1" ] || exit 1
-    swww img \
+    awww img \
         --transition-type outer \
         --transition-step 125 \
         --transition-duration 1 \

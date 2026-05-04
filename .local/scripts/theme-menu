@@ -7,7 +7,7 @@ opt=$(printf "Reapply wallpaper\nPrevious wallpaper\nClear wallpaper\nColorschem
 case "$opt" in
     "Reapply wallpaper") theme -r ;;
     "Previous wallpaper") theme -p ;;
-    "Clear wallpaper") swww clear ;;
+    "Clear wallpaper") awww clear ;;
     "Colorscheme") theme -c ;;
     "Random wallpaper") theme -s ;;
     "Wallpaper menu") theme -m ;;
