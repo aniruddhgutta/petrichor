@@ -130,7 +130,8 @@ if [ -n "$(command -v niri)" ] && [ -z "$DISPLAY" ] && [ "$(tty)" = /dev/tty1 ];
         file="/tmp/tty1_session"
         if [ ! -f "$file" ]; then
             touch "$file"
-            exec niri-session
+            # update to niri-session after chimera updates graphical session handling
+            exec niri --session
         fi
     }
 fi
