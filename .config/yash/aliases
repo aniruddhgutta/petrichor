@@ -19,4 +19,8 @@ alias mi="s make clean install"
 alias mc="make clean"
 alias diff="diff -u --color"  # not posix-compliant
 
+alias start_aria='aria2c --conf-path="${XDG_CONFIG_HOME:-$HOME/.config}/aria2/aria2.conf" -D'
+alias open_aria="aria2p --secret 'aria'"
+alias close_aria="pkill -f aria2c"
+
 alias dots='/usr/bin/git -C $DOTS_DIR'  # alias to dots repo
