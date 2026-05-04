@@ -1,4 +1,4 @@
 type = process
-command = /usr/bin/swww-daemon --namespace backdrop
+command = /usr/bin/awww-daemon --namespace backdrop
 log-type = buffer
 depends-on: graphical.target
