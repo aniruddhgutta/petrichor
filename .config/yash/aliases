@@ -1,10 +1,10 @@
 alias  ..="cd .."
 alias ...="cd ../.."
 
-alias la="ls -lAh --color"
-alias ls="ls -Ah --color"
+alias la="ls -lAh --color"  # not posix-compliant
+alias ls="ls -Ah --color"   # not posix-compliant
 
-alias rm="rm -v"
+alias rm="rm -v"  # not posix-compliant
 alias rf="rm -rf"
 alias cp="cp -i"
 
@@ -17,5 +17,6 @@ alias se="$(command -v doasedit || printf "s %s" $EDITOR) --"
 
 alias mi="s make clean install"
 alias mc="make clean"
+alias diff="diff -u --color"  # not posix-compliant
 
 alias dots='/usr/bin/git -C $DOTS_DIR'  # alias to dots repo
