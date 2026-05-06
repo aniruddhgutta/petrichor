@@ -1,8 +1,9 @@
 layout {
 	background-color "#141416"
-	focus-ring {
+	border {
         active-color "#cda2d4"
         inactive-color "#3d3744"
+        urgent-color "#a3697d"
     }
 }
 

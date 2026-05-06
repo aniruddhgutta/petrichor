@@ -1,8 +1,9 @@
 layout {
 	background-color "{background}"
-	focus-ring {
+	border {
         active-color "{accent}"
         inactive-color "{color8}"
+        urgent-color "{color1}"
     }
 }
 
