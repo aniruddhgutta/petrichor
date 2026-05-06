@@ -17,3 +17,17 @@ recent-windows {
 		urgent-color "{color1}"
 	}
 }
+
+// screencasted window indicator
+window-rule {
+    match is-window-cast-target=true
+
+    border {
+    	active-color "{color2}"
+        inactive-color "{color3}"
+    }
+    tab-indicator {
+        active-color "{color2}"
+        inactive-color "{color3}"
+    }
+}

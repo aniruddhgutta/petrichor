@@ -17,3 +17,17 @@ recent-windows {
 		urgent-color "#a3697d"
 	}
 }
+
+// screencasted window indicator
+window-rule {
+    match is-window-cast-target=true
+
+    border {
+    	active-color "#9aaa9e"
+        inactive-color "#d1bea5"
+    }
+    tab-indicator {
+        active-color "#9aaa9e"
+        inactive-color "#d1bea5"
+    }
+}

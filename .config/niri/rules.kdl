@@ -1,83 +1,158 @@
-// Work around WezTerm's initial configure bug
-// by setting an empty default-column-width.
-window-rule {
-    // This regular expression is intentionally made as specific as possible,
-    // since this is the default config, and we want no false positives.
-    // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
-
-// Open the Firefox picture-in-picture player as floating by default.
-window-rule {
-    // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    open-floating true
-}
-
-// Example: block out two password managers from screen capture.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
-    match app-id=r#"^org\.gnome\.World\.Secrets$"#
-
-    block-out-from "screen-capture"
-
-    // Use this instead if you want them visible on third-party screenshot tools.
-    // block-out-from "screencast"
-}
-
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
+// global: rounded corners for all windows
 window-rule {
     geometry-corner-radius 5
     clip-to-geometry true
+    draw-border-with-background false
 }
 
-// Set open-maximized to true for all windows.
-// (This example rule is commented out with a "/-" in front.)
-/-window-rule {
-    open-maximized true
-}
-
-// Open Cartridges as fullscreen by default.
-window-rule {
-    match app-id=r#"Cartridges$"#
-    open-fullscreen true
-}
-
-// Add a shadow and blur to launcher, notifications and waybar.
+// launcher + waybar: shadow and blur at startup
 layer-rule {
-    match namespace="^(launcher|waybar)$"  // add 'notifications' once mako adds support
+    match namespace="^(launcher|waybar)$"
     match at-startup=true
 
-    shadow {
-        on
-    }
-
+    shadow { on; }
     background-effect {
         blur true
         xray false
     }
-
     geometry-corner-radius 0
 }
 
-// Enable blur behind spotify.
-window-rule {
-    match app-id="^(spotify)$"
-
-    opacity 0.9
-
-    background-effect {
-        blur true
-    }
+// place overview backdrop behind everything
+layer-rule {
+    match namespace="^awww-daemonbackdrop$"
+    place-within-backdrop true
 }
 
-// Use current wallpaper as backdrop.
+// block screencast-sensitive windows and layers
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    match app-id=r#"^org\.telegram\.desktop$"#
+    match app-id=r#"^org\.gnome\.Fractal$"#
+
+    block-out-from "screencast"
+}
 layer-rule {
-    match namespace="^swww-daemonbackdrop$"
-    place-within-backdrop true
+    match namespace="^notifications$"
+    block-out-from "screencast"
+}
+
+// blur windows
+window-rule {
+    match app-id=r#"^com\.spotify\.Client$"#
+
+    opacity 0.9
+    background-effect { blur true; }
+}
+
+// use 2/3 width column
+window-rule {
+    match app-id=r#"^com\.discordapp\.Discord$"#
+    match app-id=r#"^com\.spotify\.Client$"#
+    match app-id=r#"^com\.usebottles\.bottles$"#
+
+    default-column-width { proportion 0.66667; }
+}
+
+// use full width column
+window-rule {
+    match app-id="^obsidian$"
+    match app-id="^spotify_player$"
+    match app-id=r#"^dev\.zed\.Zed$"#
+    match app-id=r#"^com\.spotify\.Client$"#
+
+    open-maximized true
+}
+
+// use fullscreen
+window-rule {
+    match app-id=r#"^page\.kramo\.Cartridges$"#
+    match app-id=r#"^com\.libretro\.RetroArch$"#
+    open-fullscreen true
+}
+
+// open floating and use their own preferred size
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match app-id=r#"^org\.gnome\.Loupe"#
+    match app-id=r#"^org\.gnome\.Calculator"#
+    match app-id=r#"^org\.gnome\.Decibels"#
+    match app-id=r#"^org\.gnome\.gitlab\.YaLTeR\.VideoTrimmer"#
+    match app-id=r#"^org\.gnome\.gitlab\.YaLTeR\.Identity"#
+    match app-id=r#"^org\.gnome\.NautilusPreviewer$"#
+    match app-id=r#"^org\.gnome\.Showtime$"#
+    match app-id=r#"^app\.drey\.Warp"#
+    match app-id=r#"^lxqt-policykit-agent$"#
+    match app-id=r#"^org\.musescore\.MuseScore$"# title="^Page settings$"
+    match app-id=r#"^io\.gitlab\.news_flash\.NewsFlash$"#
+    match app-id=r#"^Alacritty-floating$"#
+    match app-id=r#"^Minecraft"# title=r#"^Minecraft"#
+    match app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
+
+    open-floating true
+    default-column-width {}
+    default-window-height {}
+}
+
+// csd-friendly presentation
+window-rule {
+    match app-id=r#"^org\.gnome\.Loupe"#
+    match app-id=r#"^org\.gnome\.Nautilus"#
+    match app-id=r#"^org\.gnome\.Papers"#
+    match app-id=r#"^org\.gnome\.Ptyxis"#
+    match app-id=r#"^org\.gnome\.Calculator"#
+    match app-id=r#"^org\.gnome\.TextEditor"#
+    match app-id=r#"^org\.gnome\.Settings"#
+    match app-id=r#"^org\.gnome\.Decibels"#
+    match app-id=r#"^org\.gnome\.Showtime"#
+    match app-id=r#"^org\.gnome\.gitlab\.YaLTeR\.VideoTrimmer"#
+    match app-id=r#"^org\.gnome\.gitlab\.YaLTeR\.Identity"#
+    match app-id=r#"^org\.gnome\.NautilusPreviewer$"#
+    match app-id=r#"^org\.gnome\.Adwaita1\.Demo$"#
+    match app-id=r#"^org\.gnome\.Fractal$"#
+    match app-id=r#"^app\.drey\.Warp"#
+
+    tiled-state false
+    geometry-corner-radius 15
+}
+
+// WezTerm: empty default-column-width works around initial configure bug
+window-rule {
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+// Steam: non-main windows as floating, toast notifications pinned bottom-right
+window-rule {
+    match app-id="steam"
+    exclude title=r#"^[Ss]team$"#
+    open-floating true
+    default-column-width {}
+    default-window-height {}
+}
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    default-floating-position x=10 y=10 relative-to="bottom-right"
+    open-focused false
+}
+
+// GIMP: don't focus the startup splash
+window-rule {
+    match app-id="^gimp" title="^GIMP Startup$"
+    open-focused false
+}
+
+// KeePassXC: always focus unlock/access dialogs
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"# title="^KeePassXC - Browser Access Request$"
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"# title="^Unlock Database - KeePassXC$"
+
+    open-focused true
+}
+
+// wine: let it determine its own size
+window-rule {
+    match app-id="^explorer.exe$"
+    default-column-width {}
 }
