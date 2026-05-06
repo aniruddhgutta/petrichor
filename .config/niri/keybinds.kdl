@@ -2,7 +2,7 @@ binds {
     Mod+Space       { spawn "fuzzel"; }
     Mod+w           { spawn "footclient"; }
     Mod+d           { spawn "flatpak" "run" "net.imput.helium"; }
-    Mod+s           { spawn "foot" "-T" "spotify" "spotify_player"; }
+    Mod+s           { spawn "foot" "-T" "spotify_player" "spotify_player"; }
     Mod+e           { spawn "foot" "yazi"; }
     Mod+a           { spawn "nautilus" "--new-window"; }
     Mod+z           { spawn "zathura"; }

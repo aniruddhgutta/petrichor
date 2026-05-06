@@ -58,7 +58,7 @@ window-rule {
 // use full width column
 window-rule {
     match app-id="^obsidian$"
-    match app-id="^spotify_player$"
+    match title="^spotify_player$"
     match app-id=r#"^dev\.zed\.Zed$"#
     match app-id=r#"^com\.spotify\.Client$"#
 
