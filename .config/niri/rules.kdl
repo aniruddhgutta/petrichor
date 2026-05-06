@@ -40,7 +40,7 @@ layer-rule {
 
 // blur windows
 window-rule {
-    match app-id=r#"^com\.spotify\.Client$"#
+    match app-id=r#"^spotify$"#
 
     opacity 0.9
     background-effect { blur true; }
@@ -49,8 +49,9 @@ window-rule {
 // use 2/3 width column
 window-rule {
     match app-id=r#"^com\.discordapp\.Discord$"#
-    match app-id=r#"^com\.spotify\.Client$"#
+    match app-id=r#"^spotify$"#
     match app-id=r#"^com\.usebottles\.bottles$"#
+    match app-id=r#"^org\.gnome\.Loupe"#
 
     default-column-width { proportion 0.66667; }
 }
@@ -60,7 +61,8 @@ window-rule {
     match app-id="^obsidian$"
     match title="^spotify_player$"
     match app-id=r#"^dev\.zed\.Zed$"#
-    match app-id=r#"^com\.spotify\.Client$"#
+    match app-id=r#"^spotify$"#
+    match app-id=r#"^org\.gimp\.GIMP$"#
 
     open-maximized true
 }
@@ -75,19 +77,12 @@ window-rule {
 // open floating and use their own preferred size
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-    match app-id=r#"^org\.gnome\.Loupe"#
     match app-id=r#"^org\.gnome\.Calculator"#
     match app-id=r#"^org\.gnome\.Decibels"#
-    match app-id=r#"^org\.gnome\.gitlab\.YaLTeR\.VideoTrimmer"#
-    match app-id=r#"^org\.gnome\.gitlab\.YaLTeR\.Identity"#
     match app-id=r#"^org\.gnome\.NautilusPreviewer$"#
     match app-id=r#"^org\.gnome\.Showtime$"#
     match app-id=r#"^app\.drey\.Warp"#
-    match app-id=r#"^lxqt-policykit-agent$"#
-    match app-id=r#"^org\.musescore\.MuseScore$"# title="^Page settings$"
-    match app-id=r#"^io\.gitlab\.news_flash\.NewsFlash$"#
     match app-id=r#"^Alacritty-floating$"#
-    match app-id=r#"^Minecraft"# title=r#"^Minecraft"#
     match app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
 
     open-floating true
@@ -97,20 +92,7 @@ window-rule {
 
 // csd-friendly presentation
 window-rule {
-    match app-id=r#"^org\.gnome\.Loupe"#
-    match app-id=r#"^org\.gnome\.Nautilus"#
-    match app-id=r#"^org\.gnome\.Papers"#
-    match app-id=r#"^org\.gnome\.Ptyxis"#
-    match app-id=r#"^org\.gnome\.Calculator"#
-    match app-id=r#"^org\.gnome\.TextEditor"#
-    match app-id=r#"^org\.gnome\.Settings"#
-    match app-id=r#"^org\.gnome\.Decibels"#
-    match app-id=r#"^org\.gnome\.Showtime"#
-    match app-id=r#"^org\.gnome\.gitlab\.YaLTeR\.VideoTrimmer"#
-    match app-id=r#"^org\.gnome\.gitlab\.YaLTeR\.Identity"#
-    match app-id=r#"^org\.gnome\.NautilusPreviewer$"#
-    match app-id=r#"^org\.gnome\.Adwaita1\.Demo$"#
-    match app-id=r#"^org\.gnome\.Fractal$"#
+    match app-id=r#"^org\.gnome\."#    // all gnome apps
     match app-id=r#"^app\.drey\.Warp"#
 
     tiled-state false
@@ -139,8 +121,12 @@ window-rule {
 
 // GIMP: don't focus the startup splash
 window-rule {
-    match app-id="^gimp" title="^GIMP Startup$"
+    match app-id=r#"^org\.gimp\.GIMP$"# title=r#"^GIMP Startup$"#
     open-focused false
+}
+window-rule {
+    match app-id=r#"^org\.gimp\.GIMP$"# title=r#"^Preferences$"#
+    open-floating true
 }
 
 // KeePassXC: always focus unlock/access dialogs
