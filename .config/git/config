@@ -1,0 +1,62 @@
+# imports your git user details
+# if `user` section is added to this config, move it to ~/.config/git/user
+[include]
+	path = ~/.config/git/user
+
+# main config
+[commit]
+	template = ~/.config/git/template
+	verbose = true
+
+[core]
+	compression = 9
+	whitespace = error
+	preloadindex = true
+
+[status]
+	branch = true
+	showStash = true
+	showUntrackedFiles = all
+
+[init]
+  defaultBranch = main
+
+[diff]
+	context = 3
+	renames = copies
+	interHunkContext = 10
+
+[log]
+    abbrevCommit = true
+    graphColors  = blue,yellow,cyan,magenta,green,red
+
+[push]
+	autoSetupRemote = true
+	default = current
+	followTags = true
+
+[pull]
+	default = current
+	rebase = true
+
+[rebase]
+	autoStash = true
+	missingCommitsCheck = warn
+
+[pack]
+    threads = 0
+    windowMemory = 1g
+    packSizeLimit = 1g
+
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[url "git@github.com:"]
+	insteadOf = "gh/"
+
+[url "ssh://git@codeberg.org/"]
+	insteadOf = "cb/"
+
