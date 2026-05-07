@@ -24,3 +24,16 @@ alias a2p="aria2p --secret 'aria'"
 alias close_aria="pkill -f aria2c"
 
 alias dots='/usr/bin/git -C $DOTS_DIR'  # alias to dots repo
+
+alias gs="git status --short"
+alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
+alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n"'
+
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
+alias gu="git pull"
+
+alias gb="git branch"
+alias gi="git init"
+alias gcl="git clone"
