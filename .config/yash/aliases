@@ -37,3 +37,5 @@ alias gu="git pull"
 alias gb="git branch"
 alias gi="git init"
 alias gcl="git clone"
+
+alias sft="shfmt -i 4 -ci -sr -p -s"
