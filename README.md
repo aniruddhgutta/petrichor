@@ -23,7 +23,7 @@ More info will be added later.
 - pdf viewer: zathura
 - lock: swaylock
 - files: yazi/nautilus
-- font: personal fork of [gohu](https://github.com/aniruddhgutta/gohufont)
+- font: cozette
 - colors are managed by [reclr](https://codeberg.org/oceanicc/reclr)
 - script dependencies: brightnessctl, playerctl, graphicsmagick, awww, jq
 
@@ -31,23 +31,19 @@ More info will be added later.
 
 ## Setup Guide
 
-To install (after installing all the programs listed above (including those linked)) -
+To install (after installing all the programs listed above) -
 ```sh
-git clone https://codeberg.org/oceanicc/petrichor
-cd petrichor
-xstow -t "$HOME" .  # same arguments with stow too
-```
-In the future I might write a tiny helper script for this, but for now `stow` or `xstow` work fine.
+for i in .cache/reclr .config .local/bin .local/share/fonts; do
+  mkdir -p "$HOME/$i"
+done
 
-To uninstall (unstow) -
-```sh
-cd petrichor  # wherever you cloned it
-xstow -t "$HOME" -D .
-```
+git clone https://codeberg.org/oceanicc/petrichor $HOME/.local/share/petrichor
+(cd $HOME/.local/share/petrichor && ./sym -t "$HOME" .)
 
-To use the provided wallpapers -
-```sh
-git switch assets
-cp -r wallpapers/* ~/pics/walls/  # wherever you want to save them
-git switch main
+for i in reclr fetchy; do
+  curl -fLO https://codeberg.org/oceanicc/$i/raw/branch/main/$i $HOME/.local/bin/$i
+  chmod +x $HOME/.local/bin/$i
+done
+
+curl -fLO https://github.com/the-moonwitch/Cozette/releases/download/v.1.30.0/cozette_hidpi.otb $HOME/.local/share/fonts/cozette_hidpi.otb
 ```

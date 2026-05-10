@@ -1,0 +1,165 @@
+#!/bin/sh
+# sym - symlink farm manager
+
+die() {
+    printf 'error: %s\n' "$*" >&2
+    exit 1
+}
+
+log() {
+    printf '%s\n' "$*"
+}
+
+usage() {
+    cat >&2 << EOF
+usage: sym <src> [-t target] [-drsub]
+  -d    unlink
+  -r    restow
+  -s    dry run
+  -u    update (git pull, restow if changed)
+  -b    backup conflicts
+  -h    help
+EOF
+}
+
+# relative path from dst's directory back to src
+relpath() {
+    s=${1#/} d=${2#/}
+    # strip common leading path components
+    while [ -n "$d" ]; do
+        sc=${s%%/*} dc=${d%%/*}
+        [ "$sc" = "$dc" ] || break
+        s=${s#"$sc"}
+        s=${s#/}
+        d=${d#"$dc"}
+        d=${d#/}
+    done
+    # strip filename from d, leaving only directory components
+    case $d in */*) d=${d%/*} ;; *) d= ;; esac
+    # prepend ../ for each remaining component in dst's dir
+    rel=
+    while [ -n "$d" ]; do
+        rel="../$rel"
+        case $d in */*) d=${d#*/} ;; *) d= ;; esac
+    done
+    printf '%s' "${rel}${s}"
+}
+
+# load .symignore patterns from pkg root into $ignore
+load_ignore() {
+    ignore=
+    [ -f "$1/.symignore" ] || return 0
+    while IFS= read -r line || [ -n "$line" ]; do
+        case $line in '#'* | '') continue ;; esac
+        ignore="$ignore$line
+"
+    done < "$1/.symignore"
+}
+
+# check if a name matches any pattern in $ignore
+is_ignored() {
+    case "
+$ignore
+" in
+        *"
+$1
+"*) return 0 ;;
+    esac
+    return 1
+}
+
+do_link() {
+    src=$1 dst=$2
+    rel=$(relpath "$src" "$dst")
+    if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$rel" ]; then
+        return 0
+    fi
+    if [ -e "$dst" ]; then
+        if [ "$backup" -eq 1 ]; then
+            log "backup: $dst -> $dst.bak"
+            [ "$dry" -eq 0 ] && mv "$dst" "$dst.bak"
+            return 0
+        fi
+        die "conflict: $dst (use -b to backup)"
+    fi
+    log "link: $dst -> $rel"
+    [ "$dry" -eq 0 ] && ln -s "$rel" "$dst"
+}
+
+do_unlink() {
+    src=$1 dst=$2
+    rel=$(relpath "$src" "$dst")
+    if [ -L "$dst" ] && [ "$(readlink "$dst")" = "$rel" ]; then
+        log "unlink: $dst"
+        [ "$dry" -eq 0 ] && rm "$dst"
+    fi
+}
+
+# recurse into dirs that exist in target, link everything else whole
+walk() {
+    for src in "$1"/* "$1"/.*; do
+        [ -e "$src" ] || continue
+        base=${src##*/}
+        case $base in . | .. | .symignore) continue ;; esac
+        is_ignored "$base" && continue
+        dst="$2/$base"
+        if [ -d "$src" ] && [ -d "$dst" ] && [ ! -L "$dst" ]; then
+            walk "$src" "$dst"
+        else
+            "$mode" "$src" "$dst"
+        fi
+    done
+}
+
+do_restow() {
+    mode=do_unlink
+    walk "$pkg" "$target"
+    mode=do_link
+    walk "$pkg" "$target"
+}
+
+main() {
+    [ $# -eq 0 ] && usage
+    target=$HOME dry=0 backup=0 mode=do_link
+
+    while getopts drsbuht: opt; do
+        case $opt in
+            d) mode=do_unlink ;;
+            r) mode=do_restow ;;
+            s) dry=1 ;;
+            u) mode=do_update ;;
+            b) backup=1 ;;
+            t) target=$OPTARG ;;
+            \?) usage; die "unknown flag: -$OPTARG" ;;
+            :) usage; die "missing argument for -$OPTARG" ;;
+            h | *) usage ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+
+    [ $# -eq 0 ] && die "no source specified"
+    case $1 in
+        /*) pkg=$1 ;;
+        *) pkg="$(cd "$1" && pwd)" || die "bad path: $1" ;;
+    esac
+    [ -d "$pkg" ] || die "not a directory: $pkg"
+
+    load_ignore "$pkg"
+
+    if [ "$mode" = do_update ]; then
+        [ -d "$pkg/.git" ] || die "not a git repo: $pkg"
+        out="$(git -C "$pkg" pull 2>&1)" || die "git pull failed: $out"
+        log "$out"
+        case $out in
+            *"Already up to date"*)
+                log "nothing changed"
+                exit 0
+                ;;
+        esac
+        do_restow
+    else
+        walk "$pkg" "$target"
+    fi
+}
+
+main "$@"
