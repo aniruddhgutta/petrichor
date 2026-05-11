@@ -59,10 +59,10 @@ window-rule {
 // use full width column
 window-rule {
     match app-id="^obsidian$"
-    match title="^spotify_player$"
     match app-id=r#"^dev\.zed\.Zed$"#
     match app-id=r#"^spotify$"#
     match app-id=r#"^org\.gimp\.GIMP$"#
+    match app-id=r#"^foot$"# title="^spotify_player$"
 
     open-maximized true
 }
@@ -82,8 +82,11 @@ window-rule {
     match app-id=r#"^org\.gnome\.NautilusPreviewer$"#
     match app-id=r#"^org\.gnome\.Showtime$"#
     match app-id=r#"^app\.drey\.Warp"#
-    match app-id=r#"^Alacritty-floating$"#
     match app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
+    match app-id=r#"^foot$"# title="^impala$"
+    match app-id=r#"^foot$"# title="^bluetuith$"
+    match app-id=r#"^foot$"# title="^wiremix$"
+    match app-id=r#"^foot$"# title="^btop$"
 
     open-floating true
     default-column-width {}
