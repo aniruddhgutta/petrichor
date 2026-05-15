@@ -8,7 +8,6 @@ window-rule {
 // launcher + waybar: shadow and blur at startup
 layer-rule {
     match namespace="^(launcher|waybar)$"
-    match at-startup=true
 
     shadow { on; }
     background-effect {
@@ -44,6 +43,21 @@ window-rule {
 
     opacity 0.9
     background-effect { blur true; }
+}
+
+// non-xray blur (suitable for floating windows, popups and shells)
+window-rule {
+    match app-id=r#"^foot$"# title="^impala$"
+    match app-id=r#"^foot$"# title="^bluetuith$"
+    match app-id=r#"^foot$"# title="^wiremix$"
+    match app-id=r#"^foot$"# title="^btop$"
+
+    shadow { on; }
+    opacity 0.9
+    background-effect {
+        blur true
+        xray false
+    }
 }
 
 // use 2/3 width column
