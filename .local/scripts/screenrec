@@ -1,0 +1,78 @@
+#!/bin/sh -x
+# Wrapper for wl-screenrec
+# Requires `wl-screenrec` and `jq`
+
+usage() {
+    printf "usage: %s start|stop|status [-f file] [-o output] [-r]\n" "${0##*/}"
+    exit 1
+}
+
+start_rec() {
+    [ -f "$pidfile" ] && notify-send "Already recording" && exit 1
+    dir="${XDG_VIDEOS_DIR:-$HOME/vids}/recs"; mkdir -p "$dir"
+    : "${filename:=$dir/$(date +%F-%T).mp4}"
+    audiodev=$(pw-dump | jq -r '[.[] | select(.info.props."media.class" == "Audio/Sink")] | first | .info.props."node.name"').monitor
+
+    {
+        wl-screenrec \
+            --codec "hevc" \
+            --ffmpeg-encoder-options "qp=21" \
+            --max-fps 120 \
+            --no-damage \
+            --audio \
+            --audio-device "$audiodev" \
+            --audio-codec "opus" \
+            ${output:+-o "$output"} \
+            ${region:+-g "$region"} \
+            -f "$filename" &
+
+        echo "$! $filename" > "$pidfile"
+        wait
+        rm -f "$pidfile"
+    } &
+
+    notify-send "Recording started" "${filename##*/}"
+}
+
+stop_rec() {
+    [ -f "$cachedir/rec-region.pid" ] && pidfile="$cachedir/rec-region.pid"
+    [ ! -f "$pidfile" ] && notify-send "Not recording" && exit 1
+
+    read pid filename < "$pidfile"
+    kill -INT "$pid"
+    notify-send "Recording stopped" "${filename##*/}"
+}
+
+status_rec() {
+    if ls "$cachedir"/rec-*.pid 2> /dev/null | grep -q .; then
+        echo "Recording"
+    else
+        echo "Not recording"
+        exit 1
+    fi
+}
+
+main() {
+    cmd=$1; [ -z "$cmd" ] && usage
+    shift
+
+    while getopts "ro:f:" arg; do case $arg in
+        r) region=$(slurp) || exit 1 ;;
+        o) output="$OPTARG" ;;
+        f) filename="$OPTARG" ;;
+        *) usage ;;
+    esac done
+
+    cachedir="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache"; mkdir -p "$cachedir"
+    [ -z "$region" ] && : "${output:=$(niri msg -j focused-output | jq -r '.name')}"
+    pidfile="$cachedir/rec-${output:-region}.pid"
+
+    case "$cmd" in
+        start) start_rec ;;
+        stop) stop_rec ;;
+        status) status_rec ;;
+        *) usage ;;
+    esac
+}
+
+main "$@"
