@@ -1,10 +1,19 @@
 alias  ..="cd .."
 alias ...="cd ../.."
 
-alias la="ls -lAh --color"  # not posix-compliant
-alias ls="ls -Ah --color"   # not posix-compliant
+alias la="command -v eza >/dev/null \
+    && eza -la --icons --git --time-style='+%b %e %H:%M' \
+    || command ls -lAh"
 
-alias rm="rm -v"  # not posix-compliant
+alias ls="command -v eza >/dev/null \
+    && eza -a --icons \
+    || command ls -Ah"
+
+alias tree="command -v eza >/dev/null \
+	&& eza -aT --icons \
+	|| command tree -aC"
+
+alias rm="rm -i"
 alias rf="rm -rf"
 alias cp="cp -i"
 
@@ -17,7 +26,7 @@ alias se="$(command -v doasedit || printf "s %s" $EDITOR) --"
 
 alias mi="s make clean install"
 alias mc="make clean"
-alias diff="diff -u --color"  # not posix-compliant
+alias diff="diff -u --color || diff -u"
 
 alias start_aria='aria2c --conf-path="${XDG_CONFIG_HOME:-$HOME/.config}/aria2/aria2.conf" -D'
 alias a2p="aria2p --secret 'aria'"
@@ -25,7 +34,7 @@ alias close_aria="pkill -f aria2c"
 
 alias dots='/usr/bin/git -C $DOTS_DIR'  # alias to dots repo
 
-alias gs="git status --short"
+alias gs="git status"
 alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
 alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n"'
 

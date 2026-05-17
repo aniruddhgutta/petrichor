@@ -11,22 +11,13 @@ export PATH="$PATH:$HOME/.local/bin:$HOME/.local/scripts"
 export LANG="en_US.UTF-8"
 export LC_ALL="$LANG"
 export GPG_TTY=$(tty)
-# export POSIXLY_CORRECT=1
+export EZA_COLORS="da=0:sn=0:sb=0:uu=0:un=0:gu=0:gn=0:lc=0:lm=0:hd=0:xx=0"
 
 # Default programs
 export EDITOR=$(command -v hx || command -v nvim || command -v vis || command -v vi)
 export VISUAL="$EDITOR"
 export TERMINAL="$TERM"
 export TERMINAL_PROG="$TERMINAL"
-
-# Program settings
-export CHROME_FLAGS="
---enable-features=UseOzonePlatform
---ozone-platform=wayland
---enable-features=WebRTCPipeWireCapturer
---enable-features=WaylandWindowDecorations
---disable-features=WaylandFractionalScaleV1
-"
 
 # Cleanup
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
