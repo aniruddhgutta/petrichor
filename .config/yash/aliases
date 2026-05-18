@@ -14,7 +14,7 @@ alias tree="command -v eza >/dev/null \
 	|| command tree -aC"
 
 alias rm="rm -i"
-alias rf="rm -rf"
+alias rf="rm -rfv"  # not posix-compliant
 alias cp="cp -i"
 
 alias df="df -Th"

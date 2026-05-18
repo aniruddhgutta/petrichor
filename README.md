@@ -16,7 +16,7 @@ More info will be added later.
 - run: fuzzel
 - notif: mako
 - term: foot
-- shell: yash
+- shell: yash (optional: eza)
 - fetch: [fetchy](https://codeberg.org/oceanicc/fetchy)
 - music: rmpc/spotify
 - browser: qutebrowser/helium
