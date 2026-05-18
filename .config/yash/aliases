@@ -13,11 +13,11 @@ alias tree="command -v eza >/dev/null \
 	&& eza -aT --icons \
 	|| command tree -aC"
 
-alias rm="rm -i"
-alias rf="rm -rfv"  # not posix-compliant
-alias cp="cp -i"
+alias rm="command rm -i"
+alias rf="command rm -rfv"  # '-v' not posix-compliant
+alias cp="command cp -i"
 
-alias df="df -Th"
+alias df="command df -Th"
 alias  x="xdg-open"
 alias vi="$EDITOR"
 
@@ -26,13 +26,13 @@ alias se="$(command -v doasedit || printf "s %s" $EDITOR) --"
 
 alias mi="s make clean install"
 alias mc="make clean"
-alias diff="diff -u --color || diff -u"
+alias dff="diff -u --color"  # '--color' not posix-compliant
 
-alias start_aria='aria2c --conf-path="${XDG_CONFIG_HOME:-$HOME/.config}/aria2/aria2.conf" -D'
+alias start_aria='command aria2c --conf-path="${XDG_CONFIG_HOME:-$HOME/.config}/aria2/aria2.conf" -D'
 alias a2p="aria2p --secret 'aria'"
 alias close_aria="pkill -f aria2c"
 
-alias dots='/usr/bin/git -C $DOTS_DIR'  # alias to dots repo
+alias dots='command git -C $DOTS_DIR'  # use $DOTS_DIR as working dir for git
 
 alias gs="git status"
 alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
