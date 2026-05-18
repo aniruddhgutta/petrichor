@@ -11,24 +11,24 @@ keep it user friendly, functional and clean.
 
 ## Info
 
-| Component | Value                                                        |
+| oceanicc  | petrichor                                                    |
 |-----------|--------------------------------------------------------------|
-| Distro    | Chimera Linux                                                |
-| WM        | niri                                                         |
-| Bar       | Waybar                                                       |
-| Run       | fuzzel                                                       |
-| Notif     | fako                                                         |
-| Term      | foot                                                         |
-| Shell     | yash (optional: eza)                                         |
-| Fetch     | [fetchy](https://codeberg.org/oceanicc/fetchy)               |
-| Music     | rmpc/spotify                                                 |
-| Browser   | qutebrowser/helium                                           |
-| PDF       | zathura                                                      |
-| Lock      | swaylock                                                     |
-| Files     | yazi/nautilus                                                |
-| Font      | cozette                                                      |
-| Colors    | managed by [reclr](https://codeberg.org/oceanicc/reclr)      |
-| Scripts   | `brightnessctl`, `playerctl`, `graphicsmagick`, `awww`, `jq` |
+| distro    | chimera linux                                                |
+| wm        | niri                                                         |
+| bar       | waybar                                                       |
+| run       | fuzzel                                                       |
+| notif     | fako                                                         |
+| term      | foot                                                         |
+| shell     | yash (optional: eza)                                         |
+| fetch     | [fetchy](https://codeberg.org/oceanicc/fetchy)               |
+| music     | rmpc/spotify                                                 |
+| browser   | qutebrowser/helium                                           |
+| pdf       | zathura                                                      |
+| lock      | swaylock                                                     |
+| files     | yazi/nautilus                                                |
+| font      | cozette                                                      |
+| colors    | managed by [reclr](https://codeberg.org/oceanicc/reclr)      |
+| scripts   | `brightnessctl`, `playerctl`, `graphicsmagick`, `awww`, `jq` |
 
 ## Install
 
