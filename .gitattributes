@@ -2,21 +2,32 @@
 
 * text=auto eol=lf
 
-*.png lfs
 *.jpg lfs
-/.local/share/icons/plan9/cursors/* lfs
+*.png lfs
+*.webp lfs
 
-*config            linguist-language=INI
-*.conf             linguist-language=INI
-*.desktop          linguist-language=INI
-*.dirs             linguist-language=SHELL
-*.jsonc            linguist-language=JSON
-*.theme            linguist-language=INI
-*.txt              linguist-language=INI
-*.kdl              linguist-language=JSON
-dotman             linguist-language=SHELL
-fonts.conf         linguist-language=XML
-/.config/dinit.d/* linguist-language=INI
-/.config/yash/*    linguist-language=SHELL
-/.config/zathura/* linguist-language=SHELL
-/.local/scripts/*  linguist-language=SHELL
+*.ini        linguist-detectable
+*.json       linguist-detectable
+*.md         linguist-detectable
+*.toml       linguist-detectable
+*.xml        linguist-detectable
+
+# SHELL -> Shell, json -> JSON
+*.conf       linguist-language=INI
+*.desktop    linguist-language=INI
+*.dirs       linguist-language=Shell
+*.jsonc      linguist-language=JSON
+*.txt        linguist-language=INI
+*.kdl        linguist-language=JSON
+*config      linguist-language=INI
+*sym*        linguist-language=Shell
+.git*        linguist-language=Shell
+aria2.conf   linguist-language=Shell
+fonts.conf   linguist-language=XML
+mpd.conf     linguist-language=Shell
+sequences    linguist-vendored
+**/dinit.d/* linguist-language=INI
+**/git/*     linguist-language=Shell
+**/scripts/* linguist-language=Shell
+**/yash/*    linguist-language=Shell
+**/zathura/* linguist-language=Shell

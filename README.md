@@ -1,37 +1,37 @@
 # petrichor
 
-**petrichor** is a minimal niri setup utilising the bare minimum required to keep it user friendly, functional and clean.
-More info will be added later.
-![](../assets/previews/neochor-prev.webp?raw=true)
-![](../assets/previews/periwinkle-prev.webp?raw=true)
-![](../assets/previews/dechor-prev.webp?raw=true)
+**petrichor** is a minimal `niri` setup utilising the bare minimum required to
+keep it user friendly, functional and clean.
 
----
+## Preview
 
-## Info -
+![preview: neochor](../assets/previews/neochor-prev.webp?raw=true)
+![preview: periwinkle](../assets/previews/periwinkle-prev.webp?raw=true)
+![preview: dechor](../assets/previews/dechor-prev.webp?raw=true)
 
-- distro: chimera linux
-- wm: niri
-- bar: waybar
-- run: fuzzel
-- notif: mako
-- term: foot
-- shell: yash (optional: eza)
-- fetch: [fetchy](https://codeberg.org/oceanicc/fetchy)
-- music: rmpc/spotify
-- browser: qutebrowser/helium
-- pdf viewer: zathura
-- lock: swaylock
-- files: yazi/nautilus
-- font: cozette
-- colors are managed by [reclr](https://codeberg.org/oceanicc/reclr)
-- script dependencies: brightnessctl, playerctl, graphicsmagick, awww, jq
+## Info
 
----
+| Component | Value                                                        |
+|-----------|--------------------------------------------------------------|
+| Distro    | Chimera Linux                                                |
+| WM        | niri                                                         |
+| Bar       | Waybar                                                       |
+| Run       | fuzzel                                                       |
+| Notif     | fako                                                         |
+| Term      | foot                                                         |
+| Shell     | yash (optional: eza)                                         |
+| Fetch     | [fetchy](https://codeberg.org/oceanicc/fetchy)               |
+| Music     | rmpc/spotify                                                 |
+| Browser   | qutebrowser/helium                                           |
+| PDF       | zathura                                                      |
+| Lock      | swaylock                                                     |
+| Files     | yazi/nautilus                                                |
+| Font      | cozette                                                      |
+| Colors    | managed by [reclr](https://codeberg.org/oceanicc/reclr)      |
+| Scripts   | `brightnessctl`, `playerctl`, `graphicsmagick`, `awww`, `jq` |
 
-## Setup Guide
+## Install
 
-To install (after installing all the programs listed above) -
 ```sh
 for i in .cache/reclr .config .local/bin .local/share/fonts; do
   mkdir -p "$HOME/$i"
