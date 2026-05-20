@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+# set backlight to max brightness
+# dev=$(printf "%s\n" /sys/class/backlight/* | head -n 1)
+# read -r max < "$dev/max_brightness"
+# printf "%s" "$max" > "$dev/brightness"
+
+# set backlight to a particular brightness
+brightnessctl s 40%
+
+# unblock any network cards
+rfkill unblock all
