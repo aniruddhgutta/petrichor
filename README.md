@@ -30,9 +30,11 @@ keep it user friendly, functional and clean.
 | files     | yazi/nautilus                                                    |
 | font      | cozette                                                          |
 | colors    | managed by [reclr](https://codeberg.org/oceanicc/reclr)          |
-| scripts   | `brightnessctl`, `playerctl`, `graphicsmagick`, `slurp`, `jq`    |
-| waybar    | `wiremix`, `impala`, `bluetuith`, `btop`                         |
-| optional  | `tlp`, `tuigreet`                                                |
+| scripts   | brightnessctl, playerctl, graphicsmagick, slurp, jq              |
+| waybar    | wiremix, impala, bluetuith, btop                                 |
+| optional  | tlp, tuigreet                                                    |
+
+**NOTE** - Configurations for utilities like `tlp` can be found in the [assets branch](../assets).
 
 ## Install
 
@@ -51,5 +53,3 @@ done
 
 curl -fLO https://github.com/the-moonwitch/Cozette/releases/download/v.1.30.0/cozette_hidpi.otb $HOME/.local/share/fonts/cozette_hidpi.otb
 ```
-
-**NOTE** - Configurations for utilities like `tlp` can be found in the [assets branch](../assets).
