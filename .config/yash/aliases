@@ -1,50 +1,49 @@
-alias  ..="cd .."
-alias ...="cd ../.."
+# keep aliases one-liners with no inline comments (required for `hint` to work)
 
-alias la="command -v eza >/dev/null \
-    && eza -la --icons --git --time-style='+%b %e %H:%M' \
-    || command ls -lAh"
+alias ..='cd ..'
+alias ...='cd ../..'
 
-alias ls="command -v eza >/dev/null \
-    && eza -a --icons \
-    || command ls -Ah"
-
-alias tree="command -v eza >/dev/null \
-	&& eza -aT --icons \
-	|| command tree -aC"
-
-alias rm="command rm -i"
-alias rf="command rm -rfv"  # '-v' not posix-compliant
-alias cp="command cp -i"
-
-alias df="command df -Th"
-alias  x="xdg-open"
+alias rm='command rm -i'
+alias rf='command rm -rfv'
+alias cp='command cp -i'
+alias df='command df -Th'
+alias x='xdg-open'
 alias vi="$EDITOR"
 
-alias  s="$(command -v doas || command -v ssu  || command -v sudo) --"
-alias se="$(command -v doasedit || printf "s %s" $EDITOR) --"
+alias s="$(command -v doas || command -v ssu || command -v sudo) --"
+alias se="$(command -v doasedit || printf 's %s' "$EDITOR") --"
 
-alias mi="s make clean install"
-alias mc="make clean"
-alias dff="diff -u --color"  # '--color' not posix-compliant
+alias mc='make clean'
+alias mi='s make clean install'
+alias dff='diff -u --color'
 
-alias start_aria='command aria2c --conf-path="${XDG_CONFIG_HOME:-$HOME/.config}/aria2/aria2.conf" -D'
+alias start_aria="command aria2c --conf-path='${XDG_CONFIG_HOME:-$HOME/.config}/aria2/aria2.conf' -D"
 alias a2p="aria2p --secret 'aria'"
-alias close_aria="pkill -f aria2c"
+alias close_aria='pkill -f aria2c'
 
-alias dots='command git -C $DOTS_DIR'  # use $DOTS_DIR as working dir for git
+alias dots="command git -C $DOTS_DIR"
 
-alias gs="git status"
+alias gs='git status'
 alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
 alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n"'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gu='git pull'
+alias gb='git branch'
+alias gi='git init'
+alias gcl='git clone'
 
-alias ga="git add"
-alias gc="git commit"
-alias gp="git push"
-alias gu="git pull"
+alias sft='shfmt -i 4 -ci -sr -p -s'
 
-alias gb="git branch"
-alias gi="git init"
-alias gcl="git clone"
+if command -v eza >/dev/null; then
+  alias la="eza -la --icons --git --time-style='+%b %e %H:%M'"
+  alias ls="eza -a --icons"
+  alias tree="eza -aT --icons"
+else
+  alias la="command ls -lAh"
+  alias ls="command ls -Ah"
+  alias tree="command tree -aC"
+fi 
 
-alias sft="shfmt -i 4 -ci -sr -p -s"
+alias fbh='flatpak-builder --force-clean build-dir net.imput.helium.yml --user --install'

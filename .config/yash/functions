@@ -3,7 +3,7 @@
 #     j - print state file
 #     j_clean - clean database
 #     j <pattern> - jump to best-matching directory
-_J_DATA="${XDG_STATE_HOME:-$HOME/.local/state}/j"
+_J_DATA="${XDG_STATE_HOME:-$HOME/.local/state}/yash/j"
 mkdir -p "${_J_DATA%/*}" 2>/dev/null
 [ -f "$_J_DATA" ] || touch "$_J_DATA"
 
@@ -64,6 +64,32 @@ j_clean() {
 }
 
 YASH_AFTER_CD=_j_add
+
+# hint - remind to use aliases when a longer form is typed
+_HINT="${XDG_STATE_HOME:-$HOME/.local/state}/yash/alias-hints"
+
+_hint_build() {
+    mkdir -p "${_HINT%/*}"
+    alias | while IFS= read -r line; do
+        n=${line#alias }; n=${n%%=*}
+        v=${line#*=}
+        case "$v" in \'*) v=${v#\'}; v=${v%\'} ;; \"*) v=${v#\"}; v=${v%\"} ;; esac
+        case "$v" in "command -"*) ;; *) v=${v#command } ;; esac
+        [ -n "$n" ] && [ -n "$v" ] && printf '%s|%s\n' "$n" "$v"
+    done >| "$_HINT"
+}
+
+hint() {
+    last=$(fc -ln -1 2>/dev/null | sed 's/^[[:space:]]*//')
+    [ -z "$last" ] && return
+    while IFS= read -r line; do
+        case "$last" in "${line#*|}"|"${line#*|} "*)
+            printf '\033[33mhint\033[m: use '\''%s'\''\n' "${line%%|*}" ;;
+        esac
+    done < "$_HINT"
+}
+
+_hint_build
 
 # y - yazi shell wrapper
 # usage:

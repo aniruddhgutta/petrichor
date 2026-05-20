@@ -38,7 +38,7 @@ _update_prompt() {
     _vcs_info=$(git branch --show-current 2>/dev/null) || return
     [ -n "$(git status --porcelain 2>/dev/null)" ] && _vcs_info="$_vcs_info*"
     }
-PROMPT_COMMAND=("$PROMPT_COMMAND" '_update_prompt')
+PROMPT_COMMAND=("$PROMPT_COMMAND" '_update_prompt' 'hint')
 
 # Source
 . "${XDG_CONFIG_HOME:-$HOME/.config}/yash/aliases"
