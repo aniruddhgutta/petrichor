@@ -1,6 +1,6 @@
 #!/bin/sh
 # Wrapper for wl-screenrec
-# Requires `wl-screenrec` and `jq`
+# Requires `wl-screenrec`, `slurp` and `jq`
 
 usage() {
     printf "usage: %s start|stop|status [-f file] [-o output] [-r]\n" "${0##*/}"
