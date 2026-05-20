@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+
+folder=$HOME/notes/
+
+menu_dir() {
+    fzf --style full \
+        --no-border \
+        --prompt "> " \
+        --layout reverse \
+        --input-label ' 󰍉 Search ' \
+        --bind 'result:transform-list-label:
+            echo " $FZF_MATCH_COUNT directories "' \
+        --no-preview \
+        --color 'list-border:#669966,list-label:#99cc99' \
+        --color 'input-border:#996666,input-label:#ffcccc'    
+}
+
+menu_name() {
+    fzf --style full \
+        --no-border \
+        --prompt "> " \
+        --input-label ' 󰍉 Enter a name ' \
+        --no-preview \
+        --print-query \
+        --color 'input-border:#996666,input-label:#ffcccc' \
+        < /dev/null
+}
+
+menu_with_preview() {
+    fzf --style full \
+        --no-border \
+        --prompt "> " \
+        --layout reverse \
+        --input-label ' 󰍉 Search ' \
+        --bind 'result:transform-list-label:
+            if [ -z "$FZF_QUERY" ]; then
+                echo " $FZF_MATCH_COUNT notes "
+            else
+                echo " $FZF_MATCH_COUNT matches for [$FZF_QUERY] "
+            fi' \
+        --no-preview \
+        --color 'list-border:#669966,list-label:#99cc99' \
+        --color 'input-border:#996666,input-label:#ffcccc'
+}
+
+format_list() {
+    while IFS= read -r line; do
+        case "$line" in
+            "New") echo "󰐕 New (create a new note)" ;;
+            *.md) echo "󰍔 $line" ;;
+            *) echo " " ;;
+        esac
+    done
+}
+
+format_dirs() {
+    while IFS= read -r line; do
+        echo "  $line"
+    done
+}
+
+newnote() {
+    dir="$(find "$folder" -type d | format_dirs | menu_dir)" || exit 0
+    dir="${dir#  }"
+    : "${dir:=$folder}"
+    fzf_output=$(menu_name)
+    fzf_status=$? 
+    [ $fzf_status -eq 130 ] && exit 0
+    name=$(echo "$fzf_output" | head -1)
+    : "${name:=$(date +%F_%H-%M-%S)}"
+    setsid -f "$TERMINAL" -e nvim "${dir%/}/$name.md" >/dev/null 2>&1
+}
+
+selected() {
+    choice=$(
+    echo -e "New\n$(find $folder -type f -printf '%T@ %P\n' | sort -nr | cut -d' ' -f2-)" \
+        | format_list \
+        | menu_with_preview
+    )
+    choice=$(echo "$choice" | sed 's/^[^ ]* *//')
+    [ -z "$choice" ] && exit 0
+    case $choice in
+        "New (create a new note)"|New) newnote ;;
+        *.md) setsid -f "$TERMINAL" -e nvim "$folder$choice" >/dev/null 2>&1 ;;
+        *)    exit ;;
+    esac
+}
+
+selected
