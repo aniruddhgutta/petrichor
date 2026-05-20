@@ -1,4 +1,7 @@
-#!/bin/sh -e
+#!/bin/sh
+# runs before tty starts
+
+set -e
 
 # set backlight to max brightness
 # dev=$(printf "%s\n" /sys/class/backlight/* | head -n 1)
