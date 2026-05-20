@@ -101,6 +101,12 @@ window-rule {
     match app-id=r#"^foot$"# title="^bluetuith$"
     match app-id=r#"^foot$"# title="^wiremix$"
     match app-id=r#"^foot$"# title="^btop$"
+    match app-id=r#"^resolve$"# title="^resolve$"
+    match app-id=r#"^resolve$"# title="^Create New Project$"
+    match app-id=r#"^resolve$"# title="^Project Media Location$"
+    match app-id=r#"^resolve$"# title="^Import Media$"
+    match app-id=r#"^resolve$"# title="^Problem Report"
+    match app-id=r#"^org.kde.kdenlive$"# title="^Kdenlive$"
 
     open-floating true
     default-column-width {}
