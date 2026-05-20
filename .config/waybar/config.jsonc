@@ -12,6 +12,7 @@
     ],
     "modules-right": [
         "tray",
+        "custom/screenrec",
         "network",
         "bluetooth",
         "wireplumber",
@@ -45,6 +46,14 @@
     "tray": {
         "icon-size": 14,
         "spacing": 12,
+    },
+
+    "custom/screenrec": {
+        "exec": "echo ",
+        "exec-if": "pgrep -x wl-screenrec",
+        "tooltip": false,
+        "interval": 1,
+        "on-click": "~/.local/scripts/screenrec stop",
     },
 
     "network": {

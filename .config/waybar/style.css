@@ -42,6 +42,18 @@ window#waybar.empty #window,
 }
 #workspaces button.focused { color: @foreground; }
 
+#custom-screenrec {
+    color: @color1;
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 1; }
+  51% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
 #battery.warning { color: @color3; }
 #battery.critical { color: @color1; }
 

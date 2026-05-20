@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 # Wrapper for wl-screenrec
 # Requires `wl-screenrec` and `jq`
 
@@ -26,7 +26,7 @@ start_rec() {
             ${region:+-g "$region"} \
             -f "$filename" &
 
-        echo "$! $filename" > "$pidfile"
+        printf "%s" "$! $filename" > "$pidfile"
         wait
         rm -f "$pidfile"
     } &
@@ -45,9 +45,9 @@ stop_rec() {
 
 status_rec() {
     if ls "$cachedir"/rec-*.pid 2> /dev/null | grep -q .; then
-        echo "Recording"
+        printf "Recording\n"
     else
-        echo "Not recording"
+        printf "Not recording\n"
         exit 1
     fi
 }
