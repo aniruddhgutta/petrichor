@@ -11,8 +11,8 @@
         "niri/window",
     ],
     "modules-right": [
-        "tray",
         "custom/screenrec",
+        "tray",
         "network",
         "bluetooth",
         "wireplumber",

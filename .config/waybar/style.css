@@ -25,6 +25,7 @@ window#waybar.empty #window,
 #bluetooth,
 #wireplumber,
 #workspaces button,
+#custom-screenrec,
 #battery {
     padding: 0 12px;
     background-color: transparent;
@@ -64,6 +65,7 @@ window#waybar.empty #window,
 #bluetooth:hover,
 #wireplumber:hover,
 #workspaces button:hover,
+#custom-screenrec:hover,
 #battery:hover {
     background-color: shade(@background, 1.7);
 }
