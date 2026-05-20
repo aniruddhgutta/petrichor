@@ -3,18 +3,18 @@
 alias ..='cd ..'
 alias ...='cd ../..'
 
+alias x='xdg-open'
 alias rm='command rm -i'
 alias rf='command rm -rfv'
 alias cp='command cp -i'
 alias df='command df -Th'
-alias x='xdg-open'
 alias vi="$EDITOR"
 
 alias s="$(command -v doas || command -v ssu || command -v sudo) --"
 alias se="$(command -v doasedit || printf 's %s' "$EDITOR") --"
 
 alias mc='make clean'
-alias mi='s make clean install'
+alias mi='make clean install'
 alias dff='diff -u --color'
 
 alias start_aria="command aria2c --conf-path='${XDG_CONFIG_HOME:-$HOME/.config}/aria2/aria2.conf' -D"
