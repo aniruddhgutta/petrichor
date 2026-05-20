@@ -43,7 +43,7 @@ window#waybar.empty #window,
 #workspaces button.focused { color: @foreground; }
 
 #custom-screenrec {
-    color: @color1;
+    color: @accent;
     animation: blink 1s linear infinite;
 }
 
