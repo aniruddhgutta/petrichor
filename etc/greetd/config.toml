@@ -1,0 +1,10 @@
+[terminal]
+vt = 7
+
+[default_session]
+command = "tuigreet -t -r --power-shutdown 'loginctl poweroff' --power-reboot 'loginctl reboot' --theme 'border=magenta;text=cyan;prompt=cyan;time=blue;action=blue;button=yellow;container=black;input=green'"
+user = "_greetd"
+
+[initial_session]
+command = "niri --session"
+user = "vye"
