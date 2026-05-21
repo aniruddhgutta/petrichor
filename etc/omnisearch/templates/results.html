@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="{{__locale_id}}" dir="{{__locale_direction}}">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+        <title>
+            _search - {{query}}
+        </title>
+        <link rel="stylesheet" href="static/main.css">
+        {{if theme == "light"}}<link rel="preload" href="static/theme-light.css" as="style"><link rel="stylesheet" href="static/theme-light.css">{{endif}}
+        {{if theme == "dark"}}<link rel="preload" href="static/theme-dark.css" as="style"><link rel="stylesheet" href="static/theme-dark.css">{{endif}}
+        <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+        <link rel="search" 
+        type="application/opensearchdescription+xml" 
+        title="_search" href="/opensearch.xml">
+    </head>
+    
+    <body class="results-view">
+        <header>
+            <a href="/" class="logo-link"><h1>
+                <span>_search</span>
+            </h1></a>
+            <form action="/search" method="GET" class="search-form">
+                <input name="engine" type="hidden" value="{{selected_engine}}">
+                <input name="q" type="text" class="search-box" autocomplete="off" placeholder="{{l("search_placeholder")}}"
+                value="{{query}}">
+            </form>
+            <a href="/settings?q={{query}}" class="nav-settings-icon" title="{{l("settings_tab")}}"></a>
+        </header>
+        <nav class="nav-tabs">
+            <div class="nav-container">
+                <a href="{{search_href}}" class="active">
+                    {{l("all_tab")}}
+                </a>
+                <a href="/images?q={{query}}">
+                    {{l("images_tab")}}
+                </a>
+                <a href="/settings?q={{query}}" class="nav-settings-link">
+                    {{l("settings_tab")}}
+                </a>
+            </div>
+        </nav>
+        <div class="content-layout">
+            <aside class="sidebar-spacer">
+            </aside>
+            <main class="results-container">
+                {{if exists engine_filters}}
+                <nav class="engine-filter-list">
+                    {{for filter in engine_filters}}
+                    <a href="{{filter[0]}}" class="{{filter[2]}}">
+                        {{filter[1]}}
+                    </a>
+                    {{endfor}}
+                </nav>
+                {{endif}}
+
+                {{if exists engine_warnings}}
+                <section class="engine-warning-list">
+                    {{for warning in engine_warnings}}
+                    <article class="engine-warning">
+                        <strong class="engine-warning-title">
+                            {{warning[0]}}
+                        </strong>
+                        <p class="engine-warning-copy">
+                            {{warning[1]}}
+                        </p>
+                    </article>
+                    {{endfor}}
+                </section>
+                {{endif}}
+
+                {{for result in results}}
+                <div class="result">
+                    <div class="result-header">
+                        <div class="result-favicon"
+                            style="background-image: url('/proxy?url=https://{{result[4]}}/favicon.ico'), url('/proxy?url=https://{{result[4]}}/favicon.png');">
+                        </div>
+                        <span class="url">
+                            {{result[1]}}
+                        </span>
+                    </span>
+                    </div>
+                    <a href="{{result[0]}}">
+                        {{result[2]}}
+                    </a>
+                    <p class="desc">
+                        {{result[3]}}
+                    </p>
+                    <span>
+                        <a class="cached" href="https://web.archive.org/web/{{result[0]|safe}}">{{l("view_cached")}}</a>
+                    </span>
+                </div>
+                {{endfor}}
+
+                {{if exists pagination_links}}
+                <nav class="pagination">
+                    {{for link in pagination_links}}
+                    <a class="{{link[2]}}" href="{{link[0]}}">
+                        {{link[1]}}
+                    </a>
+                    {{endfor}}
+                </nav>
+                {{endif}}
+            </main>
+            <aside class="infobox-sidebar">
+            {{if exists infoboxes}}
+              {{for info in infoboxes}}
+                 <section class="infobox">
+                     <div class="infobox-header">
+                         <h2 class="infobox-title">
+                             {{info[0]}}
+                         </h2>
+                     </div>
+                     <div class="infobox-main">
+                         <img src="{{info[1]}}" alt="{{info[0]}}" class="infobox-image">
+                         <div class="infobox-content"> <p class="infobox-summary">
+                                 {{info[2]|safe}}
+                         </p>
+                         {{if info[3] != "#"}}
+                             <a class="read-more" href="{{info[3]}}">
+                                 {{l("read_more")}}
+                             </a>
+                         {{endif}}
+                         </div>
+                     </div>
+                 </section>
+                 {{endfor}}
+               {{endif}}
+            </aside>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="{{__locale_id}}" dir="{{__locale_direction}}">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+        <title>
+            _search
+        </title>
+        <link rel="stylesheet" href="static/main.css">
+        {{if theme == "light"}}<link rel="preload" href="static/theme-light.css" as="style"><link rel="stylesheet" href="static/theme-light.css">{{endif}}
+        {{if theme == "dark"}}<link rel="preload" href="static/theme-dark.css" as="style"><link rel="stylesheet" href="static/theme-dark.css">{{endif}}
+        <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+        <link rel="search" 
+        type="application/opensearchdescription+xml" 
+        title="_search" href="/opensearch.xml">
+        <style>
+            .view-home .search-input-wrapper {
+              display: flex;
+              flex-direction: row;
+              gap: 1.0em;
+              align-items: stretch;
+            }
+            nav.startpage {
+              margin-top: 3.5em;
+              display: grid;
+              grid-template-columns: repeat(6, 1fr);
+              gap: 0.8em;
+              align-self: center;
+            }
+            nav.startpage a {
+              background: var(--bg-card);
+              border: 2px solid var(--border);
+              color: var(--text-primary);
+              padding: 2em 2.5em;
+              text-decoration: none;
+              font-size: 0.9rem;
+              font-weight: 600;
+              font-family: sans-serif;
+              text-align: center;
+              display: block;
+            }
+            nav.startpage a:hover { border-color: var(--accent); }
+        </style>
+    </head>
+    
+    <body>
+        <div class="view-home">
+            <div class="container">
+                <h1 class="hero-logo">
+                    <span>_search</span>
+                </h1>
+                <form action="/search" class="home-search-form">
+                    <div class="search-input-wrapper">
+                        <input name="q" type="text" class="search-box" placeholder="{{l("search_placeholder")}}"
+                        autofocus autocomplete="off">
+                        <button type="submit" class="btn-primary">
+                            {{l("search_button")}}
+                        </button>
+                    </div>
+                </form>
+                <nav class="startpage">
+                  <a href="https://codeberg.org">cbg</a>
+                  <a href="https://github.com">ghb</a>
+                  <a href="https://discord.com/app">disc</a>
+                  <a href="https://chatgpt.com">gpt</a>
+                  <a href="https://claude.ai">clde</a>
+                  <a href="https://web.whatsapp.com">wa</a>
+                  <a href="https://pinterest.com">pint</a>
+                  <a href="https://www.reddit.com">rd</a>
+                  <a href="https://www.youtube.com">yt</a>
+                  <a href="https://pixiv.perennialte.ch">pix</a>
+                  <a href="https://webmail.disroot.org">dml</a>
+                  <a href="https://mail.google.com/mail">gml</a>
+                </nav>
+            </div>
+        </div>
+        <a href="/settings" class="home-settings-btn" title="{{l("settings_tab")}}"></a>
+        <footer class="home-footer">
+            <a href="{{git_remote}}" class="version-link" target="_blank" rel="noopener noreferrer">{{version}}</a>
+        </footer>
+    </body>
+</html>

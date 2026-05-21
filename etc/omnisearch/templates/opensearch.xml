@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription
+	xmlns="http://a9.com/-/spec/opensearch/1.1/"
+	xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+	<ShortName>_search</ShortName>
+	<Description>Lightweight metasearch engine</Description>
+	<Url type="text/html" method="get" template="{{domain}}/search?q={searchTerms}"/>
+	<InputEncoding>UTF-8</InputEncoding>
+	<OutputEncoding>UTF-8</OutputEncoding>
+	<moz:SearchForm>{{domain}}/</moz:SearchForm>
+</OpenSearchDescription>
