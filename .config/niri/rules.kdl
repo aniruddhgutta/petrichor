@@ -101,6 +101,7 @@ window-rule {
     match app-id=r#"^foot$"# title="^bluetuith$"
     match app-id=r#"^foot$"# title="^wiremix$"
     match app-id=r#"^foot$"# title="^btop$"
+    match app-id=r#"^foot$"# title="^wallpaper-menu$"
     match app-id=r#"^resolve$"# title="^resolve$"
     match app-id=r#"^resolve$"# title="^Create New Project$"
     match app-id=r#"^resolve$"# title="^Project Media Location$"

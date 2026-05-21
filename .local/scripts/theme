@@ -3,6 +3,7 @@
 # Backdrop generation requires `graphicsmagick`
 # Colorscheme setting requires `reclr`
 # Wallpaper setting requires `awww`
+# Wallpaper menu requires `chafa and `fzf`
 
 dir="${XDG_PICTURES_DIR:-$HOME/pics}/walls"
 hist="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/wallpaper-history"
@@ -78,18 +79,33 @@ strip_prefix() {
     done
 }
 
+menu() {
+    while true; do
+        sel=$(find "$dir" -type f -iregex '.*\.\(png\|jpe\?g\|gif\)' |
+            fzf --prompt="select wallpaper: " \
+                --layout=reverse --border \
+                --header="enter: apply  ctrl-c/esc: quit" \
+                --preview="chafa --work=1 --size=\${FZF_PREVIEW_COLUMNS}x\${FZF_PREVIEW_LINES} {}" \
+                --preview-window=right:50%:wrap)
+        [ $? -ne 0 ] && break
+
+        [ "$sel" ] && {
+            printf 'Setting \033[34m%s\033[0m as wallpaper...\n' "${sel##*/}"
+            wall "$sel"
+        }
+    done
+}
+
+[ "$1" = "_menu" ] && { menu; exit; }
+
 [ $# -eq 0 ] && usage
 while getopts rpsmhc arg; do case $arg in
     r) wall "$cur_wall" ;;
     p) wall "$prev_wall" ;;
+    m) foot -T "wallpaper-menu" --window-size-pixels=1000x400 -e "$0" _menu ;;
     s)
         wall "$(find "$dir" -type f -iregex '.*\.\(png\|jpe\?g\|gif\)' |
             sort -R | sed 1q)"
-        ;;
-    m)
-        sel=$(find "$dir" -type f -not -path '*/.git/*' |
-            strip_prefix "$dir" | fuzzel -dp 'Select wallpaper: ')
-        [ "$sel" ] && wall "$dir/$sel"
         ;;
     h)
         sel=$(strip_prefix "$dir" < "$hist" |
