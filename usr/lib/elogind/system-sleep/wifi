@@ -1,0 +1,13 @@
+#!/bin/sh
+# Fix for intel killer wifi cards not waking from sleep
+
+case "$1" in
+    pre)
+        modprobe -r iwlmld iwlwifi
+        ;;
+    post)
+        modprobe iwlwifi iwlmld
+        sleep 1
+        dinitctl restart iwd
+        ;;
+esac
