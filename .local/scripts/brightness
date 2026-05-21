@@ -4,6 +4,11 @@
 # perception-based (logarithmic-like) adjustments instead of fixed linear steps
 # Requires `brightnessctl`
 
+command -v brightnessctl >/dev/null || {
+    printf "'brightnessctl' not installed\n"
+    exit 1
+}
+
 usage() {
     printf "usage: %s [-i|-d|-s number]\n" "${0##*/}" >&2
     exit 1

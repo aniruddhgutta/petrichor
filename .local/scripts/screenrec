@@ -2,6 +2,13 @@
 # Wrapper for wl-screenrec
 # Requires `wl-screenrec`, `slurp` and `jq`
 
+for i in wl-screenrec slurp jq; do
+    command -v "$i" >/dev/null || {
+        printf "'%s' not installed\n" "$i"
+        exit 1
+    }
+done
+
 usage() {
     printf "usage: %s start|stop|status [-f file] [-o output] [-r]\n" "${0##*/}"
     exit 1

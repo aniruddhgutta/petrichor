@@ -5,6 +5,13 @@
 # Wallpaper setting requires `awww`
 # Wallpaper menu requires `chafa and `fzf`
 
+for i in gm reclr awww chafa fzf; do
+    command -v "$i" >/dev/null || {
+        printf "'%s' not installed\n" "$i"
+        exit 1
+    }
+done
+
 dir="${XDG_PICTURES_DIR:-$HOME/pics}/walls"
 hist="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/wallpaper-history"
 info="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/theme"
