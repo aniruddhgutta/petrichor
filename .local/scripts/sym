@@ -97,14 +97,14 @@ do_unlink() {
 
 # recurse into dirs that exist in target, link everything else whole
 walk() {
-    for src in "$1"/* "$1"/.*; do
+    for src in "$2"/* "$2"/.*; do
         [ -e "$src" ] || continue
         base=${src##*/}
-        case $base in . | .. | .symignore) continue ;; esac
-        is_ignored "$base" && continue
-        dst="$2/$base"
+        case $base in .|..|.symignore) continue ;; esac
+        is_ignored "${src#"$1/"}" && continue
+        dst="${3%/}/$base"
         if [ -d "$src" ] && [ -d "$dst" ] && [ ! -L "$dst" ]; then
-            walk "$src" "$dst"
+            walk "$1" "$src" "$dst"
         else
             "$mode" "$src" "$dst"
         fi
@@ -113,9 +113,9 @@ walk() {
 
 do_restow() {
     mode=do_unlink
-    walk "$pkg" "$target"
+    walk "$pkg" "$pkg" "$target"
     mode=do_link
-    walk "$pkg" "$target"
+    walk "$pkg" "$pkg" "$target"
 }
 
 main() {
@@ -158,7 +158,7 @@ main() {
         esac
         do_restow
     else
-        walk "$pkg" "$target"
+        walk "$pkg" "$pkg" "$target"
     fi
 }
 
