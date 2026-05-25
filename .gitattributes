@@ -1,7 +1,16 @@
-# lfs
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.webp filter=lfs diff=lfs merge=lfs -text
-*.png filter=lfs diff=lfs merge=lfs -text
+[attr]lfs filter=lfs diff=lfs merge=lfs -text
 
-# SHELL -> Shell, json -> JSON
-00-everything.conf     linguist-language=Shell
+* text=auto eol=lf
+
+*.jpg lfs
+*.png lfs
+*.webp lfs
+
+*.toml       linguist-detectable
+*.conf       linguist-language=INI
+.git*        linguist-language=Shell
+.sym*        linguist-language=Shell
+rc.local	 linguist-language=Shell
+wifi		 linguist-language=Shell
+**/lib/*	 linguist-language=Shell
+**/dinit.d/* linguist-language=INI
