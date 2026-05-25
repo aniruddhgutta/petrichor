@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# save backlight brightness before
+# shutdown and restore on next boot
+#
+
+dir="/var/cache/backlight"
+[ -d "$dir" ] || mkdir -p "$dir"
+
+case "$1" in
+    start)
+        for bl in /sys/class/backlight/*/brightness; do
+            [ -e "$bl" ] && chgrp video "$bl" && chmod g+w "$bl"
+        done
+        
+        for card in /sys/class/backlight/*; do
+            [ -L "$card" ] || continue
+            file="$dir/${card##*/}-brightness-old"
+            [ -r "$file" ] && cat "$file" > "$card/brightness" || true
+        done
+    ;;
+    stop)
+        for card in /sys/class/backlight/*; do
+            [ -L "$card" ] || continue
+            cat "$card/brightness" > "$dir/${card##*/}-brightness-old" || true
+        done
+    ;;
+esac

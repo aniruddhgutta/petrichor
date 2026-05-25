@@ -1,0 +1,5 @@
+type = scripted
+command = /usr/lib/dinit/backlight start
+stop-command = /usr/lib/dinit/backlight stop
+restart = false
+depends-on = local.target
