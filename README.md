@@ -19,3 +19,14 @@ unless mentioned otherwise. To use them, either:
 a) copy them directly to their respective directories
 
 b) if `assets` is cloned to a separate folder, symlink as shown: `doas sym -t / .`
+
+---
+
+## NOTES
+- Symlinking `backlight` to its dinit directory will not allow it to be autostarted by
+dinit due to security measures. Instead, you must directly copy it into its directory
+
+```sh
+doas cp etc/dinit.d/backlight /etc/dinit.d/backlight
+doas dinitctl enable backlight
+```
