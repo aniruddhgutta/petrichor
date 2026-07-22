@@ -11,11 +11,7 @@ items = []
 # NOTE: these packages' names suffixed with @cports must be
 # added to [managers.system] since they are managed by apk.
 [managers.cports]
-items = [
-    "https://github.com/chimera-linux/cports/pull/5120",    # mpdscribble
-    "https://github.com/chimera-linux/cports/pull/5176",    # nwg-look
-    "https://github.com/chimera-linux/cports/pull/5781",    # rebos
-]
+items = []
 
 # Services to be enabled by Dinit (root).
 [managers.dinit-root]
@@ -93,13 +89,16 @@ items = [
     "mako",
     "mpd",
     "mpdris2-rs",
+    "mpdscribble",
     "mpv",
     "mpv-mpris",
     "nautilus",
     "niri",
+    "nwg-look",
     "playerctl",
     "poppler",
     "qutebrowser",
+    "rebos",
     "rmpc",
     "sbctl",
     "senpai",
@@ -123,9 +122,4 @@ items = [
     "yazi",
     "zathura",
     "zathura-pdf-poppler",
-
-    # from cports
-    "mpdscribble@cports",
-    "nwg-look@cports",
-    "rebos@cports",
 ]
