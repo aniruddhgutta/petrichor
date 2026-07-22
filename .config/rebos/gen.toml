@@ -1,0 +1,131 @@
+# Other generation files to import.
+imports = [
+    "bootstrap",
+]
+
+# Packages to be installed via Cargo.
+[managers.cargo]
+items = []
+
+# Packages to be built with Cports.
+# NOTE: these packages' names suffixed with @cports must be
+# added to [managers.system] since they are managed by apk.
+[managers.cports]
+items = [
+    "https://github.com/chimera-linux/cports/pull/5120",    # mpdscribble
+    "https://github.com/chimera-linux/cports/pull/5176",    # nwg-look
+    "https://github.com/chimera-linux/cports/pull/5781",    # rebos
+]
+
+# Services to be enabled by Dinit (root).
+[managers.dinit-root]
+items = []
+
+# Services to be enabled by Dinit (user).
+[managers.dinit-user]
+items = [
+    "awww",
+    "awww-backdrop",
+    "foot",
+    "mpd",
+    "mpdris2-rs",
+    "mpdscribble",
+    "swayidle",
+    "waybar",
+]
+
+# Packages to be installed via Flatpak.
+[managers.flatpak]
+items = [
+    "com.github.tchx84.Flatseal",
+    "org.gtk.Gtk3theme.adw-gtk3",
+    "org.gtk.Gtk3theme.adw-gtk3-dark",
+    "org.localsend.localsend_app",
+    "org.freedesktop.Sdk/x86_64/24.08",
+]
+
+# Packages to be installed via Go.
+[managers.go]
+items = []
+
+# Packages to be installed via Pipx.
+[managers.pipx]
+items = [
+    "aria2p[tui]",
+    "ps_mem",
+]
+
+# Packages to be installed via the native package manager (apk).
+[managers.system]
+items = [
+    # from the main repo
+    "7zip",
+    "adw-gtk3",
+    "adwaita-icon-theme",
+    "aria2",
+    "awww",
+    "bibata-cursor",
+    "bluetuith",
+    "brightnessctl",
+    "btop",
+    "chafa",
+    "cliphist",
+    "doasedit",
+    "eza",
+    "ffmpeg",
+    "flatpak-builder",
+    "foot",
+    "fonts-nerd-iosevka",
+    "fuzzel",
+    "fzf",
+    "git",
+    "git-lfs",
+    "gvfs-mtp",
+    "gnome-calculator",
+    "gnupg",
+    "graphicsmagick",
+    "greetd",
+    "helix",
+    "htop",
+    "impala",
+    "jq",
+    "libnotify",
+    "mako",
+    "mpd",
+    "mpdris2-rs",
+    "mpv",
+    "mpv-mpris",
+    "nautilus",
+    "niri",
+    "playerctl",
+    "poppler",
+    "qutebrowser",
+    "rmpc",
+    "sbctl",
+    "senpai",
+    "shfmt",
+    "slurp",
+    "spotify-player",
+    "swayidle",
+    "swaylock",
+    "tlp",
+    "tuigreet",
+    "udisks",
+    "waybar",
+    "wiremix",
+    "wl-clipboard",
+    "wl-screenrec",
+    "xdg-desktop-portal",
+    "xdg-desktop-portal-gnome",
+    "xdg-desktop-portal-gtk",
+    "xdg-utils",
+    "yash",
+    "yazi",
+    "zathura",
+    "zathura-pdf-poppler",
+
+    # from cports
+    "mpdscribble@cports",
+    "nwg-look@cports",
+    "rebos@cports",
+]

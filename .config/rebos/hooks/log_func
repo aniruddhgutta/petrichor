@@ -1,0 +1,18 @@
+# logging functions (to be sourced)
+
+c_bracket='\033[1;90m' c_reset='\033[m'
+c_info='\033[1;92m' c_warn='\033[1;93m' c_err='\033[1;91m'
+
+log() {
+    printf '%b[%b%s%b] :%b %s\n' \
+        "$c_bracket" "${4:-$c_info}" "${3:-Info}" "$c_bracket" "$c_reset" "$1" >&2
+}
+
+war() {
+    log "$1" "$2" "${3:-Warning}" "$c_warn"
+}
+
+die() {
+    log "$1" "$2" "${3:-Error}" "$c_err"
+    exit 1
+}

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+. "${XDG_CONFIG_HOME:-$HOME/.config}/rebos/hooks/log_func"
+CPORTS=/usr/cports
+
+[ -d "$CPORTS" ] || {
+    log "Setting up ports at $CPORTS"
+    ports setup || die "Ports setup failed"
+    log "Ports setup succeeded"
+}

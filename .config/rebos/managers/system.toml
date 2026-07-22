@@ -1,0 +1,12 @@
+# System (apk)
+
+add = "doas apk add #:?"
+remove = "doas apk del $(echo #:? | sed 's/@[^ ]*//g')"
+sync = "doas apk update"
+upgrade = "doas apk upgrade"
+
+plural_name = "system packages"
+hook_name = "system_packages"
+
+[config]
+many_args = true

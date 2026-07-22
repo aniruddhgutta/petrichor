@@ -1,0 +1,9 @@
+#!/bin/sh
+
+. "${XDG_CONFIG_HOME:-$HOME/.config}/rebos/hooks/log_func"
+
+doas mkdir -p /etc/profile.d
+printf 'export PATH="$PATH:${CARGO_HOME:-$HOME/.local/share/cargo}/bin"\n' |
+    doas tee /etc/profile.d/rust.sh >/dev/null
+
+log "Added cargo to \$PATH"

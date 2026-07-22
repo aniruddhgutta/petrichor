@@ -1,0 +1,10 @@
+# Pipx
+
+add = "pipx install #:? --force"
+remove = "pipx uninstall #:?"
+
+plural_name = "pipx packages"
+hook_name = "pipx_packages"
+
+[config]
+many_args = true

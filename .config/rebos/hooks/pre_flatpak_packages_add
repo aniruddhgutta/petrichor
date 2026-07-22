@@ -1,0 +1,15 @@
+#!/bin/sh
+
+. "${XDG_CONFIG_HOME:-$HOME/.config}/rebos/hooks/log_func"
+
+command -v flatpak >/dev/null || {
+    war "Flatpak not installed, not adding flathub"
+    exit 0
+}
+
+if flatpak remote-list --columns=name | grep -qx flathub; then
+    log "flathub already added"
+else
+    flatpak remote-add --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo || die "Failed to add flathub"
+    log "Successfully added flathub"
+fi

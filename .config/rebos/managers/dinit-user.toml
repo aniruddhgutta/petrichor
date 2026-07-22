@@ -1,0 +1,10 @@
+# Dinit (user)
+
+add = "dinitctl enable #:? || exit 0"
+remove = "dinitctl disable #:? || exit 0"
+
+plural_name = "dinit services (user)"
+hook_name = "dinit_services_user"
+
+[config]
+many_args = true

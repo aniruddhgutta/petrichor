@@ -1,0 +1,9 @@
+#!/bin/sh
+
+. "${XDG_CONFIG_HOME:-$HOME/.config}/rebos/hooks/log_func"
+
+doas mkdir -p /etc/profile.d
+printf 'export PATH="$PATH:${GOPATH:-$HOME/.local/share/go}/bin"\n' |
+    doas tee /etc/profile.d/go.sh >/dev/null
+
+log "added go to \$PATH"

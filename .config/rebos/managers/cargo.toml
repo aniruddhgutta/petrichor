@@ -1,0 +1,10 @@
+# Cargo
+
+add = "cargo install #:?"
+remove = "cargo uninstall #:?"
+
+plural_name = "cargo packages"
+hook_name = "cargo_packages"
+
+[config]
+many_args = true

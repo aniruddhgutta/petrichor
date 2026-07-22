@@ -1,0 +1,12 @@
+[managers.system]
+items = [
+    "base-cbuild-host",
+    "cargo",
+    "chimera-repo-user",
+    "opendoas",
+    "flatpak",
+    "git",
+    "go",
+    "pipx",
+    "ruff",
+]

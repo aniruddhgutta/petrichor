@@ -1,0 +1,32 @@
+# Services to be enabled by Dinit (root).
+[managers.dinit-root]
+items = [
+    "sshd",
+]
+
+# Packages to be installed via Flatpak.
+[managers.flatpak]
+items = [
+    "md.obsidian.Obsidian",
+    "com.discordapp.Discord",
+    "org.prismlauncher.PrismLauncher",
+    "org.vinegarhq.Sober",
+    "org.libretro.RetroArch",
+    "sh.ppy.osu",
+    "com.spotify.Client",
+    "com.obsproject.Studio",
+    "org.blender.Blender",
+    "org.gimp.GIMP",
+]
+
+# Packages to be installed via the native package manager.
+[managers.system]
+items = [
+    "android-tools",
+    "curl",
+    "intel-vaapi-driver",
+    "intel-media-driver",
+    "lsp-plugins-lv2",
+    "sbctl",
+    "ucode-intel",
+]

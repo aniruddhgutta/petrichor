@@ -1,0 +1,10 @@
+# Go
+
+add = "go install #:?"
+remove = "rm -f $(go env GOPATH)/bin/#:?"
+
+plural_name = "go packages"
+hook_name = "go_packages"
+
+[config]
+many_args = true

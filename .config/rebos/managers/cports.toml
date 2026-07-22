@@ -1,0 +1,11 @@
+# Cports
+
+add = "ports pkg #:?"
+remove = "true"
+sync = "ports sync"
+
+plural_name = "cports packages"
+hook_name = "cports_packages"
+
+[config]
+many_args = false
