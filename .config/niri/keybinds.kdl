@@ -14,6 +14,7 @@ binds {
     Mod+Alt+Space   { spawn "theme" "-p"; }
     Mod+Ctrl+Space  { spawn "theme" "-s"; }
     Mod+Shift+Space { spawn "logout-menu"; }
+    Mod+Ctrl+Slash  { spawn "manpdf" "-m"; }
     Mod+Shift+Slash { spawn "keybinds"; }
     Mod+Shift+M     { spawn "foot" "-T" "rmpc" "rmpc"; }
     Mod+Shift+B     { spawn "foot" "-T" "btop" "btop"; }
@@ -21,17 +22,17 @@ binds {
     Mod+Shift+E     { spawn "emoji-menu"; }
     Mod+Alt+L       { spawn "swaylock"; }
 
-    XF86AudioRaiseVolume   allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+" "-l" "1.0"; }
+    XF86AudioRaiseVolume   allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+" "-l" "1.2"; }
     XF86AudioLowerVolume   allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
     XF86AudioMute          allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute       allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
     
     Mod+Left               allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     Mod+Down               allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
-    Mod+Up                 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+" "-l" "1.0"; }
+    Mod+Up                 allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+" "-l" "1.2"; }
     Mod+Right              allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-    Mod+TouchpadScrollDown allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+" "-l" "1.0"; }
+    Mod+TouchpadScrollDown allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+" "-l" "1.2"; }
     Mod+TouchpadScrollUp   allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
 
     XF86AudioPrev          allow-when-locked=true { spawn "playerctl" "previous"; }
@@ -57,7 +58,7 @@ binds {
     Mod+Alt+Up             allow-when-locked=true { spawn "brightness" "-i" "10"; }
     Mod+Alt+Right          allow-when-locked=true { spawn "brightness" "-s" "100"; }
 
-    Mod+Shift+Escape       allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+Escape       { toggle-keyboard-shortcuts-inhibit; }
     Mod+Escape             repeat=false           { toggle-overview; }
     Mod+O                  repeat=false           { toggle-overview; }
     Mod+Q                  repeat=false           { close-window; }
