@@ -1,6 +1,6 @@
 // global: rounded corners for all windows
 window-rule {
-    geometry-corner-radius 5
+    geometry-corner-radius 3
     clip-to-geometry true
     draw-border-with-background false
 }
@@ -85,6 +85,8 @@ window-rule {
 window-rule {
     match app-id=r#"^page\.kramo\.Cartridges$"#
     match app-id=r#"^com\.libretro\.RetroArch$"#
+    match app-id=r#"^blender$"#
+    match app-id=r#"^Minecraft"#
     open-fullscreen true
 }
 
@@ -97,10 +99,12 @@ window-rule {
     match app-id=r#"^org\.gnome\.Showtime$"#
     match app-id=r#"^app\.drey\.Warp"#
     match app-id=r#"^org\.telegram\.desktop$"# title="^Media viewer$"
+    match app-id=r#"^org\.prismlauncher\.PrismLauncher$"# title="^Console window"
     match app-id=r#"^foot$"# title="^impala$"
     match app-id=r#"^foot$"# title="^bluetuith$"
     match app-id=r#"^foot$"# title="^wiremix$"
     match app-id=r#"^foot$"# title="^btop$"
+    match app-id=r#"^foot$"# title="^rmpc$"
     match app-id=r#"^foot$"# title="^wallpaper-menu$"
     match app-id=r#"^resolve$"# title="^resolve$"
     match app-id=r#"^resolve$"# title="^Create New Project$"
@@ -108,6 +112,10 @@ window-rule {
     match app-id=r#"^resolve$"# title="^Import Media$"
     match app-id=r#"^resolve$"# title="^Problem Report"
     match app-id=r#"^org.kde.kdenlive$"# title="^Kdenlive$"
+    match app-id=r#"^blender$"# title="^Preferences"
+    match app-id=r#"^wineboot.exe$"# title="^Wine$"
+    match app-id=r#"Preferences"# title="^Preferences"
+    match title="^Open Files$"
 
     open-floating true
     default-column-width {}

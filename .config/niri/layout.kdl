@@ -32,7 +32,7 @@ overview {
 }
 
 recent-windows {
-    open-delay-ms 100
+    open-delay-ms 125
 
     highlight {
         padding 30
