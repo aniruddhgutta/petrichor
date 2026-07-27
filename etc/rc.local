@@ -3,3 +3,4 @@ set -e
 
 # unblock any network cards
 rfkill unblock all
+printf '255' >/sys/class/backlight/intel-backlight/brightness

@@ -14,16 +14,34 @@ For more walls I use, visit:
 ### Extra configs
 
 Various extra configurations can be found here in their respective directories
-unless mentioned otherwise. To use them, either:
+unless mentioned otherwise. Installation instructions are provided below.
 
-a) copy them directly to their respective directories
+```sh
+# premake folders for proper symlinks
+for i in  usr/lib/elogind/system-sleep etc/tlp.d; do
+    mkdir -p "/$i"
+done
 
-b) if `assets` is cloned to a separate folder, symlink as shown: `doas sym -t / .`
+# clone assets branch
+git clone -b assets --single-branch \
+    https://codeberg.org/oceanicc/petrichor $HOME/.local/share/petrichor-assets
+(cd $HOME/.local/share/petrichor-assets && doas sym -t / .)
+```
+---
+
+**Optional**: Configuring autologin with greetd
+
+```sh
+sed "s/REPLACEME/$USER/g" ./etc/greetd/config.toml > _
+doas mv _ /etc/greetd/config.toml
+git update-index --skip-worktree ./etc/greetd/config.toml
+```
 
 ---
 
-## NOTES
-- Symlinking `backlight` to its dinit directory will not allow it to be autostarted by
+**Optional**: Installing backlight service (dinit)
+
+Symlinking `backlight` to its dinit directory will not allow it to be autostarted by
 dinit due to security measures. Instead, you must directly copy it into its directory
 
 ```sh
