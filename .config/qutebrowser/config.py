@@ -3,18 +3,20 @@ from pathlib import Path
 
 config.load_autoconfig(False)
 
-STARTPAGE = Path("~/.config/qutebrowser/startpage.html").expanduser().as_uri()
-c.url.default_page = STARTPAGE
-c.url.start_pages = STARTPAGE
+HOMEPAGE = Path("~/.config/qutebrowser/homepage.html").expanduser().as_uri()
+c.url.default_page = HOMEPAGE
+c.url.start_pages = HOMEPAGE
 c.url.searchengines = {
-    'DEFAULT': 'https://www.startpage.com/sp/search?query={}'
+    'DEFAULT': 'https://search.brave.com/search?q=={}',
 }
+c.content.user_stylesheets = ["~/.config/qutebrowser/styles/4get.css"]
 
-# c.tabs.show = 'multiple'
+c.tabs.show = 'multiple'
 c.tabs.last_close = 'startpage'
 c.scrolling.bar = 'when-searching'
-# c.statusbar.show = 'in-mode'
+c.statusbar.show = 'in-mode'
 
+c.fonts.default_family = "sans-serif"
 c.colors.webpage.preferred_color_scheme = 'dark'
 c.completion.height = '40%'
 c.completion.open_categories = ['searchengines', 'bookmarks', 'history', 'quickmarks', 'filesystem']
@@ -28,7 +30,7 @@ c.content.blocking.adblock.lists = [
     'https://raw.githubusercontent.com/uBlockOrigin/uAssets/master/filters/privacy.txt',
 ]
 
-# c.content.pdfjs = True
+c.content.pdfjs = True
 c.input.mode_override = 'normal'
 c.keyhint.delay = 0
 c.content.javascript.clipboard = 'access-paste'
