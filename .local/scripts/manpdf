@@ -1,13 +1,28 @@
 #!/bin/sh -e
 # Pdf preview for man pages
+# Requires `xdg-utils`
+
+command -v xdg-open > /dev/null || {
+    printf "'xdg-open' not installed\n"
+    exit 1
+}
+
+if [ "$1" = -m ]; then
+    sel=$(man -k . |
+        sed 's/ - .*//' |
+        tr ',' '\n' |
+        sed 's/^ *//;s/ *$//' |
+        fuzzel -dp "Select manpage: ") || exit 1
+    set -- "${sel%%(*}" "${sel#*(}"
+    set -- "$1" "${2%)}"
+fi
 
 [ "$1" ] || {
-    printf "usage: %s manpage\n" " ${0##*/}" >&2
+    printf 'usage: %s [-m] | manpage [section]\n' "${0##*/}" >&2
     exit 1
 }
 
 pdf="$(mktemp)"
 trap 'rm "$pdf"' INT EXIT
-
-man -Tpdf "$1" > "$pdf"
+man -Tpdf ${2:+-S "$2"} "$1" > "$pdf"
 xdg-open "$pdf"
