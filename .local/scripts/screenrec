@@ -23,9 +23,7 @@ start_rec() {
     {
         wl-screenrec \
             --codec "hevc" \
-            --ffmpeg-encoder-options "qp=21" \
-            --max-fps 120 \
-            --no-damage \
+            --max-fps 30 \
             --audio \
             --audio-device "$audiodev" \
             --audio-codec "opus" \
