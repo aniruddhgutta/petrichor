@@ -1,10 +1,28 @@
 #!/bin/sh
-# Monitors and notifies volume changes (pipewire)
+# Monitors and notifies volume/mic changes (pipewire)
 
 trap 'kill 0 2>/dev/null' INT TERM EXIT # kill whole process group
 
-prev="$(wpctl get-volume @DEFAULT_SINK@)"
+prev_sink="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ 2> /dev/null)"
+prev_src="$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@ 2> /dev/null)"
 skip=0
+
+check() {
+    curr="$(wpctl get-volume "$1" 2> /dev/null)"
+    eval prev="\$prev_$2"
+    [ "$curr" = "$prev" ] && return 1
+    eval "prev_$2=\$curr"
+    skip=2
+
+    vol="${curr##*: }"
+    [ "$vol" = "${vol##*\ }" ] && {
+        vol="${vol%%.*}${vol##*.}"
+        disp="${vol#${vol%%[!0]*}}"
+        disp="${disp:-0}%"
+    } || unset vol disp
+
+    notify-send -r 2000 -a volume ${vol+-h int:value:$vol} "$3: ${disp-muted}"
+}
 
 pw-mon | while read -r line; do
     case $line in
@@ -12,22 +30,9 @@ pw-mon | while read -r line; do
             [ "$skip" -gt 0 ] && {
                 skip=$((skip - 1))
                 continue
-            } # debounce
-
-            curr="$(wpctl get-volume @DEFAULT_SINK@)"
-            [ "$curr" = "$prev" ] && continue
-
-            prev="$curr"
-            skip=2 # skip next 2 events
-            vol="${curr##*: }"
-
-            [ "$vol" = "${vol##*\ }" ] && { # not muted
-                vol="${vol%%.*}${vol##*.}"  # 0.07 -> 007
-                disp="${vol#${vol%%[!0]*}}" # strip leading zeros
-                disp="${disp:-0}%"
-            } || unset vol disp
-
-            notify-send -r 2000 -a "volume" ${vol+-h int:value:$vol} "Volume: ${disp-muted}"
+            }
+            check @DEFAULT_AUDIO_SINK@ sink Volume && continue
+            check @DEFAULT_AUDIO_SOURCE@ src Mic
             ;;
     esac
 done
