@@ -47,3 +47,4 @@ else
 fi 
 
 alias fbh='flatpak-builder --force-clean build-dir net.imput.helium.yml --user --install'
+alias lapk="apk query --world --fields origin | sed 's/^Origin: //' | sort -u"
