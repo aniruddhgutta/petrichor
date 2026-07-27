@@ -1,0 +1,20 @@
+:root {
+	/* background */
+	--1d2021: {color0};
+	--282828: {color8};
+	--3c3836: {color0};
+	--504945: {color8};
+
+	/* font */
+	--928374: {color7};
+	--a89984: {color15};
+	--bdae93: {color15};
+	--8ec07c: {color14};
+	--ebdbb2: {color14};
+
+	/* code highlighter */
+	--comment: {color5};
+	--default: {color15};
+	--keyword: {color9};
+	--string: {color14};
+}
