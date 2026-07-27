@@ -79,7 +79,7 @@
         "format": "{icon} {capacity}",
         "format-charging": "󰂄 {capacity}",
         "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-        "tooltip-format": "{timeTo}",
+        "tooltip-format": "{timeTo} ({power}W)",
         "states": {
             "warning": 30,
             "critical": 10
