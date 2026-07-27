@@ -2,44 +2,36 @@
 # Traps cursor on primary monitor (niri)
 # Requires 'jq'
 
-command -v jq >/dev/null || {
+command -v jq > /dev/null || {
     printf "'jq' not installed\n"
     exit 1
 }
 
-state_file="${XDG_RUNTIME_DIR:-/tmp}/trap-monitor"
-gap=10000 # distance to move secondary monitor
+state="${XDG_RUNTIME_DIR:-/tmp}/trap-monitor"
+out=$(niri msg -j outputs)
+names=$(printf '%s' "$out" | jq -r 'keys[]')
 
-get_outputs() {
-    niri msg -j outputs | jq -r 'keys[]'
+[ "$(printf '%s\n' "$names" | wc -l)" -gt 1 ] || {
+    printf 'Only one monitor detected\n'
+    exit 1
 }
+primary=$(printf '%s\n' "$names" | head -1)
+others=$(printf '%s\n' "$names" | tail -n +2)
 
-get_position() {
-    niri msg -j outputs | jq -r ".\"$1\".logical.x"
-}
-
-toggle_mode() {
-    primary=$(get_outputs | head -1)
-    secondary=$(get_outputs | tail -1)
-
-    [ "$primary" = "$secondary" ] && {
-        echo "Only one monitor detected"
-        exit 1
-    }
-
-    if [ -f "$state_file" ]; then
-        # restore: move secondary back
-        pos=$(cat "$state_file")
-        niri msg output "$secondary" position set -- "$pos" 0
-        rm "$state_file"
-        notify-send "Trap monitor OFF" "Monitors restored" 2> /dev/null || true
-    else
-        # trap: save position and move secondary far away
-        pos=$(get_position "$secondary")
-        echo "$pos" > "$state_file"
-        niri msg output "$secondary" position set -- $((pos > 0 ? pos + gap : pos - gap)) 0
-        notify-send "Trap monitor ON" "Cursor trapped on $primary" 2> /dev/null || true
-    fi
-}
-
-toggle_mode
+if [ -f "$state" ]; then
+    # restore: put every output back where it was
+    while read -r name pos; do
+        niri msg output "$name" position set -- "$pos" 0
+    done < "$state"
+    rm "$state"
+    notify-send 'Trap monitor OFF' 'Monitors restored' 2> /dev/null || true
+else
+    # trap: save each output's position, then banish it far to the side
+    : > "$state"
+    printf '%s\n' "$others" | while read -r name; do
+        pos=$(printf '%s' "$out" | jq -r --arg k "$name" '.[$k].logical.x')
+        printf '%s %s\n' "$name" "$pos" >> "$state"
+        niri msg output "$name" position set -- $((pos > 0 ? pos + 10000 : pos - 10000)) 0
+    done
+    notify-send 'Trap monitor ON' "Cursor trapped on $primary" 2> /dev/null || true
+fi
