@@ -39,6 +39,17 @@ git update-index --skip-worktree ./etc/greetd/config.toml
 
 ---
 
+**Optional**: Using provided wallpapers
+
+```sh
+dir="${XDG_PICTURES_DIR:-$HOME/pics}"
+mkdir -p "$dir"
+cp -r ./walls "$dir"
+mv "$dir/walls/homepage.png" ${XDG_CONFIG_HOME:-$HOME/.config/qutebrowser"
+```
+
+---
+
 **Optional**: Installing backlight service (dinit)
 
 Symlinking `backlight` to its dinit directory will not allow it to be autostarted by
