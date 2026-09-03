@@ -19,6 +19,9 @@
 *.jsonc      linguist-language=JSON
 *.txt        linguist-language=INI
 *.kdl        linguist-language=JSON
+*.list		 linguist-language=INI
+*.rc         linguist-language=INI
+*.ron        linguist-language=JSON
 *config      linguist-language=INI
 *sym*        linguist-language=Shell
 .git*        linguist-language=Shell
@@ -28,6 +31,7 @@ mpd.conf     linguist-language=Shell
 sequences    linguist-vendored
 **/dinit.d/* linguist-language=INI
 **/git/*     linguist-language=Shell
+**/hooks/*	 linguist-language=SHELL
 **/scripts/* linguist-language=Shell
 **/yash/*    linguist-language=Shell
 **/zathura/* linguist-language=Shell
