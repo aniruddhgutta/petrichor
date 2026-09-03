@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env dash
 # Set wallpaper, colorscheme and generate backdrop
 # Backdrop generation requires `graphicsmagick`
 # Colorscheme setting requires `reclr`
 # Wallpaper setting requires `awww`
 # Wallpaper menu requires `chafa and `fzf`
 
-for i in gm reclr awww chafa fzf; do
+for i in magick reclr awww chafa fzf; do
     command -v "$i" >/dev/null || {
         printf "'%s' not installed\n" "$i"
         exit 1
@@ -51,7 +51,7 @@ colors() {
 }
 
 backdrop() {
-    gm convert "$1" \
+    magick convert "$1" \
         -scale 25% \
         -blur 0x3 \
         -quality 50 \

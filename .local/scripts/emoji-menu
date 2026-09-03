@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env dash
 # Emoji selection menu
 
 list="${XDG_CACHE_HOME:-$HOME/.cache}/script-cache/emoji_list.txt"

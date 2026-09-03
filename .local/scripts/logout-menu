@@ -1,13 +1,13 @@
-#!/bin/sh
+#!/usr/bin/env dash
 # Logout menu
 
 opt=$(printf "Shutdown\nReboot\nSleep\nLock\nPower off monitors\nStop auto-sleep\nStart auto-sleep\nEnable conservation mode (lenovo only)\nDisable conservation mode (lenovo only)" |
     fuzzel -dp "Power options: ")
 
 case "$opt" in
-    "Shutdown") loginctl poweroff ;;
-    "Reboot") loginctl reboot ;;
-    "Sleep") loginctl suspend ;;
+    "Shutdown") loginctl poweroff || systemctl poweroff ;;
+    "Reboot") loginctl reboot || systemctl reboot ;;
+    "Sleep") loginctl suspend || systemctl suspend ;;
     "Lock") swaylock -f ;;
     "Power off monitors") niri msg action power-off-monitors ;;
     "Stop auto-sleep") dinitctl stop swayidle ;;

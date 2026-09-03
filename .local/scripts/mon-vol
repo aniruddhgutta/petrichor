@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env dash
 # Monitors and notifies volume/mic changes (pipewire)
 
 trap 'kill 0 2>/dev/null' INT TERM EXIT # kill whole process group

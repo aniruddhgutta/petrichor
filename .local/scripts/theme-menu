@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env dash
 # Menu to interact with 'theme'
 
 opt=$(printf "Reapply wallpaper\nPrevious wallpaper\nClear wallpaper\nColorscheme\nRandom wallpaper\nWallpaper menu\nWallpaper history menu\nColor picker\nToggle waybar visibility" |

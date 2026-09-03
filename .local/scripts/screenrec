@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env dash
 # Wrapper for wl-screenrec
 # Requires `wl-screenrec`, `slurp` and `jq`
 
