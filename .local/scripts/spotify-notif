@@ -1,0 +1,15 @@
+#!/usr/bin/env dash
+# Spotify now-playing notifier
+# Requires `playerctl`
+
+cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/spotify-art"
+mkdir -p "$cache_dir"
+
+playerctl --player=spotify --follow metadata \
+    --format '{{title}}	{{artist}}	{{album}}	{{mpris:artUrl}}' |
+    while IFS='	' read -r title artist album art_url; do
+        i="$cache_dir/${art_url##*/}.jpg"
+        [ -f "$i" ] || curl -fsSL "$art_url" -o "$i"
+
+        notify-send -r 3000 -a spotify -t 5000 -i "$i" "Playing" "<b>$title</b>\n$artist\n$album"
+    done
