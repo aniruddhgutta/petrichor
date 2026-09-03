@@ -39,7 +39,11 @@ keep it user friendly, functional and clean.
 ## Install
 
 ```sh
-for i in .cache/reclr .cache/script-cache .config/htop .config/spicetify/Themes .local/bin .local/share/fonts .local/share/mpd/playlists music pics/walls pics/screenshots vids/recs; do
+for i in \
+    .cache/reclr .cache/script-cache \
+    .config/htop .config/spicetify/Themes \
+    .local/bin .local/share/fonts .local/share/mpd/playlists \
+    music pics/walls pics/screenshots vids/recs; do
     mkdir -p "$HOME/$i"
 done
 
