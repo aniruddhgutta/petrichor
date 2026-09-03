@@ -80,7 +80,7 @@ items = [
     "gvfs-mtp",
     "gnome-calculator",
     "gnupg",
-    "graphicsmagick",
+    "imagemagick",
     "greetd",
     "helix",
     "htop",

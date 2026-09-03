@@ -1,9 +1,9 @@
 #!/usr/bin/env dash
 # Color picker using niri ipc
-# Color preview requires `graphicsmagick`
+# Color preview requires `imagemagick`
 
-command -v gm >/dev/null || {
-    printf "'graphicsmagick' not installed\n"
+command -v magick >/dev/null || {
+    printf "'imagemagick' not installed\n"
     exit 1
 }
 
@@ -15,6 +15,6 @@ color=${output##*Hex: }
     printf "%s\n" "$color"
     prev="$(mktemp -u).png"
     trap 'rm -f "$prev"' EXIT
-    gm convert -size 24x24 "xc:$color" "$prev" && icon="$prev" || icon=""
+    magick convert -size 24x24 "xc:$color" "$prev" && icon="$prev" || icon=""
     notify-send ${icon:+-i "$icon"} "Picked color" "$color copied to clipboard"
 }

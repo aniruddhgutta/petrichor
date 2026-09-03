@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 # Set wallpaper, colorscheme and generate backdrop
-# Backdrop generation requires `graphicsmagick`
+# Backdrop generation requires `imagemagick`
 # Colorscheme setting requires `reclr`
 # Wallpaper setting requires `awww`
 # Wallpaper menu requires `chafa and `fzf`
