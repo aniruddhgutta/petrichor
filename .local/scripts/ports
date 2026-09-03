@@ -1,0 +1,122 @@
+#!/bin/sh
+# ports: simple wrapper around cbuild, apk-style syntax
+set -e
+
+CPORTS=${CPORTS:-/usr/cports}
+CBUILD="$CPORTS/cbuild"
+
+c_bracket='\033[1;90m' c_reset='\033[m'
+c_info='\033[1;92m' c_warn='\033[1;93m' c_err='\033[1;91m'
+
+log() {
+    printf '%b[%b%s%b] :%b %s\n' \
+        "$c_bracket" "${4:-$c_info}" "${3:-Info}" "$c_bracket" "$c_reset" "$1" >&2
+}
+
+war() {
+    log "$1" "$2" "${3:-Warning}" "$c_warn"
+}
+
+die() {
+    log "$1" "$2" "${3:-Error}" "$c_err"
+    exit 1
+}
+
+usage() {
+    cat >&2 << EOF
+usage: ports <pkg|clean|setup> [arg]
+  pkg <name|pr-url>     force build a template or PR
+  sync                  sync with upstream
+  clean                 zap and rebootstrap build root
+  setup                 keygen, bootstrap, apk repo/key setup
+EOF
+}
+
+find_tmpl() {
+    d=$(find main user -maxdepth 1 -name "$1" -type d)
+    [ -n "$d" ] || die "no template for '$1'"
+    printf "%s" "$d"
+}
+
+pr_fetch() {
+		pr=$(printf "%s" "$1" | sed -n 's#.*/pull/\([0-9]*\).*#\1#p')
+		orig=$(git rev-parse HEAD)
+
+		git fetch upstream "pull/$pr/head:pr-$pr" || die "fetch failed for PR $pr"
+		trap 'pr_cleanup "$orig" "pr-$pr"' EXIT
+		git -c commit.gpgsign=false -c user.email=x@x.com -c user.name=x merge --no-edit "pr-$pr" >&2 || die "merge failed for PR $pr"
+}
+
+pr_cleanup() {
+		git reset --hard "$1" >&2
+		git branch -D "$2" >&2
+}
+
+pkg() {
+		[ -n "$1" ] || usage
+		t="$1"
+
+		case "$t" in
+		http*://*)
+				pr_fetch "$t"
+				tmpls=$(git diff --name-only "$orig...pr-$pr" -- '*/*/template.py' | xargs dirname | sort -u)
+				;;
+		*) tmpls=$(find_tmpl "$t") ;;
+		esac
+
+		for t in $tmpls; do
+			log "building $t"
+			"$CBUILD" pkg "$t" ${2:+-f} >&2
+			basename "$t"
+		done
+}
+
+setup() {
+    doas apk add base-cbuild-host ruff
+    [ -d "$CPORTS" ] || {
+		    doas git clone https://github.com/chimera-linux/cports "$CPORTS"
+		    doas chown -R "$USER:$USER" "$CPORTS"
+
+		    cd "$CPORTS"
+		    git remote get-url upstream >/dev/null 2>&1 ||
+		    		git remote add upstream https://github.com/chimera-linux/cports.git
+
+    		log "cloned cports to $CPORTS"
+		}
+
+    "$CBUILD" keygen || war "keys already exist, skipping keygen"
+    "$CBUILD" bootstrap
+
+    doas mkdir -p /etc/apk/repositories.d /etc/apk/keys
+    log "created /etc/apk/repositories.d and /etc/apk/keys"
+    printf '@cports %s/packages/main\n@cports %s/packages/user\n' "$CPORTS" "$CPORTS" | doas tee /etc/apk/repositories.d/00-cports.list > /dev/null
+    log "wrote 00-cports.list"
+
+    pub=$(ls "$CPORTS"/etc/keys/*.pub | head -n1)
+    [ -n "$pub" ] || die "no pubkey found in $CPORTS/etc/keys"
+    doas cp "$pub" /etc/apk/keys/
+    log "installed pubkey: $pub"
+}
+
+main() {
+    if [ -d "$CPORTS" ]; then
+    		cd "$CPORTS"
+    else
+				[ "$1" = "setup" ] ||
+						die "cannot cd to $CPORTS, are you sure you've run 'ports setup'?"
+		fi
+
+    case "$1" in
+        pkg) pkg "$2" -f ;;
+        sync) git pull ;;
+        clean)
+            log "zapping build root"
+            "$CBUILD" zap
+            "$CBUILD" bootstrap
+            ;;
+        setup) setup  ;;
+        *) usage ;;
+    esac
+}
+
+main "$@"
