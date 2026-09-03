@@ -28,9 +28,9 @@ keep it user friendly, functional and clean.
 | pdf       | zathura                                                          |
 | lock      | swaylock                                                         |
 | files     | yazi/nautilus                                                    |
-| font      | cozette                                                          |
+| font      | cozette/iosevka                                                  |
 | colors    | managed by [reclr](https://codeberg.org/oceanicc/reclr)          |
-| scripts   | brightnessctl, playerctl, graphicsmagick, slurp, jq              |
+| scripts   | brightnessctl, playerctl, imagemagick, slurp, jq                 |
 | waybar    | wiremix, impala, bluetuith, btop                                 |
 | optional  | tlp, tuigreet                                                    |
 
@@ -39,16 +39,19 @@ keep it user friendly, functional and clean.
 ## Install
 
 ```sh
-for i in .cache/reclr .config .local/bin .local/share/fonts; do
-  mkdir -p "$HOME/$i"
+for i in .cache/reclr .cache/script-cache .config/htop .config/spicetify/Themes .local/bin .local/share/fonts .local/share/mpd/playlists music pics/walls pics/screenshots vids/recs; do
+    mkdir -p "$HOME/$i"
 done
 
 git clone https://codeberg.org/oceanicc/petrichor $HOME/.local/share/petrichor
 (cd $HOME/.local/share/petrichor && ./sym -t "$HOME" .)
 
+touch $HOME/.cache/script-cache/theme
+cp -r $HOME/.local/share/petrichor/.cache/reclr $HOME/.cache/reclr
+
 for i in reclr fetchy; do
-  curl -fLO https://codeberg.org/oceanicc/$i/raw/branch/main/$i $HOME/.local/bin/$i
-  chmod +x $HOME/.local/bin/$i
+    curl -fLO https://codeberg.org/oceanicc/$i/raw/branch/main/$i $HOME/.local/bin/$i
+    chmod +x $HOME/.local/bin/$i
 done
 
 curl -fLO https://github.com/the-moonwitch/Cozette/releases/download/v.1.30.0/cozette_hidpi.otb $HOME/.local/share/fonts/cozette_hidpi.otb

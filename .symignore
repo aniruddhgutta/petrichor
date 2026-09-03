@@ -2,5 +2,6 @@
 .gitignore
 .gitattributes
 .symignore
+.cache
 README.md
 sym
