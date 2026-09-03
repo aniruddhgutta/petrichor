@@ -40,7 +40,7 @@ keep it user friendly, functional and clean.
 
 ```sh
 for i in \
-    .cache/reclr .cache/script-cache \
+    .ssh .cache/reclr .cache/script-cache \
     .config/htop .config/spicetify/Themes \
     .local/bin .local/share/fonts .local/share/mpd/playlists \
     music pics/walls pics/screenshots vids/recs; do
