@@ -51,6 +51,7 @@ window-rule {
     match app-id=r#"^foot$"# title="^bluetuith$"
     match app-id=r#"^foot$"# title="^wiremix$"
     match app-id=r#"^foot$"# title="^btop$"
+    match app-id=r#"^foot$"# title="^htop$"
 
     shadow { on; }
     opacity 0.9
@@ -78,6 +79,7 @@ window-rule {
     match app-id=r#"^org\.gimp\.GIMP$"#
     match app-id=r#"^foot$"# title="^spotify_player$"
 
+    open-floating false
     open-maximized true
 }
 
@@ -87,6 +89,8 @@ window-rule {
     match app-id=r#"^com\.libretro\.RetroArch$"#
     match app-id=r#"^blender$"#
     match app-id=r#"^Minecraft"#
+
+    open-floating false
     open-fullscreen true
 }
 
@@ -102,9 +106,15 @@ window-rule {
     match app-id=r#"^org\.prismlauncher\.PrismLauncher$"# title="^Console window"
     match app-id=r#"^foot$"# title="^impala$"
     match app-id=r#"^foot$"# title="^bluetuith$"
+    match app-id=r#"^bluetuith$"# title="^bluetuith$"
     match app-id=r#"^foot$"# title="^wiremix$"
+    match app-id="wiremix" title="wiremix"
     match app-id=r#"^foot$"# title="^btop$"
+    match app-id=r#"^btop$"# title="^btop$"
+    match app-id=r#"^foot$"# title="^htop$"
+    match app-id=r#"^htop$"# title="^htop$"
     match app-id=r#"^foot$"# title="^rmpc$"
+    match app-id=r#"^rmpc$"# title="^rmpc$"
     match app-id=r#"^foot$"# title="^wallpaper-menu$"
     match app-id=r#"^resolve$"# title="^resolve$"
     match app-id=r#"^resolve$"# title="^Create New Project$"
