@@ -60,3 +60,16 @@ done
 
 curl -fLO https://github.com/the-moonwitch/Cozette/releases/download/v.1.30.0/cozette_hidpi.otb $HOME/.local/share/fonts/cozette_hidpi.otb
 ```
+
+## TODO
+
+Nice **QOL** features I intend to add in the future:
+- setup scripts
+- light theme support
+- move "extra" configs along with personal scripts, to a new branch
+- proper qutebrowser `reclr` template
+- switch to quickshell (mostly because waybar SUCKS)
+- "global" omarchy-esque menu
+- fork to work with my nix-conf
+- modular `ports` script, thereby making rebos work on other distros
+- move `sym` to a different repository
