@@ -36,7 +36,9 @@ _update_prompt() {
     [ "$(id -u)" -eq 0 ] && _prefix='\fr.root\fd. '
 
     _vcs_info=$(git branch --show-current 2>/dev/null) || return
-    [ -n "$(git status --porcelain 2>/dev/null)" ] && _vcs_info="$_vcs_info*"
+    _dirty=''
+    [ -n "$(git status --porcelain 2>/dev/null)" ] && _dirty='\fm.*\fg.'
+    [ -n "$_vcs_info" ] && _vcs_info=" \fkt.(\fg.$_vcs_info$_dirty\fkt.)\fd."
     }
 PROMPT_COMMAND=("$PROMPT_COMMAND" '_update_prompt' 'hint')
 
