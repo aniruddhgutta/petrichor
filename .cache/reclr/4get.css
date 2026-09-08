@@ -1,20 +1,20 @@
 :root {
 	/* background */
-	--1d2021: #141416;
-	--282828: #3d3744;
-	--3c3836: #141416;
-	--504945: #3d3744;
+	--1d2021: #0E0E0E;
+	--282828: #44444c;
+	--3c3836: #0E0E0E;
+	--504945: #44444c;
 
 	/* font */
 	--928374: #c7c9cc;
-	--a89984: #eeeeee;
-	--bdae93: #eeeeee;
-	--8ec07c: #a0b4b8;
-	--ebdbb2: #a0b4b8;
+	--a89984: #c7c9cc;
+	--bdae93: #c7c9cc;
+	--8ec07c: #9cb9c0;
+	--ebdbb2: #9cb9c0;
 
 	/* code highlighter */
-	--comment: #cda2d4;
-	--default: #eeeeee;
-	--keyword: #b8869b;
-	--string: #a0b4b8;
+	--comment: #b694b6;
+	--default: #c7c9cc;
+	--keyword: #ae808f;
+	--string: #9cb9c0;
 }
