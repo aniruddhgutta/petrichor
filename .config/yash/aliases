@@ -28,9 +28,12 @@ alias gd="git diff --output-indicator-new=' ' --output-indicator-old=' '"
 alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n"'
 alias ga='git add'
 alias gc='git commit'
+alias gr='git rebase'
 alias gp='git push'
 alias gu='git pull'
 alias gb='git branch'
+alias gw='git switch'
+command -v gm || alias gm='git merge'
 alias gi='git init'
 alias gcl='git clone'
 
