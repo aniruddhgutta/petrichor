@@ -54,11 +54,14 @@ touch $HOME/.cache/script-cache/theme
 cp -r $HOME/.local/share/petrichor/.cache/reclr $HOME/.cache/reclr
 
 for i in reclr fetchy; do
-    curl -fLO https://codeberg.org/oceanicc/$i/raw/branch/main/$i $HOME/.local/bin/$i
+    curl -Lo $HOME/.local/bin/$i https://codeberg.org/oceanicc/$i/raw/branch/main/$i
     chmod +x $HOME/.local/bin/$i
 done
 
-curl -fLO https://github.com/the-moonwitch/Cozette/releases/download/v.1.30.0/cozette_hidpi.otb $HOME/.local/share/fonts/cozette_hidpi.otb
+curl -Lo $HOME/.local/bin/doasedit https://codeberg.org/wezen/pdoasedit/raw/branch/rewrite/pdoasedit
+chmod +x $HOME/.local/bin/doasedit
+
+curl -Lo $HOME/.local/share/fonts/cozette_hidpi.otb https://github.com/the-moonwitch/Cozette/releases/download/v.1.30.0/cozette_hidpi.otb
 ```
 
 ## TODO
