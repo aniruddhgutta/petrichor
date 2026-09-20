@@ -11,7 +11,7 @@ alias df='command df -Th'
 alias vi="$EDITOR"
 
 alias s="$(command -v doas || command -v ssu || command -v sudo) --"
-alias se="$(command -v doasedit || printf 's %s' "$EDITOR") --"
+alias se="$(command -v pdoasedit || printf 's %s' "$EDITOR") --"
 
 alias mc='make clean'
 alias mi='make clean install'
