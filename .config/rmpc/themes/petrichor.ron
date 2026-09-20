@@ -6,17 +6,31 @@
     preview_label_style: (fg: "blue"),
     current_item_style: (fg: "black", bg: "yellow", modifiers: "Bold"),
     borders_style: (fg: "dark_gray"),
-    lyrics: (timestamp: true),
     scrollbar: None,
+    symbols: (song: "", dir: "", playlist: "", marker: "M", ellipsis: "..."),
 
-    symbols: (
-        song: "",
-        dir: "",
-        playlist: "",
-        marker: "M",
-        ellipsis: "...",
-    ),
+    // queue format
+    song_table_format: [
+        // artist - title
+        (prop:
+            (kind: Group([
+                    (kind: Property(Artist)),
+                    (kind: Text(" - ")),
+                    (kind: Property(Title))]),
+                default: (kind: Property(Filename))),
+            alignment: Left,
+            width: "50%"),
+        // album   duration
+        (prop: (kind: Group([
+                    (kind: Property(Album)),
+                    (kind: Text("  ")),
+                    (kind: Property(Duration))]),
+                default: (kind: Text("-"))),
+            alignment: Right,
+            width: "50%"),
+    ],
 
+    // progress bar
     progress_bar: (
         symbols: ["─", "╼", " "],
         track_style: (fg: "red"),
@@ -24,30 +38,6 @@
         thumb_style: (fg: "red"),
     ),
 
-    song_table_format: [
-        (prop: (kind: Group([
-                    (kind: Property(Artist)),
-                    (kind: Text(" - ")),
-                    (kind: Property(Title)),
-                ]),
-                default: (kind: Property(Filename)),
-                ),
-            alignment: Left,
-            width: "50%",
-        ),
-        (prop: (kind: Group([
-                    (kind: Property(Album)),
-                    (kind: Text("  ")),
-                    (kind: Property(Duration)),
-                ]),
-                default: (kind: Text("-")),
-                ),
-            alignment: Right,
-            width: "50%",
-        ),
-    ],
-
-    // for progress bar
     components: {
         "left": Pane(Property(
             content: [
@@ -102,6 +92,12 @@
                 ),
                 (kind: Text("] ")),
 
+                // kbps
+                (kind: Text("[")),
+                (kind: Property(Status(Bitrate)),
+                    default: (kind: Text("unknown"))),
+                (kind: Text(" kbps] ")),
+
                 // [1:27/3:09]
                 (kind: Text("["), style: (fg: "yellow")),
                 (kind: Property(Status(Elapsed)), style: (fg: "yellow")),
@@ -122,7 +118,7 @@
                 direction: Horizontal,
                 panes: [
                     (size: "100%", pane: Component("left")),
-                    (size: "20", pane: Component("right")),
+                    (size: "31", pane: Component("right")),
                 ])
             ),
         ],

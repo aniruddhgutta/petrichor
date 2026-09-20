@@ -7,26 +7,11 @@
     select_current_song_on_change: true,
     album_art: (method: None),
     tabs: [
-        (
-            name: "Queue",
-            pane: Pane(Queue)
-        ),
-        (
-            name: "Search",
-            pane: Pane(Search),
-        ),
-        (
-            name: "Directories",
-            pane: Pane(Directories),
-        ),
-        (
-            name: "Artists",
-            pane: Pane(Artists),
-        ),
-        (
-            name: "Albums",
-            pane: Pane(Albums),
-        ),
+        (name: "Queue",       pane: Pane(Queue)),
+        (name: "Search",      pane: Pane(Search)),
+        (name: "Artists",     pane: Pane(Artists)),
+        (name: "Albums",      pane: Pane(Albums)),
+        (name: "Directories", pane: Pane(Directories)),
     ],
     keybinds: (
         global: {
