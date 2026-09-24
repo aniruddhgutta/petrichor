@@ -32,8 +32,8 @@
 "markup.raw" = { fg = "mint" }
 
 "ui.background" = { }
-"ui.popup" = { fg = "lilac" }
-"ui.menu" = { fg = "lilac" }
+"ui.popup" = { fg = "lilac", bg = "bar" }
+"ui.menu" = { fg = "lilac", bg = "bar" }
 "ui.menu.selected" = { fg = "mint" }
 "ui.window" = { fg = "berry_desaturated" }
 "ui.cursor" = { fg = "berry", bg = "lilac" }
@@ -41,8 +41,8 @@
 "ui.cursor.select" = { fg = "berry", bg = "violet" }
 "ui.cursor.insert" = { fg = "berry", bg = "mint" }
 "ui.cursorline" = { fg = "lilac", bg = "berry_dim" }
-"ui.statusline" = { fg = "lilac", bg = "#1a1a1a" }
-"ui.statusline.inactive" = { fg = "berry_desaturated", bg = "#1a1a1a" }
+"ui.statusline" = { fg = "lilac", bg = "bar" }
+"ui.statusline.inactive" = { fg = "berry_desaturated", bg = "bar" }
 "ui.statusline.normal" = { fg = "berry_saturated", bg = "lilac" }
 "ui.statusline.insert" = { fg = "berry_saturated", bg = "mint" }
 "ui.statusline.select" = { fg = "berry_saturated", bg = "violet" }
@@ -51,7 +51,7 @@
 "ui.text" = { fg = "lilac" }
 "ui.text.focus" = { fg = "mint" }
 "ui.selection" = { modifiers = ["reversed"] }
-"ui.virtual.ruler" = { bg = "berry_fade" }
+"ui.virtual.ruler" = { bg = "bar" }
 "ui.virtual.whitespace" = { fg = "berry_desaturated" }
 "ui.virtual.indent-guide" = { fg = "berry_fade" }
 "ui.virtual.inlay-hint" = { fg = "berry_desaturated" }
@@ -73,6 +73,7 @@
 "diagnostic.deprecated" = { modifiers = ["crossed_out"] }
 
 [palette]
+bar = "#1a1a1a"
 berry = "#3A2A4D"
 berry_fade = "#5A3D6E"
 berry_dim = "#47345E"

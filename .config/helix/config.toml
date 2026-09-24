@@ -9,7 +9,7 @@ rulers = [80]                # conventional unix guideline
 # default-yank-register="+"  # use system clipboard
 
 [editor.cursor-shape]
-insert = "bar"
+insert = "block"
 normal = "block"
 select = "underline"
 
