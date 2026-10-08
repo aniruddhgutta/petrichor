@@ -13,7 +13,7 @@ keep it user friendly, functional and clean.
 
 | petrichor | utils                                                            |
 |-----------|------------------------------------------------------------------|
-| distro    | chimera linux                                                    |
+| distro    | chimera linux / finix                                            |
 | wm        | niri                                                             |
 | bar       | waybar                                                           |
 | run       | fuzzel                                                           |
@@ -23,12 +23,12 @@ keep it user friendly, functional and clean.
 | term      | foot                                                             |
 | shell     | yash (optional: eza)                                             |
 | fetch     | [fetchy](https://codeberg.org/oceanicc/fetchy)                   |
-| music     | rmpc/spotify                                                     |
-| browser   | qutebrowser/helium                                               |
+| music     | rmpc / spotify                                                   |
+| browser   | qutebrowser / helium                                             |
 | pdf       | zathura                                                          |
 | lock      | swaylock                                                         |
-| files     | yazi/nautilus                                                    |
-| font      | cozette/iosevka                                                  |
+| files     | yazi / nautilus                                                  |
+| font      | cozette / iosevka                                                |
 | colors    | managed by [reclr](https://codeberg.org/oceanicc/reclr)          |
 | scripts   | brightnessctl, playerctl, imagemagick, slurp, jq                 |
 | waybar    | wiremix, impala, bluetuith, btop                                 |
@@ -42,13 +42,18 @@ keep it user friendly, functional and clean.
 for i in \
     .ssh .cache/reclr .cache/script-cache \
     .config/htop .config/spicetify/Themes \
-    .local/bin .local/share/fonts .local/share/mpd/playlists \
+    .local/bin .local/share/fonts .local/share/mpd/playlists .local/share/applications \
     music pics/walls pics/screenshots vids/recs; do
     mkdir -p "$HOME/$i"
 done
 
 git clone https://codeberg.org/oceanicc/petrichor $HOME/.local/share/petrichor
-(cd $HOME/.local/share/petrichor && ./sym -t "$HOME" .)
+(
+    cd $HOME/.local/share/petrichor && ./sym -t "$HOME" .
+    for i in btop/btop.conf htop/htoprc spotify-player/app.toml; do
+        git update-index --skip-worktree ".config/$i";
+    done
+)
 
 touch $HOME/.cache/script-cache/theme
 cp -r $HOME/.local/share/petrichor/.cache/reclr $HOME/.cache/reclr
