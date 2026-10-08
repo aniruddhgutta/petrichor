@@ -40,13 +40,13 @@ alias gcl='git clone'
 alias sft='shfmt -i 4 -ci -sr -p -s'
 
 if command -v eza >/dev/null; then
-  alias la="eza -la --icons --git --time-style='+%b %e %H:%M'"
-  alias ls="eza -a --icons"
-  alias tree="eza -aT --icons"
+  alias la="eza -la --icons --git --time-style='+%b %e %H:%M' --"
+  alias ls="eza -a --icons --"
+  alias tree="eza -aT --icons --"
 else
   alias la="command ls -lAh"
   alias ls="command ls -Ah"
-  alias tree="command tree -aC"
+  alias tree="command tree -aC --"
 fi 
 
 alias fbh='flatpak-builder --force-clean build-dir net.imput.helium.yml --user --install'
