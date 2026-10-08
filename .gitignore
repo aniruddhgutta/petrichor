@@ -1,4 +1,6 @@
 .config/dinit.d/boot.d
+.config/htop
+.config/btop
 .config/qutebrowser/quickmarks
 .config/qutebrowser/bookmarks
 .config/qutebrowser/pywalQute/__pycache__
