@@ -9,9 +9,9 @@ case "$opt" in
     "Reboot") loginctl reboot || systemctl reboot ;;
     "Sleep") loginctl suspend || systemctl suspend ;;
     "Lock") swaylock -f ;;
-    "Power off monitors") niri msg action power-off-monitors ;;
-    "Stop auto-sleep") dinitctl stop swayidle ;;
-    "Start auto-sleep") dinitctl start swayidle ;;
+    "Power off monitors") swaylock -f && niri msg action power-off-monitors ;;
+    "Stop auto-sleep") dinitctl || systemctl -u stop swayidle ;;
+    "Start auto-sleep") dinitctl || systemctl -u start swayidle ;;
     "Enable conservation mode (lenovo only)") printf 1 | doas tee /sys/bus/platform/devices/VPC2004:*/conservation_mode ;;
     "Disable conservation mode (lenovo only)") printf 0 | doas tee /sys/bus/platform/devices/VPC2004:*/conservation_mode ;;
     *) exit 1 ;;
