@@ -1,5 +1,4 @@
 {
-    // "layer": "top",
     "reload_style_on_change": true,
     "height": 24,
     "modules-left": [
@@ -12,6 +11,7 @@
     ],
     "modules-right": [
         "custom/screenrec",
+        "custom/warp",
         "tray",
         "network",
         "bluetooth",
@@ -54,6 +54,13 @@
         "tooltip": false,
         "interval": 1,
         "on-click": "~/.local/scripts/screenrec stop",
+    },
+
+    "custom/warp": {
+        "exec": "echo ",
+        "exec-if": "warp-cli status | grep Connected >/dev/null",
+        "tooltip": false,
+        "interval": 1,
     },
 
     "network": {

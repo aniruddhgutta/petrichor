@@ -26,6 +26,7 @@ window#waybar.empty #window,
 #wireplumber,
 #workspaces button,
 #custom-screenrec,
+#custom-warp,
 #battery {
     padding: 0 12px;
     background-color: transparent;
@@ -53,6 +54,11 @@ window#waybar.empty #window,
   50% { opacity: 1; }
   51% { opacity: 0; }
   100% { opacity: 0; }
+}
+
+#custom-warp {
+    font-size: 18px;
+    padding: 0 6px;
 }
 
 #battery.warning { color: @color3; }
