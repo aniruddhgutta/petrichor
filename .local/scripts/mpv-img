@@ -1,0 +1,4 @@
+#!/usr/bin/env dash
+# Launch mpv as an image-viewer
+
+exec mpv --profile=image "$@"
