@@ -18,7 +18,7 @@ start_rec() {
     [ -f "$pidfile" ] && notify-send "Already recording" && exit 1
     dir="${XDG_VIDEOS_DIR:-$HOME/vids}/recs"; mkdir -p "$dir"
     : "${filename:=$dir/$(date +%F-%T).mp4}"
-    audiodev=$(pw-dump | jq -r '[.[] | select(.info.props."media.class" == "Audio/Sink")] | first | .info.props."node.name"').monitor
+    audiodev=$(pw-dump | jq -r '.[] | select(.props."metadata.name"=="default") | .metadata[] | select(.key=="default.audio.sink") | .value.name').monitor
 
     {
         wl-screenrec \
