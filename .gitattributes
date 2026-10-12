@@ -1,26 +1,22 @@
 [attr]lfs filter=lfs diff=lfs merge=lfs -text
 
-* text=auto eol=lf
-
-*.jpg lfs
-*.png lfs
-*.webp lfs
-
-*.ini        linguist-detectable
-*.json       linguist-detectable
-*.md         linguist-detectable
-*.toml       linguist-detectable
-*.xml        linguist-detectable
-
-# SHELL -> Shell, json -> JSON
+*            text=auto eol=lf
 *.conf       linguist-language=INI
 *.desktop    linguist-language=INI
 *.dirs       linguist-language=Shell
+*.ini        linguist-detectable
+*.json       linguist-detectable
 *.jsonc      linguist-language=JSON
+*.jpg        lfs
 *.txt        linguist-language=INI
 *.kdl        linguist-language=JSON
-*.list		 linguist-language=INI
+*.png        lfs
+*.md         linguist-detectable
+*.list       linguist-language=INI
 *.ron        linguist-language=JSON
+*.toml       linguist-detectable
+*.xml        linguist-detectable
+*.webp       lfs
 *config      linguist-language=INI
 *sym*        linguist-language=Shell
 .git*        linguist-language=Shell
@@ -28,6 +24,8 @@ aria2.conf   linguist-language=Shell
 fonts.conf   linguist-language=XML
 mpd.conf     linguist-language=Shell
 sequences    linguist-vendored
+.cache/**    linguist-vendored
+.ssh/config  linguist-detectable
 **/dinit.d/* linguist-language=INI
 **/git/*     linguist-language=Shell
 **/hooks/*	 linguist-language=SHELL

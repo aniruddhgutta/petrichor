@@ -5,40 +5,46 @@ keep it user friendly, functional and clean.
 
 ## Preview
 
-![preview: neochor](../assets/previews/neochor-prev.webp?raw=true)
-![preview: periwinkle](../assets/previews/periwinkle-prev.webp?raw=true)
-![preview: dechor](../assets/previews/dechor-prev.webp?raw=true)
+![neochor](../assets/previews/neochor-prev.webp?raw=true)
+![periwinkle](../assets/previews/periwinkle-prev.webp?raw=true)
+![dechor](../assets/previews/dechor-prev.webp?raw=true)
 
 ## Info
 
-| petrichor | utils                                                            |
-|-----------|------------------------------------------------------------------|
-| distro    | chimera linux / finix                                            |
-| wm        | niri                                                             |
-| bar       | waybar                                                           |
-| run       | fuzzel                                                           |
-| wall      | awww                                                             |
-| record    | wl-screenrec                                                     |
-| notif     | fako                                                             |
-| term      | foot                                                             |
-| shell     | yash (optional: eza)                                             |
-| fetch     | [fetchy](https://codeberg.org/oceanicc/fetchy)                   |
-| music     | rmpc / spotify                                                   |
-| browser   | qutebrowser / helium                                             |
-| pdf       | zathura                                                          |
-| lock      | swaylock                                                         |
-| files     | yazi / nautilus                                                  |
-| font      | cozette / iosevka                                                |
-| colors    | managed by [reclr](https://codeberg.org/oceanicc/reclr)          |
-| scripts   | brightnessctl, playerctl, imagemagick, slurp, jq                 |
-| waybar    | wiremix, impala, bluetuith, btop                                 |
-| optional  | tlp, tuigreet                                                    |
+| petrichor | utils                                                   |
+| --------- | ------------------------------------------------------- |
+| distro    | chimera linux / finix                                   |
+| wm        | niri                                                    |
+| bar       | waybar                                                  |
+| run       | fuzzel                                                  |
+| wall      | awww                                                    |
+| record    | wl-screenrec                                            |
+| notif     | fako                                                    |
+| term      | foot                                                    |
+| shell     | yash (optional: eza)                                    |
+| fetch     | [fetchy](https://codeberg.org/oceanicc/fetchy)          |
+| music     | rmpc / spotify                                          |
+| browser   | qutebrowser / helium                                    |
+| pdf       | zathura                                                 |
+| lock      | swaylock                                                |
+| files     | yazi / nautilus                                         |
+| font      | cozette / iosevka                                       |
+| colors    | managed by [reclr](https://codeberg.org/oceanicc/reclr) |
+| scripts   | brightnessctl, playerctl, imagemagick, slurp, jq        |
+| waybar    | wiremix, impala, bluetuith, btop                        |
+| optional  | tlp, tuigreet                                           |
 
-**NOTE** - Configurations for utilities like `tlp` can be found in the [assets branch](../assets).
+> [!NOTE]
+>
+> Configurations for utilities like `tlp` can be found in the
+> [assets branch](../assets).
 
 ## Install
 
-```sh
+```bash
+#!/bin/sh
+set -eu
+
 for i in \
     .ssh .cache/reclr .cache/script-cache \
     .config/htop .config/spicetify/Themes \
@@ -72,12 +78,13 @@ curl -Lo $HOME/.local/share/fonts/cozette_hidpi.otb https://github.com/the-moonw
 ## TODO
 
 Nice **QOL** features I intend to add in the future:
-- setup scripts
-- light theme support
-- move "extra" configs along with personal scripts, to a new branch
-- proper qutebrowser `reclr` template
-- switch to quickshell (mostly because waybar SUCKS)
-- "global" omarchy-esque menu
-- fork to work with my nix-conf
-- modular `ports` script, thereby making rebos work on other distros
-- move `sym` to a different repository
+
+- [ ] Setup scripts
+- [ ] Light theme support
+- [ ] Move "extra" configs along with personal scripts, to a new branch
+- [ ] Proper qutebrowser `reclr` template
+- [ ] Switch to quickshell (mostly because waybar SUCKS)
+- [ ] "global" omarchy-esque menu
+- [ ] Fork to work with my nix-conf
+- [ ] Modular `ports` script, thereby making rebos work on other distros
+- [ ] Move `sym` to a different repository
