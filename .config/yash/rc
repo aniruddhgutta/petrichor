@@ -3,8 +3,8 @@
 
 # History
 HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/yash-history"
-HISTSIZE=100000
-HISTRMDUP=5000
+HISTSIZE=$((1<<30))
+HISTRMDUP=$((1<<12))
 
 # Shell options
 set -o brace-expand
