@@ -32,14 +32,22 @@ YASH_PS1R='\fc.${_vcs_info}'
 YASH_PS1P='\fi.'
 
 _update_prompt() {
+    # ssh
     [ -n "${SSH_CONNECTION-}" ] && _prefix='\fy.ssh\fd. ' || _prefix=''
-    [ "$(id -u)" -eq 0 ] && _prefix='\fr.root\fd. '
+    [ "$(id -u)" -eq 0 ] &&
+        _prefix='\fr.root\fd. '
 
+    # nix shell
+    case $PATH in */nix/store/*)
+        _prefix=$_prefix'\fkt.(\fc.nix\fkt.)\fd. ';; esac
+
+    # vcs (git)
     _vcs_info=$(git branch --show-current 2>/dev/null) || return
     _dirty=''
     [ -n "$(git status --porcelain 2>/dev/null)" ] && _dirty='\fm.*\fg.'
     [ -n "$_vcs_info" ] && _vcs_info=" \fkt.(\fg.$_vcs_info$_dirty\fkt.)\fd."
-    }
+}
+
 PROMPT_COMMAND=("$PROMPT_COMMAND" '_update_prompt' 'hint')
 
 # Source
