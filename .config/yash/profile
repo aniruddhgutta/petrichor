@@ -28,7 +28,10 @@ export SPICETIFY_INSTALL="$XDG_DATA_HOME/spicetify"
 
 # Imports
 USE_OX=2 USE_LTO=0 USE_CLANG=1 . "$XDG_CONFIG_HOME/yash/mkenv"	# compile flags
-. "$XDG_CONFIG_HOME/yash/langs"	 # lang specific env vars can be placed here
-. "$XDG_CACHE_HOME/script-cache/theme"	# theme details
+
+# lang specific env vars and theme details
+for i in "$XDG_CONFIG_HOME/yash/langs" "$XDG_CACHE_HOME/script-cache/theme"; do
+  [ -f "$i" ] && . "$i"
+done
 
 export DOTS_DIR="$HOME/.local/share/petrichor"
