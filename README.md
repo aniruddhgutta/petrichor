@@ -10,9 +10,9 @@ keep it user friendly, functional and clean.
 
 ## Preview
 
-![neochor](../assets/previews/neochor-prev.webp?raw=true)
-![periwinkle](../assets/previews/periwinkle-prev.webp?raw=true)
-![dechor](../assets/previews/dechor-prev.webp?raw=true)
+![neochor](https://codeberg.org/oceanicc/petrichor/media/branch/assets/previews/neochor-prev.webp)
+![periwinkle](https://codeberg.org/oceanicc/petrichor/media/branch/assets/previews/periwinkle-prev.webp)
+![dechor](https://codeberg.org/oceanicc/petrichor/media/branch/assets/previews/dechor-prev.webp)
 
 ## Info
 
