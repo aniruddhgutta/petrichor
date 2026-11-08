@@ -16,15 +16,16 @@ set -o le-predict
 
 # Keybindings
 for mode in --emacs --vi-insert --vi-command; do
-    bindkey "$mode" '\^L' clear-and-redraw-all
+    bindkey "$mode" '\^L'  clear-and-redraw-all
     bindkey "$mode" '\^[b' backward-emacsword
     bindkey "$mode" '\^[f' forward-emacsword
 done
 
-bindkey --vi-insert '\B' backward-delete-semiword
-bindkey --vi-insert '\^H' backward-delete-semiword
+bindkey --vi-insert '\B'   backward-delete-semiword
+bindkey --vi-insert '\^H'  backward-delete-semiword
 bindkey --vi-insert '\^[l' end-of-line
 bindkey --vi-insert '\^[h' undo
+bindkey --vi-insert '\^R'  beginning-search-backward
 
 # Prompt
 YASH_PS1='${_prefix}\fb.${PWD/#$HOME/\~}\fd. \fm.$\fd. '

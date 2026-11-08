@@ -116,3 +116,8 @@ up() {
     done
     cd "$p"
 }
+
+# hist - search through history with fzf
+hist() {
+    history | awk '{$1=""; sub(/^ /,""); print}' | fzf --reverse | yash
+}
