@@ -51,7 +51,7 @@ colors() {
 }
 
 backdrop() {
-    magick convert "$1" \
+    magick "$1" \
         -scale 25% \
         -blur 0x3 \
         -quality 50 \
