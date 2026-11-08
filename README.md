@@ -3,6 +3,11 @@
 **petrichor** is a minimal `niri` setup utilising the bare minimum required to
 keep it user friendly, functional and clean.
 
+> [!NOTE]
+>
+> check out [nixchor](https://codeberg.org/oceanicc/nixchor) for a finix-based
+> minimal system following the principles of **petrichor**.
+
 ## Preview
 
 ![neochor](../assets/previews/neochor-prev.webp?raw=true)
@@ -38,6 +43,9 @@ keep it user friendly, functional and clean.
 >
 > Configurations for utilities like `tlp` can be found in the
 > [assets branch](../assets).
+>
+> My helium configuration can be found
+> [here](https://codeberg.org/oceanicc/helichor).
 
 ## Install
 
