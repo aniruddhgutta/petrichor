@@ -1,0 +1,25 @@
+# shell
+[[language]]
+name = "bash"
+indent = { tab-width = 4, unit = "    " }
+
+# nixd
+[[language]]
+name = "nix"
+language-servers = ["nixd"]
+
+# make finix-compatible
+[language-server.nixd.config.nixd]
+nixpkgs.expr = '(builtins.getFlake (toString ./.)).nixosConfigurations.nixey.config.nixpkgs.pkgs'
+options.finix.expr = '(builtins.getFlake (toString ./.)).nixosConfigurations.nixey.options'
+
+# clang-format
+[[language]]
+name = "c"
+auto-format = true
+formatter = { command = "clang-format", args = ["--style={BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Custom, BraceWrapping: {AfterFunction: true}}"] }
+
+[[language]]
+name = "cpp"
+auto-format = true
+formatter = { command = "clang-format", args = ["--style={BasedOnStyle: LLVM, IndentWidth: 4, BreakBeforeBraces: Custom, BraceWrapping: {AfterFunction: true}}"] }
